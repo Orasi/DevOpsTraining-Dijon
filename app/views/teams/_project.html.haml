@@ -1,0 +1,14 @@
+%tr
+  %td.table-number
+    = "#{project_counter + 1}."
+  %td
+    = link_to project.project_name, project_path(project.id)
+
+  %td
+    .small.overview-time.pull-right
+      Updated:
+      = time_ago_in_words( project.updated_at) + ' ago' if project.updated_at
+  %td
+    - if current_user.admin
+      = link_to '' do
+        .pull-right.fa.fa-remove{style: 'color:red'}

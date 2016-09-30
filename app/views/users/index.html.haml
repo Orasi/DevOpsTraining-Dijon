@@ -1,0 +1,44 @@
+.dashboard-page-header
+  %h2
+    Users
+  .add-button{style: 'position: absolute;top: 100px;right: 25px;', data: {toggle: 'modal', target:'#user_modal'}}
+    %span.fa.fa-plus
+      Add User
+
+  %p.small All Users
+  - @users['users'].each do |user|
+    - user = UserPresenter.new(user)
+    - gravatar = Gravatar.new(user.username)
+    .col-sm-4
+      .panel.panel-default.customerCard
+        = link_to user_path(user.id) do
+          .panel-body
+            - if user.admin
+              .customer-admin.small
+                Admin
+            .table
+              .table-row
+                .table-cell
+                  .gravatar
+                    - if gravatar
+                      = image_tag(gravatar.image_url, class: 'img-circle')
+
+                .table-cell.customer-info.top
+
+                  .h3{style: 'margin-top:  0px'}
+                    = user.display_name
+
+                  .small= user.username
+                  .small= user.company
+
+
+#user_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Add User
+      .modal-body
+        #user_modal_content
+          = render partial: 'user_form', locals: {user: {}}

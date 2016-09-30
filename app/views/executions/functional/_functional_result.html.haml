@@ -1,0 +1,138 @@
+- result = ResultPresenter.new(@detail['testcase'])
+- manual_results = result.results.select{|r| r if r['result_type'] == 'manual'}
+- automated_results = result.results.select{|r| r if r['result_type'] == 'automated'}
+
+.col-md-9
+  .pull-right
+    %button{type: 'button', data: {toggle: 'modal', target: '#test_runner_modal'}, class: 'btn btn-default'}
+      Manual Test Runner
+  .row
+    .col-md-12
+      - unless result.blank?
+        %h4
+          = result.validation_id ? "#{result.validation_id} - #{result.testcase_name}" : result.testcase_name
+          = link_to '', '', class: 'fa fa-pencil small'
+          %br
+        %h5
+          = link_to 'View Steps', '#', id: 'steps_view', class: 'small', style: 'margin-left:20px' unless result.reproduction_steps.blank?
+        - unless result.reproduction_steps.blank?
+          .row#steps_table{style: 'display:none'}
+            = render partial: 'executions/functional/steps', locals: {steps: result.reproduction_steps}
+        %hr
+      -if result.results.blank?
+        %h4= 'No results for this validation.'
+      - if manual_results.blank?
+        %button{type: 'button', data: {toggle: 'modal', target: '#manual_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
+          Add Manual Result
+
+  - unless manual_results.blank?
+    .row
+      .col-md-12
+        %button{type: 'button', data: {toggle: 'modal', target: '#manual_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
+          Add Manual Result
+        %h4 Manual Results
+
+        %table.table.table-condensed.table-overview
+          %thead
+            %tr
+              %td
+              %th
+                Status
+              %th
+                Comment
+              %th
+                Created By
+              %th
+                Created
+          %tbody
+            - manual_results.each_with_index do |obj, i|
+              - r = ResultPresenter.new(obj)
+              %tr
+                %td
+                  = "#{i + 1}."
+                %td
+                  - if r.status == 'pass'
+                    .success-box.text-center= "Passed"
+                  - if r.status == 'fail'
+                    .danger-box.text-center= "Failed"
+                  - if r.status == 'skip'
+                    .primary-box.text-center= "Skipped"
+                  - unless r.status
+                    .primary-box.text-center= "Incomplete"
+                %td
+                  = r['comment']
+                %td
+                  = r['created_by_name']
+                %td
+                  .small.overview-time
+                    = time_ago_in_words(r['created_at']) + ' ago' if r['created_at']
+        %br
+        %br
+
+  - unless automated_results.blank?
+    .row
+      .col-md-12
+        %h4 Automated Results
+        %table.table.table-condensed.table-overview
+          %tbody
+            - automated_results.each_with_index do |obj, i|
+              - r = ResultPresenter.new(obj)
+              %tr
+                %td
+                  = "#{i + 1}."
+                %td
+                  -#= display_icon_for result.device.manufacturer, unique_id: result.device.unique_id
+                  = r['environment_display_name'] ? r['environment_display_name'] : r['environment_name']
+                %td{ style: 'width: 60%;'}
+                  Comments:
+                  %br
+                  = r['comment']
+                %td
+                  Status:
+                  %br
+                  .test-result
+                    = build_status r.status
+                %td
+                  %br
+                  - if result['screenshot']
+                    %div{class: 'link-like screenshot-link fa fa-camera-retro', data: {toggle: 'modal', target:'#screenshot_modal', image: ""}}
+                  - if result['stacktrace']
+                    %div{class: 'link-like stacktrace-link fa fa-file-text', data: {toggle: 'modal', target:'#stacktracke_modal', text: "#{result['stacktrace']}"}}
+                  = link_to '', '', {class: 'fa fa-clock-o link-icon', remote: true}
+                  - if result['link']
+                    = link_to '', result['link'], class: 'link-icon fa fa-link', target: '_blank'
+                %td
+                  .pull-right.small.overview-time
+                    -#.timeago{title: result.updated_at.iso8601}
+-#
+-#= render partial: 'manual_results/manual_result_modal', locals: {validation: @validation}
+-#= render partial: 'manual_results/test_runner_modal', locals: {validation: @validation}
+-#
+-##history_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+-#  .modal-dialog{role: 'document'}
+-#    .modal-content{style:'width:1000px'}
+-#      .modal-body
+-#        #history_content
+-#
+-#
+:javascript
+  $('#steps_view').click(function(e){
+    e.preventDefault()
+    $('#steps_table').slideToggle('slow');
+  });
+-#
+-#  $('.timeago').timeago()
+-#  $('.screenshot-link').on('click', function(){
+-#    $('#screenshot_div').html($(this).data('image'));
+-#  })
+-#  $('.stacktrace-link').on('click', function(){
+-#    $('#stacktrace_div').html($(this).data('text'));
+-#  })
+-#  $(document).on('show.bs.modal', '.modal', function () {
+-#    var zIndex = 1040 + (10 * $('.modal:visible').length);
+-#    $(this).css('z-index', zIndex);
+-#    setTimeout(function() {
+-#        $('.modal').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+-#    }, 0);
+-#  });
+

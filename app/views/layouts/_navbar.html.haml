@@ -1,0 +1,63 @@
+%nav.navbar.navbar-default.navbar-fixed-top{ role: 'navigation' }
+  .navbar-header
+    %button.navbar-toggle{ type: 'button', data: { toggle: 'collapse', target: 'main-navbar' } }
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand
+      Mustard
+    - if current_user
+
+      #logout.pull-right
+
+        = link_to logout_path, class: 'navbar-brand' do
+          #welcome
+            = "Welcome, #{current_user.first_name.titleize}"
+            %span.caret
+          #logoutLink Logout
+#nav-side-menu.sidebar.visible-lg.visible-md.visible-sm
+  %ul.nav.nav-bar
+    %li
+      = link_to '#', class: 'nav-collapse nav-item', style: 'height:41px' do
+        .collapse-sidebar-button.glyphicon.glyphicon-chevron-left.pull-right
+    %li{style: 'white-space:nowrap;overflow:hidden'}
+      = link_to root_path, class: 'nav-item' do
+        .fa.fa-dashboard
+        %span.nav-link-text
+          = ' Dashboard'
+    -if current_user && current_user.admin
+      %li{style: 'white-space:nowrap;overflow:hidden'}
+        = link_to projects_path, class: 'nav-item' do
+          .fa.fa-bar-chart
+          %span.nav-link-text
+            = ' Projects'
+    -if current_user && current_user.admin
+      %li{style: 'white-space:nowrap;overflow:hidden'}
+        = link_to users_path, class: 'nav-item' do
+          .fa.fa-user
+          %span.nav-link-text
+            = ' Users'
+    %li{style: 'white-space:nowrap;overflow:hidden'}
+      = link_to teams_path, class: 'nav-item' do
+        .fa.fa-users
+        %span.nav-link-text
+          = ' Teams'
+
+:javascript
+  if (localStorage.getItem("sideBar") == null){
+    localStorage.setItem("sideBar", true);
+  }
+  if (localStorage.getItem("sideBar") === "true"){
+    $(".nav-link-text").show();
+    $(".sidebar").width("250px");
+    $("#dashboard").css("margin-left", "250px");
+    $(".collapse-sidebar-button").removeClass("glyphicon-chevron-right");
+    $(".collapse-sidebar-button").addClass("glyphicon-chevron-left");
+  }else{
+    $(".nav-link-text").hide();
+    $(".sidebar").width("50px");
+    $("#dashboard").css("margin-left", "50px");
+    $(".collapse-sidebar-button").removeClass("glyphicon-chevron-left");
+    $(".collapse-sidebar-button").addClass("glyphicon-chevron-right");
+  }

@@ -1,0 +1,16 @@
+.container-fluid
+  .row
+    .col-md-12
+      %h4
+        %ul.overview_select.nav.nav-pills
+          %li.active{role: "presentation"}
+            %a.active{href: "#environment_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
+              Environments
+          %li{role: "presentation", style: 'margin-left:0'}
+            %a{href: "#testcase_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
+              Testcases
+  .tab-content
+    .tab-pane.fade.in.active#environment_overview{role: "tabpanel"}
+      = render partial: 'device_overview', locals: {execution: execution}
+    -#.tab-pane.fade#testcase_overview{role: "tabpanel"}
+    -#  = sync partial: 'validation_overview', resource: @execution

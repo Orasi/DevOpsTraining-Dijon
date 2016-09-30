@@ -1,0 +1,14 @@
+.container-fluid
+  .row
+    .btn.btn-default.btn-xs.pull-right
+      = link_to :Manage, project_path(execution.project_id), class: 'link-icon'
+    .col-md-4
+      %h4{ style: 'font-weight: 300;'}
+        = execution.created_at
+      %p{ style: 'font-size: 14px;font-weight: 700;'}
+        Status:
+        %span{ style: 'font-size: 13px; font-weight:300'}
+          = 'Open' unless execution.closed
+          = 'Closed' if execution.closed
+    .col-md-8
+      #results_overview_top_panel

@@ -1,0 +1,16 @@
+%tr
+  %td.table-number
+    = "#{counter + 1}."
+  %td
+    = link_to team.name, team_path(team.id)
+  %td
+    Users:
+    = team.user_count
+  %td
+    Project:
+    = team.project_count
+    %br
+  %td
+    .small.overview-time
+      Updated:
+      = time_ago_in_words( team.updated_at) + ' ago'

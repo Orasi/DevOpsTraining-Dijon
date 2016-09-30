@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-body
+    %table.table.table-striped.table-hover.table-condensed
+      %tr
+        %td
+        %th
+          Step Action
+        %th
+          Expected Result
+      - if steps.blank?
+        %tr
+          No Steps Defined
+      - steps.each do |step|
+        %tr
+          %td
+            = "#{step['step_number']}."
+          %td
+            = step['action']
+          %td
+            %li= step['result']

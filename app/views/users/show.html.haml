@@ -1,0 +1,44 @@
+- gravatar = Gravatar.new(@user.username)
+.dashboard-page-header
+  %h4
+
+    = "User -  #{@user.display_name}"
+    %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#user_modal'}}
+
+
+.col-sm-4
+  .panel.panel-default
+    %table.table.table-striped
+      %tr
+        %td
+          Gravatar:
+          - if gravatar
+            .pull-right= image_tag(gravatar.image_url, class: 'img-circle')
+      %tr
+        %td
+          Username:
+          .pull-right= @user.username
+      %tr
+        %td
+          Name:
+          .pull-right= @user.display_name
+      %tr
+        %td
+          Company:
+          .pull-right= @user['company']
+      %tr
+        %td
+          Admin:
+          .pull-right= @user['admin']
+
+
+#user_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Add User
+      .modal-body
+        #user_modal_content
+          = render partial: 'user_form', locals: {user: @user}

@@ -1,0 +1,21 @@
+-#%h1 Dashboard
+-#= link_to 'Logout',  logout_path
+-#- @projects['projects'].each do |p|
+-#  .project_link= link_to p['project_name'], project_path(p['id'])
+.dashboard-page-header
+  %h4 Projects
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            = "#{current_user.display_name.titleize}'s Projects"
+
+        .panel-body
+          %table.table.table-condensed.table-overview.table-hover
+            %tbody#teams
+              - @projects['projects'].each_with_index do |project, i|
+                - project = ProjectPresenter.new(project)
+                = render partial: 'projects/project', locals: {project: project, project_counter: i}
+

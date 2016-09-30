@@ -1,0 +1,4 @@
+class EnvironmentPresenter < BasePresenter
+
+
+end

@@ -1,0 +1,14 @@
+%tr
+  %td.table-number
+    = "#{counter + 1}."
+  %td
+    - unless execution.closed
+      = link_to 'Current Execution', execution_path(execution.id)
+      = link_to '','', method: :put, class: 'fa fa-archive pull-right'
+    - else
+      = link_to 'Closed Execution', execution_path(execution.id)
+      .pull-right.small= "#{ execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y') }"
+  %td
+    - if execution.updated_at < 2.weeks.ago && current_user.admin?
+      = link_to execution_path(execution), method: :delete, class: 'pull-right' do
+        .fa.fa-trash-o

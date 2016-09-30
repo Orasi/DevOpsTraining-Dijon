@@ -1,0 +1,62 @@
+
+- pass_count = execution['pass'].count
+- fail_count = execution['fail'].count
+- skip_count = execution['skip'].count
+- not_run_count = execution['not_run'].count
+- total_tests = pass_count + fail_count + skip_count + not_run_count
+
+.row
+  .col-md-12
+    %table.table.table-condensed.table-overview.numbered_table
+      %tbody
+        - ['abcderf'].each_with_index do |env, i|
+          %tr
+            - results_bar = stacked_progress_bar :Results, total_tests, pass_count, fail_count, skip_count
+            %td
+              .row-index
+            %td
+              -#= display_icon_for device.manufacturer, unique_id: device.unique_id
+              = 'Test Device'
+              .created_at.hidden-sm.hidden-xs
+                %span.small
+                  Created:
+                  = "<CREATED ON>"
+              -#.upated_at.hidden-lg.hidden-md
+              -#  %span.small.overview-time
+              -#    -if true                                                        #FIX
+              -#      .timeago{title: DateTime.now.iso8601}                         //FIX
+              -#
+              -#.functionalxs.visible-xs
+              -#  %br
+              -#  .stacked_progress
+              -#    = results_bar
+
+            -#  .screenshotxs.visible-xs
+            -#    %br
+            -#    .stacked_progress
+            -#      = screenshot_bar
+            -#
+            -#  .pefromancexs.visible-xs
+            -#    %br
+            -#    .stacked_progress
+            -#      = performance_bar
+            %td
+              .stacked_progress
+                = results_bar
+            -#%td.visible-sm.visible-md.visible-lg
+            -#  .stacked_progress
+            -#    = screenshot_bar
+            -#%td.visible-sm.visible-md.visible-lg
+            -#  = performance_bar
+            %td
+              .pull-right.small.overview-time
+                -if true                                            #FIX ME
+                  .timeago{title: DateTime.now.iso8601}
+            %td
+              .pull-right
+                -#= link_to '',execution_device_info_path(execution_id: device.execution.id, device_id: device.id), class: 'glyphicon glyphicon-info-sign link-icon', data: {toggle: 'modal', target: '#infoModal'}, remote: true
+
+
+
+  :javascript
+    $('.timeago').timeago()

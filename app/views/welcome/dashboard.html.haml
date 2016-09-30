@@ -1,0 +1,39 @@
+.container-fluid.clearfix
+  .dashboard-page-header
+    %h2.dashboard-title Dashboard
+    %p.dashboard-description Welcome to the dashboard!
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Recent
+        .panel-body.lg-panel
+          %table.table.table-condensed.table-overview.table-hover
+            %tbody#activityView
+  .row
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            %span
+              Projects
+            -#= link_to ' add', new_customer_path, class: 'btn pull-right default-label fa fa-user-plus small', remote: true
+        .panel-body.lg-panel
+          %table.table.table-condensed.table-overview.table-hover
+            %tbody#teams
+              - @projects['projects'].each_with_index do |p, i|
+                - p = ProjectPresenter.new(p)
+                = render partial: 'projects/project', locals: {project: p, project_counter: i}
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            %span
+              Teams
+              -#= link_to ' add project', new_project_path(), class: 'btn pull-right default-label popover-trigger fa fa-plus small', remote: true
+        .panel-body.lg-panel
+          %table.table.table-condensed.table-overview.table-hover
+            %tbody#project-list
+              - @teams['teams'].each_with_index do |t, i|
+                - t = TeamPresenter.new(t)
+                = render partial: 'teams/team', locals: {team: t, counter: i}

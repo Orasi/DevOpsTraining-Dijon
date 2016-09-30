@@ -1,0 +1,33 @@
+#signup.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        .modeal-title
+          Welcome to Mustard
+      .modal-body
+
+        %ul.nav.nav-tabs
+          %li.active{role: :presentation}
+            %a{href: '#loginTab', 'data-toggle' => 'tab'} Log In
+        -#%li{role: :presentation}
+        -#  %a{href: '#signupTab', 'data-toggle' => 'tab'} Sign Up
+
+        .tab-content
+
+          .tab-pane.active#loginTab{role: :tabpanel}
+            = form_tag url: login_path, role: :form do
+              .form-group
+                %label Username
+                = text_field_tag :username, '', class: 'form-control', required: true
+              .form-group
+                %label Password
+                = password_field_tag  :password, '',  class: 'form-control', required: true
+              .form-group
+                = submit_tag 'Log In', class: 'form-control'
+
+:javascript
+  $('#signup').modal({
+    backdrop: 'static',
+    keyboard: true
+  });
+  $('#signup').modal('show');

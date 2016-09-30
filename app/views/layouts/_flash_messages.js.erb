@@ -1,0 +1,12 @@
+<% flash.each do |key, value| %>
+    <% status = 'danger' if key == 'alert' %>
+    <% status = 'danger' if key == 'error' %>
+    <% status = 'info' if key == 'notice' %>
+    <% status = 'success' if key == 'success' %>
+    $.bootstrapGrowl("<%= value %>", {
+        ele: 'body',
+        type: "<%= status %>",
+        delay: 6000,
+        allow_dismiss: true,
+    });
+<% end %>

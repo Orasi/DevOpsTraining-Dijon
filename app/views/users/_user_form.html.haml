@@ -1,0 +1,30 @@
+= puts(user)
+= form_tag(user['username'] ? user_path(user['id']) : users_path,
+           method: user['username'] ? :put : :post,
+           role: :form) do
+  .form-group
+    = fields_for :user do |f|
+      %label Username
+      = text_field_tag 'user[username]', user['username'], class: 'form-control', required: true
+    .form-group
+      %label First Name
+      = text_field_tag 'user[first_name', user['first_name'], class: 'form-control', required: true
+    .form-group
+      %label Last Name
+      = text_field_tag 'user[last_name]', user['last_name'], class: 'form-control', required: true
+    .form-group
+      %label Company
+      = text_field_tag 'user[company]', user['company'], class: 'form-control', required: true
+    - unless user['username']
+      .form-group
+        %label Password
+        = password_field_tag 'user[password]', '', class: 'form-control', required: true
+      .form-group
+        %label Confirm Password
+        = password_field_tag 'user[password_confirmation]', '', class: 'form-control', required: true
+    .form-group
+      %label Admin
+      = check_box_tag 'user[admin]', true, user['admin']
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+    .pull-right= link_to 'Delete User', user_path(user['id']), method: :delete, class: 'btn btn-danger' if user['username']

@@ -1,0 +1,83 @@
+-#- execution = @execution['execution']
+-#%h3 Execution Info
+-#.eid= execution['id']
+-#.eproject= link_to "Parent Project", project_path(execution['project_id'])
+-#.estatus= "closed:  #{execution['closed']}"
+-#
+-#%h4= "Failed Test -  Total: #{execution['fail'].count}"
+-#- execution['fail'].each do |f|
+-#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
+-#
+-#
+-#%h4= "Passed Test -  Total: #{execution['pass'].count}"
+-#- execution['pass'].each do |f|
+-#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
+-#
+-#
+-#%h4= "Skipped Test -  Total: #{execution['skip'].count}"
+-#- execution['skip'].each do |f|
+-#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
+-#
+-#
+-#%h4= "Not Run Test -  Total: #{execution['not_run'].count}"
+-#- execution['not_run'].each do |f|
+-#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
+- execution = ExecutionPresenter.new(@status['execution'])
+.dashboard-page-header
+  %h4
+    Test Results
+    %ol.breadcrumb.pull-right{ style: 'background-color: white;font-size: .5em;' }
+      %li
+        = link_to current_user.display_name, ''
+      %li
+        = link_to '<PROJECT NAME>', ''#project_path(execution.project_id)
+      %li.active
+        Current Execution
+.container-fluid
+  .panel.panel-default
+    .panel-body
+      %div{ role: 'tabpanel' }
+        .overview-content
+          = render 'executions/overview_top', execution: execution
+        %ul.nav.nav-tabs#resultTabs{ role: 'tablist' }
+          %li.active{ role: 'presentation' }
+            %a{ href: '#overview', aria: { controls: 'overview' }, role: 'tab', data: { toggle: 'tab' } }
+              Overview
+          -#- unless @execution.validations_by_type('manual').blank?
+          -#  %li{ role: 'presentation' }
+          -#    %a{ href: '#manual', aria: { controls: 'functional'}, role: 'tab', data: { toggle: 'tab' } }
+          -#      Manual
+          %li{ role: 'presentation' }
+            %a{ href: '#functional', aria: { controls: 'functional'}, role: 'tab', data: { toggle: 'tab' } }
+              Functional
+          -#- unless @execution.validations_by_type('screenshot').blank?
+          -#  %li{ role: 'presentation' }
+          -#    %a{ href: '#screenshots', aria: { controls: 'screenshots'}, role: 'tab', data: { toggle: 'tab' } }
+          -#      Screenshots
+          -#- unless @execution.validations_by_type('performance').blank?
+          -#  %li{ role: 'presentation' }
+          -#    %a{ href: '#performance', aria: { controls: 'performance'}, role: 'tab', data: { toggle: 'tab' } }
+          -#      Performance
+      .tab-content
+        .tab-pane.active#overview{ role: 'tabpanel' }
+          = render 'executions/overview_bottom', execution: execution
+        -#.tab-pane#manual{ role: 'tabpanel' }
+        -#  = render 'manual_results/bottom_results'
+        -#.tab-pane#screenshots{ role: 'tabpanel' }
+        -#  = render 'screenshot_results/bottom_results'
+        .tab-pane#functional{ role: 'tabpanel' }
+          = render partial: 'executions/functional/functional_results', locals: {execution: execution}
+        -#.tab-pane#performance{ role: 'tabpanel' }
+        -#  = render 'performance_results/bottom_results'
+  -#= render 'executions/info_modal'
+  -##screenshot_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  -#  .modal-dialog{role: 'document'}
+  -#    .modal-content{style:'width:1000px'}
+  -#
+  -#      .modal-body{style: 'padding:0px'}
+  -#        #screenshot_div{style: 'width:100%'}
+  -##stacktracke_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  -#  .modal-dialog{role: 'document'}
+  -#    .modal-content{style:'width:1000px'}
+  -#      .modal-body
+  -#        %pre#stacktrace_div{style: 'width:100%;white-space:pre'}

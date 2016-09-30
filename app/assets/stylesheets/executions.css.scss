@@ -1,0 +1,182 @@
+// Place all the styles related to the Executions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+//.report-header {
+//  background-color: #337AB6;
+//  width: 100%;
+//  margin: 0;
+//  height: 150px;
+//  padding: 10px;
+//}
+//
+//.report_th {
+//  height: 140px;
+//  white-space: nowrap;
+//  border-left: 0px !important;
+//  border-right: 0px !important;
+//  text-align: left;
+//}
+//
+//.rotate_header {
+//  text-align: left;
+//  transform: translate(60px, 75px) rotate(315deg);
+//  width: 15px;
+//  margin-left: 4px;
+//}
+//
+//.underline {
+//  margin-left: 0px;
+//  width: 100%;
+//  border-top: 1px solid #CCCCCC;
+//  padding: 5px 10px;
+//  position: relative;
+//  top: -90px;
+//}
+//
+//.align-left {
+//  text-align: left;
+//  font-weight: bold;
+//}
+//
+//.project-image {
+//  margin-top: 20px;
+//  height: 75px;
+//}
+//
+//.project_subtitle {
+//  width: 100%;
+//  text-align: center !important;
+//  color: white;
+//  font-weight: bolder;
+//  font-size: 18px;
+//  margin-top: 10px;
+//}
+#test_runner_modal .modal-content {
+  width: 1000px;
+  margin-left:  -250px !important;
+}
+.link-like:hover{
+  cursor: pointer;
+}
+.link-icon {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-icon:hover
+{
+  color:inherit;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.overview_select{
+  li > a{
+    color: gray;
+    background-color: white;
+    box-shadow: inset 0 -2px lightgray;
+  }
+
+  li.active > a, li.active{
+    color: #1abc9c;
+    background-color: white;
+    box-shadow: inset 0 -2px #1abc9c;
+  }
+  li, li.active, li:hover, li:focus{
+    background-color:white;
+  }
+
+  a, a.active, a:hover, a:focus{
+    background-color:white;
+  }
+
+  li > a:hover, li.active > a:hover, li:focus > a, li:focus > a:hover,  li.active > a:focus{
+    background-color: white;
+    color: darkslategray;
+    box-shadow: inset 0 -2px gray;
+  }
+  li.active > a:hover, li:focus > a:hover,  li.active > a:focus{
+    box-shadow: inset 0 -2px #1abc9c;
+    color: #1abc9c;
+  }
+}
+
+.pass_progress > .progress > .progress-bar{
+  background-color: #1abc9c;
+}
+
+.fail_progress > .progress > .progress-bar{
+  background-color: #e74c3c;
+}
+
+.incomplete_progress > .progress > .progress-bar{
+  background-color: #e7ba0f;
+}
+.stacked_progress > .progress> .progress-bar-success{
+  background-color: #1abc9c;
+}
+.stacked_progress > .progress> .progress-bar-danger{
+  background-color: #e74c3c;
+}
+.stacked_progress > .progress> .progress-bar-warning{
+  background-color: #e7ba0f;
+}
+.numbered_table {
+  counter-reset: rowNumber;
+}
+
+.numbered_table tr {
+  counter-increment: rowNumber;
+}
+
+.numbered_table tr td .row-index::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+}
+.numbered_table tr td .row-index::after {
+  content: '.';
+}
+
+$orasi_blue: #f1c40f;;
+$opacity: 0.4;
+$orasi_blue_rgb: rgba(241,196,15,$opacity);
+.loader {
+  margin: 0 auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid $orasi_blue_rgb;
+  border-right: 1.1em solid $orasi_blue_rgb;
+  border-bottom: 1.1em solid $orasi_blue_rgb;
+  border-left: 1.1em solid $orasi_blue;
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

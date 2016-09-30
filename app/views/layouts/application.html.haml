@@ -1,0 +1,30 @@
+%html
+  %head
+    %title Mustard
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+    %link{ rel: 'stylesheet', href: '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' }
+    %link{ rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,400', type: 'text/css' }
+  %body
+    .loading-overlay
+      .loading-icon
+        .sk-cube-grid
+          .sk-cube.sk-cube1
+          .sk-cube.sk-cube2
+          .sk-cube.sk-cube3
+          .sk-cube.sk-cube4
+          .sk-cube.sk-cube5
+          .sk-cube.sk-cube6
+          .sk-cube.sk-cube7
+          .sk-cube.sk-cube8
+          .sk-cube.sk-cube9
+        %h2{style: 'color:white;opacity:1'}
+          Loading..
+    = render 'layouts/navbar'
+    .container#flash-messages
+      :javascript
+        #{render partial: 'layouts/flash_messages.js'}
+    #dashboard
+      = yield
