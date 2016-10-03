@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require timeago
 //= require select2
+//= require Chart
 //= require turbolinks
 //= require_tree .
 

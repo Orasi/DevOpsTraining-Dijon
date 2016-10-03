@@ -3,7 +3,8 @@
   %h4
 
     = "User -  #{@user.display_name}"
-    %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#user_modal'}}
+    - if current_user.admin
+      %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#user_modal'}}
 
 
 .col-sm-4

@@ -1,0 +1,27 @@
+%table.table.table-overview.table-hover
+  %thead
+    %tr
+      %th
+      %th
+        Execution
+      %th
+        Closed?
+      %th
+        Actions
+  %tbody#executions
+    - executions.each_with_index do |e, i|
+      - execution = ExecutionPresenter.new(e)
+      %tr
+        %td.table-number
+          = "#{i + 1}."
+        %td
+          = link_to "#{execution.created_at.strftime('%m/%d/%Y')}", execution_path(execution.id)
+        %td
+          - if execution.closed
+            = "#{ execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y') }"
+        %td
+          - if !execution.closed
+            = link_to '',close_execution_path(execution.id), method: :put, class: 'fa fa-archive'
+          - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
+            = link_to execution_path(execution), method: :delete do
+              .fa.fa-trash-o

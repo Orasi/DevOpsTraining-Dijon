@@ -1,0 +1,110 @@
+
+- chart_data = [execution['fail'].count, execution['pass'].count, execution['skip'].count, execution['not_run'].count]
+- total_tests = execution['fail'].count + execution['pass'].count + execution['skip'].count + execution['not_run'].count
+
+#execution_quickview
+  %table{style: 'text-align;center'}
+    %tr
+      %td{colspan: 2}
+        %h4.quickview_title= link_to @title, execution_path(execution['id'])
+    %tr
+      %td
+        .project_info_table
+          %table.table.table-hover
+            %thead
+              %tr
+                %th
+                  Status
+                %th
+                  Total
+                %th
+                  Percent
+            %tr
+              %td
+                Pass
+              %td
+                = execution['pass'].count
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['pass'].count/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Fail
+              %td
+                = execution['fail'].count
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['fail'].count/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Skip
+              %td
+                = execution['skip'].count
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['skip'].count/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Not Run
+              %td
+                = execution['not_run'].count
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['skip'].count/ total_tests) * 100, precision: 1) : '0%'
+      %td
+        .project_header_chart
+          - if total_tests > 0
+            %canvas.execution-chart{width: 150, height: 150, data: { chart: chart_data}}
+          - else
+            %h5
+              No Testcases defined
+
+  - if total_tests > 0
+    :javascript
+      //current_ctx =  $(document.currentScript).closest('.execution_quickview').find('.execution-chart')
+      current_ctx =  $('.execution-chart').last()
+
+      var data = {
+        labels: [
+            "Fail",
+            "Pass",
+            "Skip",
+            "Not Run"
+        ],
+        datasets: [
+            {
+                data: current_ctx.data('chart'),
+                backgroundColor: [
+                    "#1abc9c",
+                    "#e74c3c",
+                    "#e7ba0f",
+                ]
+            }]
+      };
+      var options = {
+        legend: {display: false},
+        responsive: true,
+        maintainAspectRatio: true,
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+              return previousValue + currentValue;
+            });
+            var currentValue = dataset.data[tooltipItem.index];
+            var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+            return precentage + "%";
+            }
+          }
+        }
+      }
+      //var currentScript = document.currentScript || (function() {
+      //  var scripts = document.getElementsByTagName('script');
+      //  return scripts[scripts.length - 1];
+      //})();
+
+
+      var current_chart = new Chart(current_ctx,{
+        type: 'doughnut',
+        data: data,
+        options: options
+      });
+
+

@@ -17,4 +17,6 @@ module ApplicationHelper
         content_tag(:div, 'Incomplete', class: 'primary-box text-center')
     end
   end
+
+
 end

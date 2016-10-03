@@ -66,3 +66,4 @@ gem 'mustard_client', '= 0.1.9'
 gem 'select2-rails'
 gem "font-awesome-rails"
 gem 'gravatar-ultimate'
+gem 'chart-js-rails'

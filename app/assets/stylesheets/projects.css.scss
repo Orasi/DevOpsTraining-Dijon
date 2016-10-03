@@ -1,0 +1,32 @@
+.project_info_table{
+  width: 400px;
+
+  //display:inline-block
+}
+.project_header_chart{
+  margin-left: 50px;
+  width: 200px;
+  height: 200px;
+
+}
+.execution_quickview_panel {
+  display: flex;
+  justify-content: space-between;
+}
+.execution_chart{
+  min-height: 100px;
+  min-width: 100px;
+}
+
+#execution_quickview{
+  display: flex;
+  justify-content: space-between;
+}
+.view-link{
+  margin-top: 5px;
+}
+
+.quickview_title{
+  text-align: center;
+  text-decoration: underline;
+}

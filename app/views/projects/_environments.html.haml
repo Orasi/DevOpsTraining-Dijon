@@ -1,0 +1,24 @@
+%table.table.table-overview.table-hover
+  %thead
+    %tr
+      %th
+      %th
+        Environment
+      %th
+        Last Updated
+      %th
+        Actions
+  %tbody#environments
+    - environments.reverse.each_with_index do |e, i|
+      - environment = EnvironmentPresenter.new(e)
+      %tr
+        %td.table-number
+          = "#{i + 1}."
+        %td
+          = environment.display_icon
+          = environment.display_name
+        %td
+          = environment.updated_at.strftime('%m/%d/%Y')
+
+        %td
+          %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#environment_modal'}}

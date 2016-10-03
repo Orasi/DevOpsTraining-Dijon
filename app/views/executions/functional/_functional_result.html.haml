@@ -82,7 +82,7 @@
                   = "#{i + 1}."
                 %td
                   -#= display_icon_for result.device.manufacturer, unique_id: result.device.unique_id
-                  = r['environment_display_name'] ? r['environment_display_name'] : r['environment_name']
+                  = r['display_name']
                 %td{ style: 'width: 60%;'}
                   Comments:
                   %br

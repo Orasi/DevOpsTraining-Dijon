@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   #Project Paths
   resources :projects
 
+
   # Teastcase Paths
   resources :testcases
 
@@ -31,7 +32,8 @@ Rails.application.routes.draw do
   #Execution Paths
   resources :executions
   get 'executions/:id/testcase_detail/:testcase_id', to: 'executions#testcase_detail', as: :testcase_detail
-
+  put 'executions/:id/close', to: 'executions#close', as: :close_execution
+  get 'executions/:id/project_execution_summary/:title', to: 'executions#project_summary', as: :execution_project_summary
   #Result Paths
   resources :results
 end

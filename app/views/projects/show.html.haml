@@ -1,25 +1,10 @@
 - project = ProjectPresenter.new(@project['project'])
--#%h3 Project Info
--#.id= project['id']
--#.name=project['project_name']
--#.api= project['api_key']
--#
--#.testcases
--#  %h4 Testcases
--#  - project['testcases'].each do |tc|
--#    .tclink= link_to tc['testcase_name'], testcase_path(tc['id'])
--#
--#.environments
--#  %h4 Environments
--#  - project['environments'].each do |env|
--#    .envid= env['id']
--#    .envstatus= env['uuid']
--#
--#.executions
--#  %h4 Executions
--#  - project['executions'].each do |env|
--#    .envlink=link_to env['id'], execution_path(env['id'])
 
+- current_execution_id = project.executions[0]['id']
+- if project.executions.count > 1
+  -previous_execution_id = project.executions[1]['id']
+- else
+  -previous_execution_id = -1
 
 .dashboard-page-header
   %h2
@@ -33,35 +18,38 @@
     .col-md-12
       .panel.panel-default
         .panel-heading
-          %h3.panel-title Api Key
-        .panel-body
-          = project.api_key
+          %h3.panel-title
+            Project Information
+            .pull-right.small
+              API Key:
+              = project.api_key
+
+        .panel-body.execution_quickview_panel{style: 'min-height:250px'}
+          .current_execution{style: 'width:50%'}
+            .loader
+          .previous_execution{style: 'width:50%'}
+            .loader
+
+
   .row
-    .col-md-6
+    .col-md-12
       .panel.panel-default
-        .panel-heading
-          %h3.panel-title Executions
         .panel-body
-          %table.table.table-condensed.table-overview.table-hover
-            %tbody#executions
-              - project['executions'].reverse.each_with_index do |e, i|
-                - e = ProjectPresenter.new(e)
-                = render partial: 'executions/executions', locals: {execution: e, counter: i}
-    .col-md-6
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title Add Environment
-          = link_to 'All Environments', '', class: 'results-index-page', remote: true
-        .panel-body
-          #new-device
-            = link_to 'New Environment', '', class: 'btn btn-success', remote: true
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title Add Validations
-          = link_to 'All Testcases', '', class: 'results-index-page', remote: true
-        .panel-body
-          #new-validations
-            = link_to 'New Testcases', '', class: 'btn btn-success', remote: true
+          %ul#project_info_tabs.nav.nav-tabs{role: 'tablist'}
+            %li.active{role: 'presentation'}
+              = link_to 'Executions', '#execution_tab', role: 'tab', data: {toggle: 'tab'}
+            %li{role: 'presentation'}
+              = link_to 'Environments', '#environment_tab', role: 'tab', data: {toggle: 'tab'}
+            %li{role: 'presentation'}
+              = link_to 'Testcases', '#testcase_tab', role: 'tab', data: {toggle: 'tab'}
+
+          .tab-content
+            #execution_tab.tab-pane.active{role: 'tabpanel'}
+              = render partial: 'executions', locals: {executions: project.executions}
+            #environment_tab.tab-pane{role: 'tabpanel'}
+              = render partial: 'environments', locals: {environments: project.environments}
+            #testcase_tab.tab-pane{role: 'tabpanel'}
+              = render partial: 'testcases', locals: {testcases: project.testcases}
 
 #project_modal.modal.fade
   .modal-dialog
@@ -73,6 +61,24 @@
       .modal-body
         #project_modal_content
           = render partial: 'project_form', locals: {project: project}
+
+#environment_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Environment
+      .modal-body
+        #environment_modal_content
+          %h1 environment modal
+          -#= render partial: 'project_form', locals: {project: project}
+
+:javascript
+  $('#project_info_tabs').tab()
+  $('.current_execution').load("#{execution_project_summary_path(id: "#{current_execution_id}", title: 'Current Execution')}")
+  $('.previous_execution').load("#{execution_project_summary_path(id: "#{previous_execution_id}", title: 'Previous Execution')}")
+
 -#= render 'projects/validation_modal'
 
 -#= render 'projects/device_modal'

@@ -1,0 +1,25 @@
+%table.table.table-overview.table-hover
+  %thead
+    %tr
+      %th
+        ID
+      %th
+        Testcase Name
+
+      %th
+        Last Updated
+      %th
+        Actions
+  %tbody#testcases
+    - testcases.each do |t|
+      - testcase = TestcasePresenter.new(t)
+      %tr
+        %td.table-number
+          = "#{t['testcase_id']}."
+        %td
+          = testcase.testcase_name
+        %td
+          = testcase.updated_at.strftime('%m/%d/%Y')
+        %td
+          = link_to testcase_path(t['id']) do
+            %span.fa.fa-pencil.link-like.small
