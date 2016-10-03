@@ -1,0 +1,14 @@
+= form_tag(team_user_path,
+           method: :post,
+           role: :form) do
+  .form-group
+    = fields_for :team do |f|
+      %label User
+      = select_tag 'team[user_id]',  options_for_select(@users['users'].map{|u| ["#{u['first_name']} #{u['last_name']}", u['id']]}),
+                                                     {class: 'functional select2',
+                                                      style: 'width:100%',
+                                                      include_blank: true,
+                                                      data: {placeholder: 'Select User'}}
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+

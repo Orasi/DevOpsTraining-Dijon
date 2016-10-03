@@ -1,0 +1,14 @@
+= form_tag(team_project_path,
+           method: :post,
+           role: :form) do
+  .form-group
+    = fields_for :team do |f|
+      %label Project
+      = select_tag 'team[project_id]',  options_for_select(@projects['projects'].map{|p| [p['project_name'], p['id']]}),
+                                                     {class: 'functional select2',
+                                                      style: 'width:100%',
+                                                      include_blank: true,
+                                                      data: {placeholder: 'Select Project'}}
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+

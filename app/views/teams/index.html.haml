@@ -8,6 +8,7 @@
         .panel-heading
           %h3.panel-title
             = "#{current_user.display_name.titleize}'s Teams"
+            = link_to ' Add Team', '', class: 'pull-right btn default-label fa fa-users small', data: {toggle: 'modal', target:'#team_modal'}
 
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
@@ -15,3 +16,14 @@
               - @teams['teams'].each_with_index do |team, i|
                 - team = ProjectPresenter.new(team)
                 = render partial: 'teams/team', locals: {team: team, counter: i}
+
+#team_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Add Team
+      .modal-body
+        #team_modal_content
+          = render partial: 'team_form', locals: {team: {}}

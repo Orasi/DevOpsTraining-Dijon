@@ -2,6 +2,7 @@
 .dashboard-page-header
   %h2
     = team.name + ' Team'
+    %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#team_modal'}}
 
 .container-fluid
   .row
@@ -18,24 +19,61 @@
         .panel-heading
           %h3.panel-title
             Projects
-            = link_to ' Add Project', '', class: 'pull-right btn default-label fa fa-bar-chart small', remote: true
+            = link_to ' Add Project', '', class: 'pull-right btn default-label fa fa-bar-chart small', data: {toggle: 'modal', target: '#team_project_modal'}
 
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
             %tbody#projects
               - team['projects'].each_with_index do |p, i|
                 - p = ProjectPresenter.new(p)
-                = render partial: 'teams/project', locals: {project: p, project_counter: i}
+                = render partial: 'teams/project', locals: {team: team, project: p, project_counter: i}
     .col-md-6
       .panel.panel-default
         .panel-heading
           %h3.panel-title
             Users
-            = link_to ' Add User', '', class: 'pull-right btn default-label fa fa-user-plus small', remote: true
+            = link_to ' Add User', '', class: 'pull-right btn default-label fa fa-user-plus small', data: {toggle: 'modal', target: '#team_user_modal'}
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
             %tbody#users
               - team['users'].each_with_index do |u, i|
                 - u = UserPresenter.new(u)
-                = render partial: 'teams/user', locals: {user: u, counter: i}
+                = render partial: 'teams/user', locals: {team: team, user: u, counter: i}
 
+
+#team_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Team
+      .modal-body
+        #team_modal_content
+          = render partial: 'team_form', locals: {team: team}
+
+#team_user_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Team
+      .modal-body
+        #team_user_modal_content
+          = render partial: 'team_user_form', locals: {team: team}
+
+#team_project_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Team
+      .modal-body
+        #team_project_modal_content
+          = render partial: 'team_project_form', locals: {team: team}
+
+
+:javascript
+  $('.functional.select2').select2()
