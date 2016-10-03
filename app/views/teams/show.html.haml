@@ -2,7 +2,8 @@
 .dashboard-page-header
   %h2
     = team.name + ' Team'
-    %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#team_modal'}}
+    - if current_user['admin']
+      %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#team_modal'}}
 
 .container-fluid
   .row
@@ -19,7 +20,8 @@
         .panel-heading
           %h3.panel-title
             Projects
-            = link_to ' Add Project', '', class: 'pull-right btn default-label fa fa-bar-chart small', data: {toggle: 'modal', target: '#team_project_modal'}
+            - if current_user['admin']
+              = link_to ' Add Project', '', class: 'pull-right btn default-label fa fa-bar-chart small', data: {toggle: 'modal', target: '#team_project_modal'}
 
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
@@ -32,7 +34,8 @@
         .panel-heading
           %h3.panel-title
             Users
-            = link_to ' Add User', '', class: 'pull-right btn default-label fa fa-user-plus small', data: {toggle: 'modal', target: '#team_user_modal'}
+            - if current_user['admin']
+              = link_to ' Add User', '', class: 'pull-right btn default-label fa fa-user-plus small', data: {toggle: 'modal', target: '#team_user_modal'}
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
             %tbody#users
@@ -40,39 +43,39 @@
                 - u = UserPresenter.new(u)
                 = render partial: 'teams/user', locals: {team: team, user: u, counter: i}
 
+- if current_user['admin']
+  #team_modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+            %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+          %h4 Edit Team
+        .modal-body
+          #team_modal_content
+            = render partial: 'team_form', locals: {team: team}
 
-#team_modal.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
-          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
-        %h4 Edit Team
-      .modal-body
-        #team_modal_content
-          = render partial: 'team_form', locals: {team: team}
+  #team_user_modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+            %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+          %h4 Edit Team
+        .modal-body
+          #team_user_modal_content
+            = render partial: 'team_user_form', locals: {team: team}
 
-#team_user_modal.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
-          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
-        %h4 Edit Team
-      .modal-body
-        #team_user_modal_content
-          = render partial: 'team_user_form', locals: {team: team}
-
-#team_project_modal.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
-          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
-        %h4 Edit Team
-      .modal-body
-        #team_project_modal_content
-          = render partial: 'team_project_form', locals: {team: team}
+  #team_project_modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+            %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+          %h4 Edit Team
+        .modal-body
+          #team_project_modal_content
+            = render partial: 'team_project_form', locals: {team: team}
 
 
 :javascript

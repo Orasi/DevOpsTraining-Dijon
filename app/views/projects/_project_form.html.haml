@@ -1,0 +1,11 @@
+= puts project
+= form_tag(project['id'] ? project_path(project['id']) : projects_path,
+           method: project['id'] ? :put : :post,
+           role: :form) do
+  .form-group
+    = fields_for :project do |f|
+      %label Name
+      = text_field_tag 'project[name]', project['project_name'], class: 'form-control', required: true
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+    .pull-right= link_to 'Delete Project', project_path(project['id']), method: :delete, class: 'btn btn-danger' if project['id']

@@ -1,12 +1,22 @@
 class UsersController < ApplicationController
 
   def index
+
     @users = @mustard.users.all
+
+    if @users['error']
+      redirect_to user_path(current_user['id'])
+    end
+
   end
 
   def show
     user = @mustard.users.find(params[:id])
     @user = UserPresenter.new(user['user'])
+
+    if user['error']
+      redirect_back fallback_location: root_path, flash: { alert: "Failed to access user. Error[#{user['error']}]"}
+    end
   end
 
   def create

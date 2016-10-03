@@ -11,6 +11,8 @@
         .panel-heading
           %h3.panel-title
             = "#{current_user.display_name.titleize}'s Projects"
+            - if current_user['admin']
+              = link_to ' Add Project', '', class: 'pull-right btn default-label fa fa-bar-chart small', data: {toggle: 'modal', target: '#project_modal'}
 
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
@@ -19,3 +21,13 @@
                 - project = ProjectPresenter.new(project)
                 = render partial: 'projects/project', locals: {project: project, project_counter: i}
 
+#project_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Add Project
+      .modal-body
+        #project_modal_content
+          = render partial: 'project_form', locals: {project: {}}

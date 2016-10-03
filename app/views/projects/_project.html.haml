@@ -8,3 +8,7 @@
     .small.overview-time.pull-right
       Updated:
       = time_ago_in_words( project.updated_at) + ' ago'
+  %td
+    - if current_user.admin
+      = link_to project_path(id: project['id']), method: :delete  do
+        .pull-right.fa.fa-remove{style: 'color:red'}

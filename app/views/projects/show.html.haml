@@ -24,6 +24,9 @@
 .dashboard-page-header
   %h2
     = project.project_name + ' Project'
+    - if current_user['admin']
+      %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#project_modal'}}
+
 
 .container-fluid
   .row
@@ -60,6 +63,16 @@
           #new-validations
             = link_to 'New Testcases', '', class: 'btn btn-success', remote: true
 
+#project_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Add Project
+      .modal-body
+        #project_modal_content
+          = render partial: 'project_form', locals: {project: project}
 -#= render 'projects/validation_modal'
 
 -#= render 'projects/device_modal'

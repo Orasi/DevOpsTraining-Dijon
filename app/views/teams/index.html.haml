@@ -8,7 +8,8 @@
         .panel-heading
           %h3.panel-title
             = "#{current_user.display_name.titleize}'s Teams"
-            = link_to ' Add Team', '', class: 'pull-right btn default-label fa fa-users small', data: {toggle: 'modal', target:'#team_modal'}
+            - if current_user['admin']
+              = link_to ' Add Team', '', class: 'pull-right btn default-label fa fa-users small', data: {toggle: 'modal', target:'#team_modal'}
 
         .panel-body
           %table.table.table-condensed.table-overview.table-hover
