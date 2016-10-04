@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get 'executions/:id/testcase_detail/:testcase_id', to: 'executions#testcase_detail', as: :testcase_detail
   put 'executions/:id/close', to: 'executions#close', as: :close_execution
   get 'executions/:id/project_execution_summary/:title', to: 'executions#project_summary', as: :execution_project_summary
+
   #Result Paths
   resources :results
+  get 'results/:id/history', to: 'executions#result_history', as: :result_history
+  get 'results/:id/screenshot/:screenshot_id', to: 'results#screenshot', as: :result_screenshot
 end

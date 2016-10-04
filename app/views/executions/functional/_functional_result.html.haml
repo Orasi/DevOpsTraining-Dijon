@@ -24,7 +24,6 @@
       - if manual_results.blank?
         %button{type: 'button', data: {toggle: 'modal', target: '#manual_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
           Add Manual Result
-
   - unless manual_results.blank?
     .row
       .col-md-12
@@ -33,6 +32,7 @@
         %h4 Manual Results
 
         %table.table.table-condensed.table-overview
+
           %thead
             %tr
               %td
@@ -81,7 +81,6 @@
                 %td
                   = "#{i + 1}."
                 %td
-                  -#= display_icon_for result.device.manufacturer, unique_id: result.device.unique_id
                   = r['display_name']
                 %td{ style: 'width: 60%;'}
                   Comments:
@@ -94,40 +93,64 @@
                     = build_status r.status
                 %td
                   %br
-                  - if result['screenshot']
-                    %div{class: 'link-like screenshot-link fa fa-camera-retro', data: {toggle: 'modal', target:'#screenshot_modal', image: ""}}
-                  - if result['stacktrace']
-                    %div{class: 'link-like stacktrace-link fa fa-file-text', data: {toggle: 'modal', target:'#stacktracke_modal', text: "#{result['stacktrace']}"}}
-                  = link_to '', '', {class: 'fa fa-clock-o link-icon', remote: true}
-                  - if result['link']
-                    = link_to '', result['link'], class: 'link-icon fa fa-link', target: '_blank'
+                  - if r['screenshot_id']
+                    %div{class: 'link-like screenshot-link fa fa-camera-retro', data: {toggle: 'modal', target:'#screenshot_modal', image: result_screenshot_path(id: r['id'], screenshot_id: r['screenshot_id'])}}
+                  - if r['stacktrace']
+                    %div{class: 'link-like stacktrace-link fa fa-file-text', data: {toggle: 'modal', target:'#stacktrace_modal', text: "#{r['stacktrace']}"}}
+                  %span.fa.fa-clock-o.link-icon.history-link{data: {url: result_history_path(r.id), toggle: 'modal', target: '#history_modal'}}
+                  - if r['link']
+                    = link_to '', r['link'], class: 'link-icon fa fa-link', target: '_blank'
                 %td
-                  .pull-right.small.overview-time
-                    -#.timeago{title: result.updated_at.iso8601}
+                  - if result['updated_at']
+                    .pull-right.small.overview-time
+                      .timeago{title: result.updated_at.iso8601}
 -#
 -#= render partial: 'manual_results/manual_result_modal', locals: {validation: @validation}
 -#= render partial: 'manual_results/test_runner_modal', locals: {validation: @validation}
 -#
--##history_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
--#  .modal-dialog{role: 'document'}
--#    .modal-content{style:'width:1000px'}
--#      .modal-body
--#        #history_content
--#
--#
+#history_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #history_content
+          .loader
+
+#stacktrace_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        %pre#stacktrace_div{style: 'width:100%;white-space:pre'}
+
+#screenshot_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #screenshot_div
+          = image_tag '', alt: 'Screenshot', id: 'screenshot_image'
+          .loader
 :javascript
+
+
   $('#steps_view').click(function(e){
     e.preventDefault()
     $('#steps_table').slideToggle('slow');
   });
--#
--#  $('.timeago').timeago()
--#  $('.screenshot-link').on('click', function(){
--#    $('#screenshot_div').html($(this).data('image'));
--#  })
--#  $('.stacktrace-link').on('click', function(){
--#    $('#stacktrace_div').html($(this).data('text'));
--#  })
+
+  $('.history-link').click(function(e){
+    $('#history_content').load($(this).data('url'))
+  })
+
+  $('.stacktrace-link').on('click', function(){
+    $('#stacktrace_div').html($(this).data('text'));
+  })
+
+  $('.screenshot-link').on('click', function(){
+    $('#screenshot_div').html("<img src='" + $(this).data('image') + "' >");
+  })
+
+  $('.timeago').timeago()
+
+
 -#  $(document).on('show.bs.modal', '.modal', function () {
 -#    var zIndex = 1040 + (10 * $('.modal:visible').length);
 -#    $(this).css('z-index', zIndex);

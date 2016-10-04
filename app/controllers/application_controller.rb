@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
 
   def attach_mustard_client
     @mustard = MustardClient::Mustard.new
+    @mustard.set_mustard_url(Rails.application.config.mustard_api)
     @mustard.set_user_token(session[:user_token])
   end
 

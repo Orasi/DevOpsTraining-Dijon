@@ -1,0 +1,55 @@
+.container-fluid
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Run
+        - if display_environment
+          %th Environment
+        %th Comment
+        %th Status
+        %th Attachments
+    %tbody
+      - results['results'].reverse.each_with_index do |obj, i|
+        - result = ResultPresenter.new(obj)
+        %tr
+          %td
+            = "#{i + 1}."
+          - if display_environment
+            %td
+              = display_icon_for results['environment_type']
+              = results.environment_display_name
+          %td{ style: 'width: 60%;'}
+            Comments:
+            %br
+            = result.comment
+          %td
+            Status:
+            %br
+            .test-result
+              = build_status(result.status)
+          %td
+            %br
+            - if result['screenshot_id']
+              .link-like.screenshot-link.fa.fa-camera-retro{data: {toggle: 'modal', target:'#screenshot_modal',image: result_screenshot_path(id: results['id'], screenshot_id: result['screenshot_id'])}, class: 'img-responsive'}
+            - if result['stacktrace']
+              %div{class: 'link-like stacktrace-link fa fa-file-text', data: {toggle: 'modal', target:'#stacktrace_modal', text: "#{result.stacktrace}"}}
+
+            - if result['link']
+              = link_to '', result.link, class: 'link-icon fa fa-link', target: '_blank'
+          %td
+            - if result['updated_at']
+              .pull-right.small.overview-time
+                = time_ago_in_words(result.updated_at) + ' ago'
+:javascript
+
+  $('.history-link').click(function(e){
+    $('#history_content').load($(this).data('url'))
+  })
+
+  $('.stacktrace-link').on('click', function(){
+    $('#stacktrace_div').html($(this).data('text'));
+  })
+
+  $('.screenshot-link').on('click', function(){
+    $('#screenshot_div').html("<img src='" + $(this).data('image') + "' >");
+  })

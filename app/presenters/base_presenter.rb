@@ -33,4 +33,6 @@ class BasePresenter < SimpleDelegator
     end
   end
 
+
+
 end

@@ -7,4 +7,15 @@ class ResultsController < ApplicationController
     render json: @result
   end
 
+  def screenshot
+
+    screenshot = @mustard.results.screenshot(params[:id], params[:screenshot_id])
+
+    if screenshot['error']
+      render json: {error: "Screenshot Error [#{screenshot['error']}]"}
+    else
+      redirect_to screenshot['screenshot']
+    end
+
+  end
 end

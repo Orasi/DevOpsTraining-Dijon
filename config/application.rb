@@ -10,6 +10,7 @@ module MustardFront
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/app)
     config.autoload_paths += %W(#{config.root}/lib)
+    config.mustard_api = 'http://10.238.242.61:8081'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

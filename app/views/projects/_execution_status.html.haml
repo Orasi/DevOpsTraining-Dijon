@@ -25,28 +25,28 @@
               %td
                 = execution['pass'].count
               %td
-                = total_tests > 0 ? number_to_percentage((execution['pass'].count/ total_tests) * 100, precision: 1) : '0%'
+                = total_tests > 0 ? number_to_percentage((execution['pass'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
             %tr
               %td
                 Fail
               %td
                 = execution['fail'].count
               %td
-                = total_tests > 0 ? number_to_percentage((execution['fail'].count/ total_tests) * 100, precision: 1) : '0%'
+                = total_tests > 0 ? number_to_percentage((execution['fail'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
             %tr
               %td
                 Skip
               %td
                 = execution['skip'].count
               %td
-                = total_tests > 0 ? number_to_percentage((execution['skip'].count/ total_tests) * 100, precision: 1) : '0%'
+                = total_tests > 0 ? number_to_percentage((execution['skip'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
             %tr
               %td
                 Not Run
               %td
                 = execution['not_run'].count
               %td
-                = total_tests > 0 ? number_to_percentage((execution['skip'].count/ total_tests) * 100, precision: 1) : '0%'
+                = total_tests > 0 ? number_to_percentage((execution['skip'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
       %td
         .project_header_chart
           - if total_tests > 0

@@ -1,5 +1,7 @@
 class ExecutionsController < ApplicationController
 
+
+
   def show
     @status = @mustard.executions.testcase_status( params[:id] )
     @summary = @mustard.executions.environment_summary( params[:id])
@@ -43,6 +45,15 @@ class ExecutionsController < ApplicationController
 
     @status = @mustard.executions.testcase_status( params[:id] )
     render partial: 'projects/execution_status', locals: {execution: @status['execution']}
+  end
+
+  def result_history
+
+    @result = @mustard.results.find(params[:id])
+
+    render json: {error: 'Could not find result'} and return unless @result
+
+    render partial: 'executions/functional/result_history', locals: {results: @result['result'], display_environment: false}
   end
 
 end
