@@ -73,6 +73,7 @@
     .row
       .col-md-12
         %h4 Automated Results
+        -#- asdfasdfasdfasdf
         %table.table.table-condensed.table-overview
           %tbody
             - automated_results.each_with_index do |obj, i|
@@ -81,7 +82,8 @@
                 %td
                   = "#{i + 1}."
                 %td
-                  = r['display_name']
+                  = display_icon_for r['environment_type']
+                  = r['environment_name']
                 %td{ style: 'width: 60%;'}
                   Comments:
                   %br

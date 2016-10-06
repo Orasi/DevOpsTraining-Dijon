@@ -1,0 +1,28 @@
+.container-fluid
+  = form_tag(testcase_import_path(@project['project']['id']), method: :post) do |f|
+    = text_area_tag 'csv', @csv,  require: true, style: 'display:none'
+    = submit_tag 'Confirm Testcase Import', class: 'btn btn-success'
+
+  - unless @testcases['fail'].blank?
+    .panel.panel-default
+      .panel-body
+        %h4 The following test cases were rejected:
+        %ul
+          - @testcases['fail'].each do |error|
+            %li= error
+
+  %table.table-hover.table-bordered.table-condensed{style: 'width:100%'}
+    - @testcases['success'].each do |tc|
+      %tr
+        %td
+          = tc['validation_id']
+        %td
+          = tc['name']
+        %td
+          %table.table.table-striped{style: 'max-width:600px'}
+            - tc['reproduction_steps'].each do |s|
+              %tr
+                %td{style: 'max-width:300px'}
+                  = s['action']
+                %td{style: 'max-width:300px'}
+                  = s['result']

@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-body
+    = form_tag(testcase_import_path(@project['project']['id'], preview: :preview), method: :post) do |f|
+      .form-group
+        = label_tag 'Import Testcases'
+      .form-group
+        = text_area_tag 'csv', '', {class: 'form-control', style: 'height:400px', placeholder: 'Paste CSV Here', require: true, autofocus: true}
+      .form-group
+        = submit_tag 'Preview Testcases'

@@ -1,27 +1,3 @@
--#- execution = @execution['execution']
--#%h3 Execution Info
--#.eid= execution['id']
--#.eproject= link_to "Parent Project", project_path(execution['project_id'])
--#.estatus= "closed:  #{execution['closed']}"
--#
--#%h4= "Failed Test -  Total: #{execution['fail'].count}"
--#- execution['fail'].each do |f|
--#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
--#
--#
--#%h4= "Passed Test -  Total: #{execution['pass'].count}"
--#- execution['pass'].each do |f|
--#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
--#
--#
--#%h4= "Skipped Test -  Total: #{execution['skip'].count}"
--#- execution['skip'].each do |f|
--#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
--#
--#
--#%h4= "Not Run Test -  Total: #{execution['not_run'].count}"
--#- execution['not_run'].each do |f|
--#  .fail= link_to "#{f['id']}.  #{f['name']}", testcase_path(f['id'])
 - execution = ExecutionPresenter.new(@status['execution'])
 .dashboard-page-header
   %h4
@@ -30,7 +6,7 @@
       %li
         = link_to current_user.display_name, ''
       %li
-        = link_to '<PROJECT NAME>', ''#project_path(execution.project_id)
+        = link_to execution.project_name, project_path(execution.project_id)
       %li.active
         Current Execution
 .container-fluid

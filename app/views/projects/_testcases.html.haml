@@ -1,3 +1,4 @@
+= link_to ' Add Testcase', '', class: 'pull-right btn default-label fa fa-check-square-o small', data: {toggle: 'modal', target: '#new_testcase_modal'}
 %table.table.table-overview.table-hover
   %thead
     %tr
@@ -17,9 +18,22 @@
         %td.table-number
           = "#{t['testcase_id']}."
         %td
-          = testcase.testcase_name
+          = link_to testcase.testcase_name, testcase_path(testcase.id)
         %td
           = testcase.updated_at.strftime('%m/%d/%Y')
         %td
-          = link_to testcase_path(t['id']) do
-            %span.fa.fa-pencil.link-like.small
+          %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase.id)}}
+#new_testcase_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 New Testcase
+      .modal-body
+        #new_testcase_modal_content
+          = render partial: 'testcases/testcase_form', locals: {testcase: {}, project_id: @project['project']['id']}
+:javascript
+  $('.testcase-link').click(function(){
+    $('#testcase_modal_content').load($(this).data('path'))
+  })

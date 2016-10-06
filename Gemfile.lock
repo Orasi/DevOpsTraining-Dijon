@@ -109,7 +109,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
-    mustard_client (0.1.13)
+    mustard_client (0.1.14)
     netrc (0.11.0)
     nio4r (1.2.1)
     nokogiri (1.6.8)
@@ -215,7 +215,7 @@ DEPENDENCIES
   jquery-rails
   less-rails-bootstrap
   listen (~> 3.0.5)
-  mustard_client (= 0.1.13)
+  mustard_client (= 0.1.14)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rest-client

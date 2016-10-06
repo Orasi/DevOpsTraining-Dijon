@@ -1,0 +1,25 @@
+= form_tag(environment['uuid'] ? environment_path(environment['id']) : environments_path,
+           method: environment['uuid'] ? :put : :post,
+           role: :form) do
+  .form-group
+    = fields_for :environment do |f|
+      = hidden_field_tag 'environment[project_id]', project_id
+      %label UUID
+      = text_field_tag 'environment[uuid]', environment['uuid'], class: 'form-control', required: true
+  .form-group
+    %label Environment Type
+    = select_tag 'environment[environment_type]',  options_for_select(['Windows', 'Mac', 'Android', 'iOS', 'Linux', 'Windows Phone'], environment['environment_type']),
+                                                   {class: 'functional select2',
+                                                    style: 'width:100%',
+                                                    include_blank: true,
+                                                    data: {placeholder: 'Select Environment Type'}}
+  .form-group
+    %label Display Name
+    = text_field_tag 'environment[display_name]', environment['display_name'], class: 'form-control'
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+    .pull-right= link_to 'Delete Environment', environment_path(environment['id']), method: :delete, class: 'btn btn-danger' if environment['uuid']
+
+:javascript
+  $('.functional.select2').select2()

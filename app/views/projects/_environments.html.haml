@@ -1,3 +1,4 @@
+= link_to ' Add Environment', '', class: 'pull-right btn default-label fa fa-globe small', data: {toggle: 'modal', target: '#new_environment_modal'}
 %table.table.table-overview.table-hover
   %thead
     %tr
@@ -16,9 +17,24 @@
           = "#{i + 1}."
         %td
           = environment.display_icon
-          = environment.display_name
+          = environment['display_name'] && environment['display_name'] != '' ? environment.display_name : environment.uuid
         %td
           = environment.updated_at.strftime('%m/%d/%Y')
 
         %td
-          %span.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target:'#environment_modal'}}
+          %span.fa.fa-pencil.link-like.environment-link.small{data: {toggle: 'modal', target:'#environment_modal', path: edit_environment_path(environment.id)}}
+
+#new_environment_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Environment
+      .modal-body
+        #new_environment_modal_content
+          = render partial: 'environments/environment_form', locals: {environment: {}, project_id: @project['project']['id']}
+:javascript
+  $('.environment-link').click(function(){
+    $('#environment_modal_content').load($(this).data('path'))
+  })

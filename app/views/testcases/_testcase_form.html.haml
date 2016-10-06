@@ -1,0 +1,19 @@
+= link_to 'Import Testcases', testcase_import_path(project_id)
+= form_tag(testcase['name'] ? testcase_path(testcase['id']) : testcases_path,
+           method: testcase['name'] ? :put : :post,
+           role: :form) do
+  .form-group
+    = hidden_field_tag 'testcase[project_id]', project_id
+    %label Name
+    = text_field_tag 'testcase[name]', testcase['name'], class: 'form-control', required: true
+  .form-group
+    %label Validation ID
+    = text_field_tag 'testcase[validation_id]', testcase['validation_id'], class: 'form-control', required: true
+
+  .form-group
+    %label Reproduction Steps
+    = text_field_tag 'testcase[reproduction_steps]', testcase['reproduction_steps'], class: 'form-control'
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+    .pull-right= link_to 'Delete Testcase', testcase_path(testcase['id']), method: :delete, class: 'btn btn-danger' if testcase['name']

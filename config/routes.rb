@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
   # App Paths
   root 'welcome#dashboard'
   post 'login', to: 'application#login', as: :login
@@ -8,12 +9,15 @@ Rails.application.routes.draw do
   get 'logout', to: 'application#logout', as: :logout
   get 'dashboard', to: 'welcome#dashboard', as: :dashboard
 
+
   #Project Paths
   resources :projects
 
 
   # Teastcase Paths
   resources :testcases
+  get 'projects/:id/testcases/import', to: 'testcases#import_form', as: :testcase_import
+  post 'projects/:id/testcases/import(/:preview)', to: 'testcases#import'
 
 
   #Team Paths
@@ -23,17 +27,22 @@ Rails.application.routes.draw do
   post 'teams/:id/users', to: 'teams#add_user', as: :team_user
   delete 'teams/:id/users/:user_id', to: 'teams#remove_user', as: :remove_team_user
 
+
   #User Paths
   resources :users
 
+
   #Environments Paths
   resources :environments
+
 
   #Execution Paths
   resources :executions
   get 'executions/:id/testcase_detail/:testcase_id', to: 'executions#testcase_detail', as: :testcase_detail
   put 'executions/:id/close', to: 'executions#close', as: :close_execution
   get 'executions/:id/project_execution_summary/:title', to: 'executions#project_summary', as: :execution_project_summary
+  get 'executions/:id/environment_overview', to: 'executions#environment_overview', as: :execution_environment_overview
+
 
   #Result Paths
   resources :results

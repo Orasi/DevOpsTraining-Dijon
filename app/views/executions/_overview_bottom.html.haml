@@ -11,6 +11,9 @@
               Testcases
   .tab-content
     .tab-pane.fade.in.active#environment_overview{role: "tabpanel"}
-      = render partial: 'device_overview', locals: {execution: execution}
+      .loader
+    :javascript
+      $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
+    -#= render partial: 'environment_overview', locals: {execution: execution}
     -#.tab-pane.fade#testcase_overview{role: "tabpanel"}
     -#  = sync partial: 'validation_overview', resource: @execution

@@ -4,7 +4,7 @@ class ExecutionsController < ApplicationController
 
   def show
     @status = @mustard.executions.testcase_status( params[:id] )
-    @summary = @mustard.executions.environment_summary( params[:id])
+
 
   end
 
@@ -13,6 +13,12 @@ class ExecutionsController < ApplicationController
     @detail = @mustard.executions.testcase_detail(params[:id], params[:testcase_id])
     render partial: 'executions/functional/functional_result', layout: false
 
+  end
+
+  def environment_overview
+    @summary = @mustard.executions.environment_summary( params[:id])
+
+    render partial: 'executions/environment_overview', locals: {execution: @summary['summary']}
   end
 
   def close
