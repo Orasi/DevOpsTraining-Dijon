@@ -6,13 +6,12 @@
 
         - execution.each_with_index do |env, i|
           %tr
-            - results.asdfasdf
             - results_bar = stacked_progress_bar :Results, total_tests, env['pass_count'], env['fail_count'], env['skip_count']
             %td
               .row-index
             %td
-              = display_icon_for device.manufacturer, unique_id: device.unique_id
-              = 'Test Device'
+              = display_icon_for env['environment_type']
+              = env['display_name'] && env['display_name'] != '' ? env['display_name'] : env['uuid']
               -#.created_at.hidden-sm.hidden-xs
               -#  %span.small
               -#    Created:
