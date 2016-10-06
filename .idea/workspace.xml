@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00fb2558-8b2a-422f-81d5-b21c721e9ed5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/_environment_overview.html.haml" afterPath="$PROJECT_DIR$/app/views/executions/_environment_overview.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" afterPath="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" />
     </list>
     <ignored path="Mustard-Front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,16 +41,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testcases_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/testcases_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -136,12 +126,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_environment_overview.html.haml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_environment_overview.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/executions/_environment_overview.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64696485">
+            <state vertical-scroll-proportion="-16.875">
               <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_execution_status.html.haml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1022364">
+              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+              <folding>
+                <marker date="1475764970488" expanded="true" signature="2271:2635" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2289:2382" placeholder="[...]" />
+                <marker date="1475764970488" expanded="true" signature="2402:2627" placeholder="[...]" />
+                <marker date="1475764970488" expanded="true" signature="2416:2440" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2416:2612" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2416:2626" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2500:2612" placeholder="[...]" />
+                <marker date="1475764970488" expanded="true" signature="2657:3304" placeholder="{&quot;responsive&quot;: true...}" />
+                <marker date="1475764970488" expanded="true" signature="2675:2691" placeholder="{&quot;display&quot;: false...}" />
+                <marker date="1475764970488" expanded="true" signature="2772:3296" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2795:3286" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="2844:3274" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="3016:3082" placeholder="{...}" />
+                <marker date="1475764970488" expanded="true" signature="3311:3497" placeholder="//..." />
+                <marker date="1475764970488" expanded="true" signature="3499:3630" placeholder="//..." />
+                <marker date="1475764970488" expanded="true" signature="3506:3630" placeholder="//..." />
+                <marker date="1475764970488" expanded="true" signature="3548:3628" placeholder="{&quot;type&quot;: 'doughnut'...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,7 +210,6 @@
         <option value="$PROJECT_DIR$/app/controllers/results_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/executions/functional/_result_history.html.haml" />
         <option value="$PROJECT_DIR$/app/views/executions/show.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/executions/_overview_bottom.html.haml" />
         <option value="$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml" />
@@ -209,6 +226,7 @@
         <option value="$PROJECT_DIR$/app/controllers/testcases_controller.rb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/views/executions/_environment_overview.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" />
       </list>
     </option>
   </component>
@@ -319,6 +337,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mustard-Front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mustard-Front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1038,32 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.041666">
-          <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-          <folding>
-            <marker date="1475693635065" expanded="true" signature="2156:2520" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2174:2267" placeholder="[...]" />
-            <marker date="1475693635065" expanded="true" signature="2287:2512" placeholder="[...]" />
-            <marker date="1475693635065" expanded="true" signature="2301:2325" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2301:2497" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2301:2511" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2385:2497" placeholder="[...]" />
-            <marker date="1475693635065" expanded="true" signature="2542:3189" placeholder="{&quot;responsive&quot;: true...}" />
-            <marker date="1475693635065" expanded="true" signature="2560:2576" placeholder="{&quot;display&quot;: false...}" />
-            <marker date="1475693635065" expanded="true" signature="2657:3181" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2680:3171" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2729:3159" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="2901:2967" placeholder="{...}" />
-            <marker date="1475693635065" expanded="true" signature="3196:3382" placeholder="//..." />
-            <marker date="1475693635065" expanded="true" signature="3384:3515" placeholder="//..." />
-            <marker date="1475693635065" expanded="true" signature="3391:3515" placeholder="//..." />
-            <marker date="1475693635065" expanded="true" signature="3433:3513" placeholder="{&quot;type&quot;: 'doughnut'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3833866">
@@ -1180,9 +1194,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/executions/_environment_overview.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64696485">
+        <state vertical-scroll-proportion="-16.875">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1022364">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+          <folding>
+            <marker date="1475764970488" expanded="true" signature="2271:2635" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2289:2382" placeholder="[...]" />
+            <marker date="1475764970488" expanded="true" signature="2402:2627" placeholder="[...]" />
+            <marker date="1475764970488" expanded="true" signature="2416:2440" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2416:2612" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2416:2626" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2500:2612" placeholder="[...]" />
+            <marker date="1475764970488" expanded="true" signature="2657:3304" placeholder="{&quot;responsive&quot;: true...}" />
+            <marker date="1475764970488" expanded="true" signature="2675:2691" placeholder="{&quot;display&quot;: false...}" />
+            <marker date="1475764970488" expanded="true" signature="2772:3296" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2795:3286" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="2844:3274" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="3016:3082" placeholder="{...}" />
+            <marker date="1475764970488" expanded="true" signature="3311:3497" placeholder="//..." />
+            <marker date="1475764970488" expanded="true" signature="3499:3630" placeholder="//..." />
+            <marker date="1475764970488" expanded="true" signature="3506:3630" placeholder="//..." />
+            <marker date="1475764970488" expanded="true" signature="3548:3628" placeholder="{&quot;type&quot;: 'doughnut'...}" />
+          </folding>
         </state>
       </provider>
     </entry>
