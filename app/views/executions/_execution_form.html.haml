@@ -1,0 +1,8 @@
+= form_tag( close_execution_path(execution_id), method: :put, role: :form) do
+  .form-group
+    = fields_for :execution do |f|
+      %label New Execution Name
+      = text_field_tag 'execution[name]',  "Execution: #{DateTime.now.strftime('%m/%d/%Y')}", class: 'form-control', required: true
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+

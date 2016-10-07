@@ -1,4 +1,3 @@
-= puts project
 = form_tag(project['id'] ? project_path(project['id']) : projects_path,
            method: project['id'] ? :put : :post,
            role: :form) do

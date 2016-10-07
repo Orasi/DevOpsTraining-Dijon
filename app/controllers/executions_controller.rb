@@ -23,7 +23,7 @@ class ExecutionsController < ApplicationController
 
   def close
 
-    execution = @mustard.executions.close(execution_id: params[:id])
+    execution = @mustard.executions.close(execution_id: params[:id], name: params[:execution][:name])
 
     if execution['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to close execution. Error[#{execution['error']}]"}
