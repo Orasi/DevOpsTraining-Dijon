@@ -3,14 +3,14 @@
 .tcid= testcase['id']
 .tcname= testcase['name']
 .tcvid= testcase['validation_id']
-
-%h3 Steps
-%table
-  - testcase['reproduction_steps'].each do |step|
-    %tr
-      %td
-        = step['step_number']
-      %td
-        = step['action']
-      %td
-        = step['result']
+- if testcase['reproduction_steps']
+  %h3 Steps
+  %table
+    - testcase['reproduction_steps'].each do |step|
+      %tr
+        %td
+          = step['step_number']
+        %td
+          = step['action']
+        %td
+          = step['result']

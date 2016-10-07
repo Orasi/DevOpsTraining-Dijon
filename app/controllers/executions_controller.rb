@@ -62,4 +62,17 @@ class ExecutionsController < ApplicationController
     render partial: 'executions/functional/result_history', locals: {results: @result['result'], display_environment: false}
   end
 
+  def next_test
+
+    next_test = @mustard.executions.next_test(params[:id])
+
+    redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
+
+    @execution_id = params[:id]
+    render partial: 'results/no_testcases' and return unless next_test['testcase']['id']
+
+    render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase']} and return
+
+  end
+
 end

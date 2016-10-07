@@ -1,0 +1,27 @@
+- runner ||= false
+= form_tag( runner ? runner_result_path : results_path, method: :post, role: :form, remote: runner) do
+  .form-group
+    = hidden_field_tag 'result[environment_id]', -1
+    = hidden_field_tag 'result[testcase_id]', testcase_id
+    = hidden_field_tag 'result[execution_id]', execution_id
+    = hidden_field_tag 'result[result_type]', 'manual'
+
+    %label Status
+    %br
+    %span{style: 'margin:15px'}
+      = label_tag :Pass
+      = radio_button_tag 'result[status]', 'pass'
+    %span{style: 'margin:15px'}
+      = label_tag :Fail
+      = radio_button_tag 'result[status]', 'fail'
+    %span{style: 'margin:15px'}
+      = label_tag :Skip
+      = radio_button_tag 'result[status]', 'skip'
+
+  .form-group
+    %label Comment
+    = text_field_tag 'result[comment]', nil, class: 'form-control'
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+

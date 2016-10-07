@@ -1,10 +1,11 @@
 - result = ResultPresenter.new(@detail['testcase'])
-- manual_results = result.results.select{|r| r if r['result_type'] == 'manual'}
-- automated_results = result.results.select{|r| r if r['result_type'] == 'automated'}
+
+- manual_results = result['manual_results']
+- automated_results = result['automated_results']
 
 .col-md-9
   .pull-right
-    %button{type: 'button', data: {toggle: 'modal', target: '#test_runner_modal'}, class: 'btn btn-default'}
+    %button{type: 'button',id: 'test_runner_btn', data: {toggle: 'modal', target: '#test_runner_modal'}, class: 'btn btn-default'}
       Manual Test Runner
   .row
     .col-md-12
@@ -17,17 +18,17 @@
           = link_to 'View Steps', '#', id: 'steps_view', class: 'small', style: 'margin-left:20px' unless result.reproduction_steps.blank?
         - unless result.reproduction_steps.blank?
           .row#steps_table{style: 'display:none'}
-            = render partial: 'executions/functional/steps', locals: {steps: result.reproduction_steps}
+            = render partial: 'testcases/steps', locals: {steps: result.reproduction_steps}
         %hr
-      -if result.results.blank?
+      -if result.manual_results.blank? && result.automated_results.blank?
         %h4= 'No results for this validation.'
       - if manual_results.blank?
-        %button{type: 'button', data: {toggle: 'modal', target: '#manual_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
+        %button{type: 'button', data: {toggle: 'modal', target: '#manual_result_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
           Add Manual Result
   - unless manual_results.blank?
     .row
       .col-md-12
-        %button{type: 'button', data: {toggle: 'modal', target: '#manual_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
+        %button{type: 'button', data: {toggle: 'modal', target: '#manual_result_modal'}, class: 'btn btn-default pull-right default-label fa fa-plus-square small'}
           Add Manual Result
         %h4 Manual Results
 
@@ -130,9 +131,23 @@
         #screenshot_div
           = image_tag '', alt: 'Screenshot', id: 'screenshot_image'
           .loader
+#manual_result_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #manual_result_modal_content
+          = render partial: 'results/result_form', locals: {execution_id: result['execution_id'], testcase_id: result['validation_id'] && result['validation_id'] != '' ? result['validation_id'] : result['name']}
+#test_runner_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #test_runner_modal_content
+          .loader
 :javascript
 
-
+  $('#test_runner_btn').click(function(){
+    $('#test_runner_modal_content').load("#{next_test_path(result['execution_id'])}")
+  })
   $('#steps_view').click(function(e){
     e.preventDefault()
     $('#steps_table').slideToggle('slow');
