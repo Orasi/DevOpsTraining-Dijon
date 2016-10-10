@@ -1,0 +1,15 @@
+$.ajax({
+  url: "<%= @href %>",
+  type: 'GET',
+  dataType: 'binary',
+  headers: {"User-Token" : "<%= @token %>"},
+  processData: false,
+  success: function(blob) {
+    var windowUrl = window.URL || window.webkitURL;
+    var url = windowUrl.createObjectURL(blob);
+    anchor.prop('href', url);
+    anchor.prop('download', fileName);
+    anchor.get(0).click();
+    windowUrl.revokeObjectURL(url);
+  }
+});

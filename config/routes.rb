@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :testcases
   get 'projects/:id/testcases/import', to: 'testcases#import_form', as: :testcase_import
   post 'projects/:id/testcases/import(/:preview)', to: 'testcases#import'
+  get 'projects/:id/testcases/export', to: 'testcases#export', as: :export_testcase
 
 
   #Team Paths

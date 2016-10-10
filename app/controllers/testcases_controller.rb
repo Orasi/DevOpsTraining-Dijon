@@ -91,6 +91,18 @@ class TestcasesController < ApplicationController
 
   end
 
+  def export
+    @project = @mustard.projects.find(params[:id])
+
+    redirect_back fallback_location: root_path, flash: { alert: @project['error']} if @project['error']
+
+    @result = @mustard.testcases.export params[:id]
+
+    redirect_back fallback_location: root_path, flash: { alert: @result['error']} if @result['error']
+
+    redirect_to @result['report']
+  end
+
 
   private
 
