@@ -12,8 +12,8 @@
           .panel-body{style: 'min-width:200px'}
             Show:
             .form-group
-              = select_tag "test", grouped_options_for_select([['Passed', pass],
-                                                               ['Failed', fail],
+              = select_tag "test", grouped_options_for_select([['Failed', fail],
+                                                               ['Passed', pass],
                                                                ['Skipped', skip],
                                                                ['No Results', not_run]], nil),
                                                        {class: 'functional select2',
