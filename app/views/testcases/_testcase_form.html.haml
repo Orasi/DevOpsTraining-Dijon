@@ -1,4 +1,5 @@
 = link_to 'Import Testcases', testcase_import_path(project_id)
+
 = form_tag(testcase['name'] ? testcase_path(testcase['id']) : testcases_path,
            method: testcase['name'] ? :put : :post,
            role: :form) do
@@ -10,9 +11,18 @@
     %label Validation ID
     = text_field_tag 'testcase[validation_id]', testcase['validation_id'], class: 'form-control', required: true
 
-  .form-group
+  - if testcase['name'] && testcase['reproduction_steps']
     %label Reproduction Steps
-    = text_field_tag 'testcase[reproduction_steps]', testcase['reproduction_steps'], class: 'form-control'
+
+    - testcase['reproduction_steps'].each do |step|
+      .well
+        %label.step_number=  "Step ##{step['step_number']}"
+        %br
+        %label Action
+        = text_field_tag "reproduction_steps[#{step['step_number']}][action]",  step['action'], class: 'form-control'
+        %label Result
+        = text_field_tag "reproduction_steps[#{step['step_number']}][result]",  step['result'], class: 'form-control'
+
 
   .form-group
     = submit_tag 'Submit', class: 'btn btn-primary'

@@ -10,7 +10,10 @@ module MustardFront
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/app)
     config.autoload_paths += %W(#{config.root}/lib)
-    config.mustard_api = 'https://mustardapi.orasi.com'
+    puts '******************************************************************************'
+    puts ENV['MUSTARD_URL']
+    puts '******************************************************************************'
+    config.mustard_api = ENV['MUSTARD_URL']
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

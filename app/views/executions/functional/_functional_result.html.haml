@@ -107,10 +107,7 @@
                   %td
                     .small.overview-time
                       = time_ago_in_words(r['created_at']) + ' ago' if r['created_at']
--#
--#= render partial: 'manual_results/manual_result_modal', locals: {validation: @validation}
--#= render partial: 'manual_results/test_runner_modal', locals: {validation: @validation}
--#
+
 #history_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
   .modal-dialog{role: 'document'}
     .modal-content{style:'width:1000px'}

@@ -7,7 +7,7 @@ module ExecutionsHelper
     fail_percent = fail.to_f / total * 100
     skip_percent = skip.to_f / total * 100
 
-    puts pass_percent, fail_percent, skip_percent
+    # puts pass_percent, fail_percent, skip_percent
 
     content = content_tag(:span, "#{label}: #{display_percentage(total, pass + fail + skip)}")
 

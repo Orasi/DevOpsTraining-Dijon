@@ -15,8 +15,9 @@
 //= require twitter/bootstrap
 //= require timeago
 //= require select2
+//= require vue
 //= require Chart
-//= require turbolinks
+
 //= require_tree .
 
 String.prototype.capitalizeFirstLetter = function() {

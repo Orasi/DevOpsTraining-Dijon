@@ -41,14 +41,16 @@
 :javascript
   $('.functional.select2').select2()
   $('.functional.select2').on("select2:selecting", function(e) {
-    $('#functional_results_panel').load(e.params.args.data.id).hide().fadeIn()
-
-
+    $('#functional_results_panel').fadeOut().load(e.params.args.data.id, function(){
+      $('#functional_results_panel').fadeIn()
+    })
   });
 
   $('.results_load').click(function(e){
     e.preventDefault();
-    $('#functional_results_panel').load(this.href).hide().fadeIn()
+    $('#functional_results_panel').hide().load(this.href, function(){
+      $('#functional_results_panel').fadeIn()
+    })
   })
 
 
