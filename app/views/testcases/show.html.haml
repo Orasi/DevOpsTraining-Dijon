@@ -1,16 +1,51 @@
 - testcase = @testcase
-%h3 Testcase Info
-.tcid= testcase['id']
-.tcname= testcase['name']
-.tcvid= testcase['validation_id']
-- if testcase['reproduction_steps']
-  %h3 Steps
-  %table
-    - testcase['reproduction_steps'].each do |step|
-      %tr
-        %td
-          = step['step_number']
-        %td
-          = step['action']
-        %td
-          = step['result']
+.dashboard-page-header
+
+  %h4
+    = testcase['name']
+    %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase['id'])}}
+    %ol.breadcrumb.pull-right{ style: 'background-color: white;font-size: .5em;' }
+      %li
+        = link_to "Back to Project", project_path(testcase['project_id'])
+.container-fluid
+
+
+  Reproduction Steps
+  .panel.panel-default
+    .panel-body
+      %table.table.table-striped.table-hover.table-condensed
+        %tr
+          %td
+          %th
+            Step Action
+          %th
+            Expected Result
+          %td
+          %td
+        - if testcase['reproduction_steps'].blank?
+          %tr
+            No Steps Defined
+        -else
+          - testcase['reproduction_steps'].each do |step|
+            %tr
+              %td
+                = step['step_number']
+              %td
+                = step['action']
+              %td
+                = step['result']
+              %td
+#testcase_modal.modal.fade
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Testcase
+      .modal-body
+        #testcase_modal_content
+          .loader
+:javascript
+  $('.testcase-link').click(function(){
+    $('#testcase_modal_content').load($(this).data('path'))
+  });

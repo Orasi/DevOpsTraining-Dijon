@@ -1,5 +1,6 @@
 = link_to ' Add Testcase', '', class: 'pull-right btn default-label fa fa-check-square-o small', data: {toggle: 'modal', target: '#new_testcase_modal'}
-= link_to ' Export Testcase', export_testcase_path(project_id: 6), class: 'pull-right btn default-label fa fa-check-square-o small', target: '_blank'
+= link_to ' Export Testcase', export_testcase_path(project_id: @project['id']), class: 'pull-right btn default-label fa fa-check-square-o small', target: '_blank'
+= link_to 'Import Testcases', testcase_import_path(project_id: @project['id']), class: 'pull-right btn default-label fa fa-check-square-o small', target: '_blank'
 %table.table.table-overview.table-hover
   %thead
     %tr
