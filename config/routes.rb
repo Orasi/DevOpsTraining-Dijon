@@ -31,6 +31,10 @@ Rails.application.routes.draw do
 
   #User Paths
   resources :users
+  get 'users/:id/password_reset/:token', to: 'users#reset_password_form', as: :reset_password_form
+  post 'users/:id/reset', to: 'users#reset_password', as: :post_reset_password
+  post 'users/forgot-password', to: 'users#forgot_password', as: :forgot_password
+  get 'users/:id/password_reset', to: 'users#trigger_password_reset', as: :trigger_password_reset
 
 
   #Environments Paths

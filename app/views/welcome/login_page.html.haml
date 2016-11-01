@@ -9,8 +9,8 @@
         %ul.nav.nav-tabs
           %li.active{role: :presentation}
             %a{href: '#loginTab', 'data-toggle' => 'tab'} Log In
-        -#%li{role: :presentation}
-        -#  %a{href: '#signupTab', 'data-toggle' => 'tab'} Sign Up
+          %li{role: :presentation}
+            %a{href: '#forgotPassword', 'data-toggle' => 'tab'} Forgot Password
 
         .tab-content
 
@@ -24,6 +24,13 @@
                 = password_field_tag  :password, '',  class: 'form-control', required: true
               .form-group
                 = submit_tag 'Log In', class: 'form-control'
+          .tab-pane#forgotPassword{role: :tabpanel}
+            = form_tag(forgot_password_path) do
+              .form-group
+                %label Username
+                = text_field_tag :username, '', class: 'form-control', required: true
+              .form-group
+                = submit_tag 'Reset', class: 'form-control'
 
 :javascript
   $('#signup').modal({

@@ -1,3 +1,4 @@
+- remove_tag = false unless defined? remove_tag
 %tr
   %td.table-number
     = "#{project_counter + 1}."
@@ -9,6 +10,6 @@
       Updated:
       = time_ago_in_words( project.updated_at) + ' ago'
   %td
-    - if current_user.admin
-      = link_to project_path(id: project['id']), method: :delete  do
+    - if current_user.admin && remove_tag
+      = link_to project_path(id: project['id']), method: :delete, data: {confirm: "Are you sure?"}  do
         .pull-right.fa.fa-remove{style: 'color:red'}

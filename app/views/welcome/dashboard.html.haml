@@ -23,7 +23,7 @@
             %tbody#teams
               - @projects['projects'].each_with_index do |p, i|
                 - p = ProjectPresenter.new(p)
-                = render partial: 'projects/project', locals: {project: p, project_counter: i}
+                = render partial: 'projects/project', locals: {project: p, project_counter: i, remove_tag: false}
     .col-md-6
       .panel.panel-default
         .panel-heading

@@ -30,7 +30,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'vuejs-rails'
 gem 'dotenv-rails'
 
 group :development, :test do
@@ -65,7 +64,7 @@ gem 'haml'
 # bootstrap Less
 gem 'awesome_print'
 gem 'less-rails-bootstrap'
-gem 'mustard_client', '= 0.1.20'
+gem 'mustard_client', '= 0.1.23'
 gem 'select2-rails'
 gem "font-awesome-rails"
 gem 'gravatar-ultimate'

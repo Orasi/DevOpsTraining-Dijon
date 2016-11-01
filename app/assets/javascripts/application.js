@@ -15,7 +15,6 @@
 //= require twitter/bootstrap
 //= require timeago
 //= require select2
-//= require vue
 //= require Chart
 
 //= require_tree .

@@ -19,7 +19,7 @@
             %tbody#teams
               - @projects['projects'].each_with_index do |project, i|
                 - project = ProjectPresenter.new(project)
-                = render partial: 'projects/project', locals: {project: project, project_counter: i}
+                = render partial: 'projects/project', locals: {project: project, project_counter: i, remove_tag: true}
 
 #project_modal.modal.fade
   .modal-dialog

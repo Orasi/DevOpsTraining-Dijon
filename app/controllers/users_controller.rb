@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  skip_before_action :require_user_token, only: [:trigger_password_reset, :reset_password, :reset_password_form, :forgot_password]
+
   def index
 
     @users = @mustard.users.all
@@ -61,6 +63,51 @@ class UsersController < ApplicationController
       redirect_back fallback_location: root_path, flash: { notice: "User failed to delete. Error[#{user['error']}]"}
     else
       redirect_to users_path, flash: { success:  "User deleted"}
+    end
+  end
+
+  def trigger_password_reset
+    user = @mustard.users.find(params[:id])
+    @user = UserPresenter.new(user['user'])
+
+    if user['error']
+      redirect_back fallback_location: root_path, flash: { alert: "Failed to access user. Error[#{user['error']}]"}
+    end
+
+    @mustard.users.trigger_password_reset( @user.username,reset_password_form_url(@user.id, token: 'TOKEN'))
+    redirect_back fallback_location: root_path, flash: {success: "Password reset email sent for user #{@user['username']}"}
+  end
+
+
+  def forgot_password
+    user = @mustard.users.find_by_username(params[:username])
+    @user = UserPresenter.new(user['user'])
+
+    unless user['error']
+      @mustard.users.trigger_password_reset(@user['username'], reset_password_form_url(@user.id, token: 'TOKEN'))
+    end
+
+    redirect_back fallback_location: root_path, flash: {success: "Password reset email sent for user #{params['username']}"}
+  end
+
+  def reset_password_form
+
+    @user_id = params[:id]
+    @token = params[:token]
+
+  end
+
+  def reset_password
+
+    redirect_back fallback_location: root_path, flash: {alert: 'Passwords do not match'} and
+        return unless params[:password] == params[:password_confirmation]
+
+    response = @mustard.users.reset_password params[:user_id], params[:password_token], params[:password]
+
+    if response['error']
+      redirect_back fallback_location: root_path, flash: { alert: response['error']}
+    else
+      redirect_to root_path, flash: { success: 'Password Changed'}
     end
   end
 
