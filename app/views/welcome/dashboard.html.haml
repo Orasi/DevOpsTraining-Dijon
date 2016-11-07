@@ -9,7 +9,10 @@
           %h3.panel-title Recent
         .panel-body.lg-panel
           %table.table.table-condensed.table-overview.table-hover
-            %tbody#activityView
+            %tbody#recentResults
+              - @results['results'].each_with_index do |r, i|
+                - r = ResultPresenter.new(r)
+                = render partial: 'results/result', locals: {result: r, result_counter: i}
   .row
     .col-md-6
       .panel.panel-default

@@ -64,7 +64,7 @@ gem 'haml'
 # bootstrap Less
 gem 'awesome_print'
 gem 'less-rails-bootstrap'
-gem 'mustard_client', '= 0.1.23'
+gem 'mustard_client', '= 0.1.24'
 gem 'select2-rails'
 gem "font-awesome-rails"
 gem 'gravatar-ultimate'
