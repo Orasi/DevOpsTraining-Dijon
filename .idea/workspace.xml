@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00fb2558-8b2a-422f-81d5-b21c721e9ed5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/results/_result.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Mustard-Front.iml" afterPath="$PROJECT_DIR$/.idea/Mustard-Front.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/welcome_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/welcome_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/welcome/dashboard.html.haml" afterPath="$PROJECT_DIR$/app/views/welcome/dashboard.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/results/_result.html.haml" afterPath="$PROJECT_DIR$/app/views/results/_result.html.haml" />
     </list>
     <ignored path="Mustard-Front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,8 +74,8 @@
       <file leaf-file-name="_result.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/results/_result.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.234375">
-              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.29296875">
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -1157,8 +1152,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/results/_result.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.234375">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.29296875">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
           <folding />
         </state>
       </provider>

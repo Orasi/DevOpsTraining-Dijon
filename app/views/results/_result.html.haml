@@ -6,7 +6,12 @@
   %td
     = result.testcase_name
   %td
-    = result.result['environment_id']
+    - if result['environment_display_name']
+      = result['environment_display_name']
+    - elsif result['environment_id'] == -1
+      = 'Manual'
+    - else
+      = result.result['environment_id']
   %td
     = build_status result.result['status']
   %td
