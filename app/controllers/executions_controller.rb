@@ -16,13 +16,14 @@ class ExecutionsController < ApplicationController
   end
 
   def environment_overview
+    @count = @mustard.executions.testcase_count( params[:id])
     @summary = @mustard.executions.environment_summary( params[:id])
 
     render partial: 'executions/environment_overview', locals: {execution: @summary['summary']}
   end
 
   def testcase_overview
-
+    @count = @mustard.executions.environment_count( params[:id])
     @summary = @mustard.executions.testcase_summary( params[:id])
     puts @summary
 
