@@ -21,6 +21,15 @@ class ExecutionsController < ApplicationController
     render partial: 'executions/environment_overview', locals: {execution: @summary['summary']}
   end
 
+  def testcase_overview
+
+    @summary = @mustard.executions.testcase_summary( params[:id])
+    puts @summary
+
+    render partial: 'executions/testcase_overview', locals: {execution: @summary['summary']}
+
+  end
+
   def close
 
     execution = @mustard.executions.close(execution_id: params[:id], name: params[:execution][:name])

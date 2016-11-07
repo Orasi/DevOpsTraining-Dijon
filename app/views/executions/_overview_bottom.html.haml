@@ -4,13 +4,23 @@
       %h4
         %ul.overview_select.nav.nav-pills
           %li.active{role: "presentation"}
-            %a.active{href: "#environment_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
+            %a#env_overview_tab.active{href: "#environment_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
               Environments
           %li{role: "presentation", style: 'margin-left:0'}
-            %a{href: "#testcase_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
+            %a#tc_overview_tab{href: "#testcase_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
               Testcases
   .tab-content
     .tab-pane.fade.in.active#environment_overview{role: "tabpanel"}
       .loader
-    :javascript
-      $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
+    .tab-pane.fade.in.active#testcase_overview{role: "tabpanel"}
+      .loader
+:javascript
+  $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
+
+  $('#tc_overview_tab').on('show.bs.tab', function (e) {
+    $('#testcase_overview').load("#{execution_testcase_overview_path(id: execution['id'])}")
+  })
+
+  $('#env_overview_tab').on('show.bs.tab', function (e) {
+    $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
+  })

@@ -1,0 +1,24 @@
+- total_tests = 100
+.row
+  .col-md-12
+    %table.table.table-condensed.table-overview.numbered_table
+      %tbody
+        - execution.each_with_index do |tc, i|
+          %tr
+            - results_bar = stacked_progress_bar :Results, total_tests, tc['pass_count'], tc['fail_count'], tc['skip_count']
+            %td
+              .row-index
+            %td
+              = tc['name']
+            %td
+              .stacked_progress
+                = results_bar
+            %td
+              .pull-right.small.overview-time
+                -if true
+                  .timeago{title: DateTime.parse(tc['updated_at']).iso8601}
+            %td
+              .pull-right
+
+  :javascript
+    $('.timeago').timeago()
