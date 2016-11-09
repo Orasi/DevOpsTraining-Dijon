@@ -3,10 +3,11 @@ class ExecutionsController < ApplicationController
 
 
   def show
+
     @status = @mustard.executions.testcase_status( params[:id] )
 
-
   end
+
 
   def testcase_detail
 
@@ -15,14 +16,19 @@ class ExecutionsController < ApplicationController
 
   end
 
+
   def environment_overview
+
     @count = @mustard.executions.testcase_count( params[:id])
     @summary = @mustard.executions.environment_summary( params[:id])
 
     render partial: 'executions/environment_overview', locals: {execution: @summary['summary']}
+
   end
 
+
   def testcase_overview
+
     @count = @mustard.executions.environment_count( params[:id])
     @summary = @mustard.executions.testcase_summary( params[:id])
     puts @summary
@@ -30,6 +36,7 @@ class ExecutionsController < ApplicationController
     render partial: 'executions/testcase_overview', locals: {execution: @summary['summary']}
 
   end
+
 
   def close
 
@@ -43,6 +50,7 @@ class ExecutionsController < ApplicationController
 
   end
 
+
   def destroy
 
     execution = @mustard.executions.delete(params[:id])
@@ -52,16 +60,21 @@ class ExecutionsController < ApplicationController
     else
       redirect_back fallback_location: root_path, flash: { success:  "Execution deleted"}
     end
+
   end
 
+
   def project_summary
+
     @title = params[:title]
 
     render partial: 'projects/no_execution_status' and return if params[:id] == '-1'
 
     @status = @mustard.executions.testcase_status( params[:id] )
     render partial: 'projects/execution_status', locals: {execution: @status['execution']}
+
   end
+
 
   def result_history
 
@@ -70,7 +83,9 @@ class ExecutionsController < ApplicationController
     render json: {error: 'Could not find result'} and return unless @result
 
     render partial: 'executions/functional/result_history', locals: {results: @result['result'], display_environment: false}
+
   end
+
 
   def next_test
 
