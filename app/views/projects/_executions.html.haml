@@ -28,7 +28,7 @@
             - current_execution = execution
             = link_to '','', data: {toggle: 'modal', target: '#execution', execution: execution.id}, class: 'fa fa-archive'
           - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
-            = link_to execution_path(execution), method: :delete do
+            = link_to execution_path(id: execution.id), method: :delete do
               .fa.fa-trash-o
 #execution.modal.fade
   .modal-dialog

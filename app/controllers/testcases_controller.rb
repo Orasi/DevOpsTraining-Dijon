@@ -35,9 +35,13 @@ class TestcasesController < ApplicationController
 
   def update
     reproduction_steps = []
-    params[:reproduction_steps].keys.each do |k|
-      reproduction_steps.append({step_number: k, action: params[:reproduction_steps][k][:action], result: params[:reproduction_steps][k][:result]})
+
+    if params[:reproduction_steps]
+      params[:reproduction_steps].keys.each do |k|
+        reproduction_steps.append({step_number: k, action: params[:reproduction_steps][k][:action], result: params[:reproduction_steps][k][:result]})
+      end
     end
+
 
     testcase = @mustard.testcases.update(params[:id], {name: testcase_params[:name],
                                                        project_id: testcase_params[:project_id],
@@ -98,11 +102,11 @@ class TestcasesController < ApplicationController
   def export
     @project = @mustard.projects.find(params[:id])
 
-    redirect_back fallback_location: root_path, flash: { alert: @project['error']} if @project['error']
+    redirect_back fallback_location: root_path, flash: { alert: @project['error']} and return if @project['error']
 
     @result = @mustard.testcases.export params[:id]
 
-    redirect_back fallback_location: root_path, flash: { alert: @result['error']} if @result['error']
+    redirect_back fallback_location: root_path, flash: { alert: @result['error']} and return if @result['error']
 
     redirect_to @result['report']
   end
