@@ -1,8 +1,9 @@
-
 - chart_data = [execution['fail'].count, execution['pass'].count, execution['skip'].count, execution['not_run'].count]
 - total_tests = execution['fail'].count + execution['pass'].count + execution['skip'].count + execution['not_run'].count
 
-#execution_quickview
+- parent_id = "overview_#{SecureRandom.hex(5)}"
+
+.execution_quickview{id: parent_id}
   %table{style: 'text-align;center'}
     %tr
       %td{colspan: 2}
@@ -58,8 +59,8 @@
 
   - if total_tests > 0
     :javascript
-      //current_ctx =  $(document.currentScript).closest('.execution_quickview').find('.execution-chart')
-      current_ctx =  $('.execution-chart').last()
+      current_ctx =  $('##{parent_id}').find('.execution-chart')
+      //current_ctx =  $('.execution-chart').last()
 
       var data = {
         labels: [

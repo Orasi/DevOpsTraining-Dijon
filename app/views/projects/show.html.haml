@@ -6,6 +6,7 @@
 - else
   -previous_execution_id = -1
 
+
 .dashboard-page-header
   %h2
     = project.project_name + ' Project'
@@ -51,6 +52,7 @@
             #testcase_tab.tab-pane{role: 'tabpanel'}
               = render partial: 'testcases', locals: {testcases: project.testcases}
 
+
 #project_modal.modal.fade
   .modal-dialog
     .modal-content
@@ -61,6 +63,7 @@
       .modal-body
         #project_modal_content
           = render partial: 'project_form', locals: {project: project}
+
 
 #environment_modal.modal.fade
   .modal-dialog
@@ -85,9 +88,5 @@
 
 :javascript
   $('#project_info_tabs').tab()
-  $('.current_execution').load("#{execution_project_summary_path(id: "#{current_execution_id}", title: 'Current Execution')}")
   $('.previous_execution').load("#{execution_project_summary_path(id: "#{previous_execution_id}", title: 'Previous Execution')}")
-
--#= render 'projects/validation_modal'
-
--#= render 'projects/device_modal'
+  $('.current_execution').load("#{execution_project_summary_path(id: "#{current_execution_id}", title: 'Current Execution')}")
