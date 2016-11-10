@@ -10,7 +10,31 @@
         %h4.quickview_title= link_to @title, execution_path(execution['id'])
     %tr
       %td
-        .project_info_table
+        .small_project_info.visible-md
+          %table.table.table-hover
+            %tr
+              %td
+                Pass
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['pass'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Fail
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['fail'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Skip
+              %td
+                = total_tests > 0 ? number_to_percentage((execution['skip'].count.to_f/ total_tests) * 100, precision: 1) : '0%'
+            %tr
+              %td
+                Not Run
+              %td
+                - not_run_count = total_tests - execution['skip'].count - execution['pass'].count - execution['fail'].count
+                = total_tests > 0 ? number_to_percentage((not_run_count.to_f / total_tests) * 100, precision: 1) : '0%'
+
+        .project_info_table.visible-lg
           %table.table.table-hover
             %thead
               %tr

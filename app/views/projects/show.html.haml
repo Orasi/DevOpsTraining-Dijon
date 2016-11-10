@@ -16,20 +16,19 @@
 
 .container-fluid
   .row
-    .col-md-12
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title
-            Project Information
-            .pull-right.small
-              API Key:
-              = project.api_key
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          Project Information
+          .pull-right.small
+            API Key:
+            = project.api_key
 
-        .panel-body.execution_quickview_panel{style: 'min-height:250px'}
-          .current_execution{style: 'width:50%'}
-            .loader
-          .previous_execution{style: 'width:50%'}
-            .loader
+      .panel-body.execution_quickview_panel{style: 'min-height:250px'}
+        .current_execution{style: 'width:50%'}
+          .loader
+        .previous_execution{style: 'width:50%'}
+          .loader
 
 
   .row
