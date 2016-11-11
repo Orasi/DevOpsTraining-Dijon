@@ -42,6 +42,8 @@
               = link_to 'Environments', '#environment_tab', role: 'tab', data: {toggle: 'tab'}
             %li{role: 'presentation'}
               = link_to 'Testcases', '#testcase_tab', role: 'tab', data: {toggle: 'tab'}
+            %li{role: 'presentation'}
+              = link_to 'Reports', '#reports_tab', role: 'tab', data: {toggle: 'tab'}
 
           .tab-content
             #execution_tab.tab-pane.active{role: 'tabpanel'}
@@ -50,6 +52,8 @@
               = render partial: 'environments', locals: {environments: project.environments}
             #testcase_tab.tab-pane{role: 'tabpanel'}
               = render partial: 'testcases', locals: {testcases: project.testcases}
+            #reports_tab.tab-pane{role: 'tabpanel'}
+              = render partial: 'reports', locals: {project: @project['project']}
 
 
 #project_modal.modal.fade

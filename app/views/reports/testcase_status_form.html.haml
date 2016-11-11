@@ -1,0 +1,18 @@
+= form_tag testcase_status_path(project_id: @project['id']) do
+
+  .field
+    = label_tag :execution
+    %br
+    - options = @project['executions'].map{|e| [e['name'], e['id']]}
+    = select_tag "execution_id", options_for_select(options),
+                                                     {class: 'functional select2',
+                                                      style: 'width:100%',
+                                                      include_blank: true,
+                                                      data: {placeholder: 'Select Execution'}}
+    %br
+    %br
+    = submit_tag 'Generate Report', class: 'btn btn-primary'
+
+:javascript
+  $('.select2').select2({ width: '100%'})
+  $('.datepicker').datepicker();

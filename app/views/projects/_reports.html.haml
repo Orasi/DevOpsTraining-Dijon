@@ -1,0 +1,31 @@
+%table.table.table-overview.table-hover
+  %thead
+    %tr
+      %th
+        Report
+  %tbody#reports
+    %tr
+      %td
+        = link_to ' Export Testcase', export_testcase_path(project_id: project['id']), target: '_blank'
+    %tr
+      %td
+        = link_to 'Testcase Status', '#', remote: true, class: 'report_link', data: {toggle: 'modal', target: '#report_modal', path: testcase_status_form_path(project_id: project['id'])}
+    %tr
+      %td
+        = link_to 'Execution Comparison', ''
+
+#report_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Report Options
+      .modal-body
+        #report_modal_content
+          .loader
+:javascript
+  $('.report_link').click(function(){
+    path = $(this).data('path')
+    $('#report_modal_content').load(path)
+  })
