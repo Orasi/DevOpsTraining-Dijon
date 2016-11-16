@@ -61,6 +61,14 @@ class ResultsController < ApplicationController
 
   end
 
+  def step_log
+
+    @result = @mustard.results.find params[:id]
+
+    redirect_back fallback_location: root_path, flash: { alert: "Failed to find result"} and return if result['error']
+
+  end
+
   private
 
   def result_params

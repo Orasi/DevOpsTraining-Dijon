@@ -103,6 +103,8 @@
                   %span.fa.fa-clock-o.link-icon.history-link{data: {url: result_history_path(r.id), toggle: 'modal', target: '#history_modal'}}
                   - if r['link']
                     = link_to '', r['link'], class: 'link-icon fa fa-link', target: '_blank'
+                  - if r['step_log']
+                    %div{class: 'link-like step-log-link fa fa-cube', data: {toggle: 'modal', target:'#step_log_modal', steplog: r['step_log']}}
                 %td
                   %td
                     .small.overview-time
@@ -128,7 +130,15 @@
         #screenshot_div
           = image_tag '', alt: 'Screenshot', id: 'screenshot_image'
           .loader
-#manual_result_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+
+#step_log_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #step_log_div
+          .loader
+
+          #manual_result_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
   .modal-dialog{role: 'document'}
     .modal-content{style:'width:1000px'}
       .modal-body

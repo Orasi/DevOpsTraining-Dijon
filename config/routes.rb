@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   resources :results
   get 'results/:id/history', to: 'executions#result_history', as: :result_history
   get 'results/:id/screenshot/:screenshot_id', to: 'results#screenshot', as: :result_screenshot
+  get 'results/:id/step-log', to: 'results#step_log', as: :step_log
 
   #Report Paths
   get 'reports/testcase-status/:project_id', to: 'reports#testcase_status_form', as: :testcase_status_form
