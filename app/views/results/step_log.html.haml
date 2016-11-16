@@ -1,1 +1,48 @@
-= @results
+%table.table.table-hover
+  - JSON.parse(@step_log).each do |step|
+    - depth = 0
+    %tr
+      %td
+        = step['step_name']
+      %td
+        = "#{step['elapsed_time'].round(2)} seconds"
+      %td
+        = step['status']
+    - unless step['sub_steps'].blank?
+      - step['sub_steps'].each do |sub|
+      - depth = 1
+        %tr
+          %td
+            %div{style: "margin-left:#{depth*20}"}= sub['step_name']
+          %td
+            = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
+          %td
+            = sub['status']
+        - sub['sub_steps'].each do |sub|
+          - depth = 2
+          %tr
+            %td
+              %div{style: "margin-left:#{depth*20}"}= sub['step_name']
+            %td
+              = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
+            %td
+              = sub['status']
+          - sub['sub_steps'].each do |sub|
+            - depth = 3
+            %tr
+              %td
+                %div{style: "margin-left:#{depth*20}"}= sub['step_name']
+              %td
+                = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
+              %td
+                = sub['status']
+            - sub['sub_steps'].each do |sub|
+              - depth = 4
+              %tr
+                %td
+                  %div{style: "margin-left:#{depth*20}"}= sub['step_name']
+                %td
+                  = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
+                %td
+                  = sub['status']
+

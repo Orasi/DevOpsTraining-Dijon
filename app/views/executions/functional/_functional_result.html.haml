@@ -104,7 +104,7 @@
                   - if r['link']
                     = link_to '', r['link'], class: 'link-icon fa fa-link', target: '_blank'
                   - if r['step_log']
-                    %div{class: 'link-like step-log-link fa fa-cube', data: {toggle: 'modal', target:'#step_log_modal', steplog: r['step_log']}}
+                    = link_to '', step_log_path(r['id']), class: 'link-icon fa fa-cube', data: {toggle: 'modal', target:'#step_log_modal', steplog: r['step_log']}
                 %td
                   %td
                     .small.overview-time
@@ -138,7 +138,7 @@
         #step_log_div
           .loader
 
-          #manual_result_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+#manual_result_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
   .modal-dialog{role: 'document'}
     .modal-content{style:'width:1000px'}
       .modal-body
