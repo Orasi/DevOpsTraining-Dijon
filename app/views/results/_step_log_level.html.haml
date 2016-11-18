@@ -12,7 +12,7 @@
             %h4
               = step['step_name']
               .small.step_time
-                = "#{step['elapsed_time'].round(2)} seconds" if step_elapsed_time && step['elapsed_time'] != ''
+                = "#{step['elapsed_time'].round(2)} seconds" if step['elapsed_time'] && step['elapsed_time'] != ''
           %td.step_status.step_col
             - if step['status'].downcase == 'complete'
               .fa.fa-check-circle{style: 'color:green'}
