@@ -19,6 +19,46 @@
  *= require_self
  */
 
+.sub_steps{
+    display: none;
+    margin-left: 25px;
+    /*border: 1px solid lightgray;*/
+}
+.collapse_all{
+    display: none;
+}
+.step-expand{
+    border: 1px solid white;
+}
+.step-expand:hover{
+    background: #e8e8e8;
+    border: 1px solid lightgray;
+}
+
+
+.step_name{
+    word-wrap: break-word;
+    display: inline;
+
+}
+
+.step_time{
+    margin: 10px;
+}
+
+.step-table{
+    width: 100%;
+}
+.step-icon{
+
+    text-align: center;
+    margin: auto;
+    width: 30px;
+}
+.step_status{
+    width: 40px;
+    font-size: 1.25em;
+}
 ul.select2-results {
     max-height: 400px;
 }

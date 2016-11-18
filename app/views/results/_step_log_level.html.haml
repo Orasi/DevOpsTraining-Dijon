@@ -1,0 +1,30 @@
+.step
+  .step-expand
+    .step_name.step_col
+      %table.step-table
+        %tr
+          %td.step-icon
+            - if step['sub_steps'].blank?
+              &bull;
+            -else
+              %span.step-expand-icon.fa.fa-plus-square-o
+          %td
+            %h4
+              = step['step_name']
+              .small.step_time
+                = "#{step['elapsed_time'].round(2)} seconds"
+          %td.step_status.step_col
+            - if step['status'].downcase == 'complete'
+              .fa.fa-check-circle{style: 'color:green'}
+            - elsif step['status'].downcase == 'error'
+              .fa.fa-times-circle{style: 'color:red'}
+            - elsif step['status'] == ''
+              .fa.fa-exclamation-circle{style: 'color:orange'}
+            - else
+              .pull-right= step['status']
+
+
+  - unless step['sub_steps'].blank?
+    .sub_steps
+      - step['sub_steps'].each do |sub|
+        = render partial: 'step_log_level', locals: {step: sub}

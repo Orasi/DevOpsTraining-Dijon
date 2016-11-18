@@ -1,97 +1,30 @@
-%table.table.table-hover
-  - JSON.parse(@step_log).each do |step|
-    - depth = 0
-    %tr.depth1
-      %td
-        - unless step['sub_steps'].blank?
-          %span.fa.fa-plus-square-o
-        = step['step_name']
-      %td
-        = "#{step['elapsed_time'].round(2)} seconds"
-      %td
-        - if step['status'].downcase == 'complete'
-          .fa.fa-check-circle{style: 'color:green'}
-        - else
-          = step['status']
-    - unless step['sub_steps'].blank?
-      - step['sub_steps'].each do |sub|
-      - depth = 1
-        %tr.depth2{style: 'display:none'}
-          %td
+%h3{style: 'margin:25px'}
+  Step Log
+  .btn.btn-default.btn.sm.pull-right.expand_all Expand All
+  .btn.btn-default.btn.sm.pull-right.collapse_all Collapse All
 
-            %span{style: "margin-left:#{depth*20}"}
-              - unless sub['sub_steps'].blank?
-                %span.fa.fa-plus-square-o
-              = sub['step_name']
-          %td
-            = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
-          %td
-            - if sub['status'].downcase == 'complete'
-              .fa.fa-check-circle{style: 'color:green'}
-            - else
-              = sub['status']
-        - sub['sub_steps'].each do |sub|
-          - depth = 2
-          %tr.depth3{style: 'display:none'}
-            %td
-              %span{style: "margin-left:#{depth*20}"}
-                - unless sub['sub_steps'].blank?
-                  %span.fa.fa-plus-square-o
-                = sub['step_name']
-            %td
-              = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
-            %td
-              - if sub['status'].downcase == 'complete'
-                .fa.fa-check-circle{style: 'color:green'}
-              - else
-                = sub['status']
-          - sub['sub_steps'].each do |sub|
-            - depth = 3
-            %tr.depth4{style: 'display:none'}
-              %td
-                %span{style: "margin-left:#{depth*20}"}
-                  - unless sub['sub_steps'].blank?
-                    %span.fa.fa-plus-square-o
-                  = sub['step_name']
-              %td
-                = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
-              %td
-                - if sub['status'].downcase == 'complete'
-                  .fa.fa-check-circle{style: 'color:green'}
-                - else
-                  = sub['status']
-            - sub['sub_steps'].each do |sub|
-              - depth = 4
-              %tr.depth5{style: 'display:none'}
-                %td
-                  - unless sub['sub_steps'].blank?
-                    %span.fa.fa-plus-square-o
-                  %span{style: "margin-left:#{depth*20}"}= sub['step_name']
-                %td
-                  = "#{sub['elapsed_time'].round(2)} seconds" if sub['elapsed_time'] != ''
-                %td
-                  - if sub['status'].downcase == 'complete'
-                    .fa.fa-check-circle{style: 'color:green'}
-                  - else
-                    = sub['status']
+.panel.panel-default{style: 'margin:25px'}
+  .panel-body
+    .step-log
+      - JSON.parse(@step_log).each do |step|
+        = render partial: 'step_log_level', locals: {step: step}
 
 :javascript
-  $('.depth1').click(function(){
-    $(this).next('.depth2').toggle()
-    $(this).find('.fa-plus-square-o .fa-minus-square-o').toggleClass('fa-plus-square-o fa-minus-square-o')
+  $('.step-expand').click(function(e){
+
+    $(this).closest('.step').find('.sub_steps:first').slideToggle()
+    $(this).find('.step-expand-icon:first').toggleClass('fa-plus-square-o fa-minus-square-o')
+    e.preventBubble()
+    e.preventDefault()
   })
 
-  $('.depth2').click(function(){
-    $(this).next('.depth3').toggle()
-    $(this).find('.fa-plus-square-o .fa-minus-square-o').toggleClass('fa-plus-square-o fa-minus-square-o')
+  $('.expand_all').click(function(){
+    $('.sub_steps').show();
+    $(this).hide()
+    $('.collapse_all').show()
   })
-
-  $('.depth3').click(function(){
-    $(this).next('.depth4').toggle()
-    $(this).find('.fa-plus-square-o .fa-minus-square-o').toggleClass('fa-plus-square-o fa-minus-square-o')
-  })
-
-  $('.depth4').click(function(){
-    $(this).next('.depth5').toggle()
-    $(this).find('.fa-plus-square-o .fa-minus-square-o').toggleClass('fa-plus-square-o fa-minus-square-o')
+  $('.collapse_all').click(function(){
+    $('.sub_steps').hide();
+    $(this).hide()
+    $('.expand_all').show()
   })
