@@ -20,11 +20,13 @@
 
   $('.expand_all').click(function(){
     $('.sub_steps').show();
+    $('.fa-plus-square-o').addClass('fa-minus-square-o').removeClass('fa-plus-square-o')
     $(this).hide()
     $('.collapse_all').show()
   })
   $('.collapse_all').click(function(){
     $('.sub_steps').hide();
+    $('.fa-minus-square-o').addClass('fa-plus-square-o').removeClass('fa-minus-square-o')
     $(this).hide()
     $('.expand_all').show()
   })
