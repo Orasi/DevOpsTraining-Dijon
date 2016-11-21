@@ -100,9 +100,13 @@
     $('.current_execution').load("#{execution_project_summary_path(id: "#{current_execution_id}", title: 'Current Execution')}")
   }
 
+  function reloadCurrent(){
+    $('.current_execution').load("#{execution_project_summary_update_path(id: "#{current_execution_id}", title: 'Current Execution')}")
+  }
+
   loadCurrent()
   loadPrevious()
 
-  setInterval(loadCurrent, 30000)
+  setInterval(reloadCurrent, 30000)
 
 
