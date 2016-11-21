@@ -104,7 +104,7 @@
             }]
       };
       var options = {
-        animation: #{!update},
+        #{update ? 'animation : false,': ''}
         legend: {display: false},
         responsive: true,
         maintainAspectRatio: true,

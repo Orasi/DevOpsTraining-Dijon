@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="00fb2558-8b2a-422f-81d5-b21c721e9ed5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/executions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" afterPath="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="Mustard-Front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,21 +50,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="executions_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="executions_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45820433">
-              <caret line="73" column="46" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="89" selection-start-line="60" selection-start-column="89" selection-end-line="61" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_execution_status.html.haml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_execution_status.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-70.0">
-              <caret line="112" column="48" selection-start-line="112" selection-start-column="48" selection-end-line="112" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.32475883">
+              <caret line="106" column="30" selection-start-line="106" selection-start-column="30" selection-end-line="106" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -76,11 +73,11 @@
       <file leaf-file-name="show.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.291666">
-              <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
+            <state vertical-scroll-proportion="-19.666666">
+              <caret line="92" column="31" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
               <folding>
-                <marker date="1479734220838" expanded="true" signature="3254:3293" placeholder="{...}" />
-                <marker date="1479734220838" expanded="true" signature="3254:3391" placeholder="{...}" />
+                <marker date="1479739125641" expanded="true" signature="3254:3293" placeholder="{...}" />
+                <marker date="1479739125641" expanded="true" signature="3254:3391" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -155,10 +152,10 @@
         <option value="$PROJECT_DIR$/app/views/results/step_log.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/views/results/_step_log_level.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/projects/show.html.haml" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/projects/_execution_status.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/projects/show.html.haml" />
       </list>
     </option>
   </component>
@@ -685,8 +682,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="27" width="1920" height="1053" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16826923" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -696,7 +693,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32555673" sideWeight="0.49786323" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28101802" sideWeight="0.49786323" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28101802" sideWeight="0.49786323" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1106,17 +1103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.291666">
-          <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
-          <folding>
-            <marker date="1479734220838" expanded="true" signature="3254:3293" placeholder="{...}" />
-            <marker date="1479734220838" expanded="true" signature="3254:3391" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.525">
@@ -1125,18 +1111,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-70.0">
-          <caret line="112" column="48" selection-start-line="112" selection-start-column="48" selection-end-line="112" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="89" selection-start-line="60" selection-start-column="89" selection-end-line="61" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45820433">
-          <caret line="73" column="46" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="46" />
+        <state vertical-scroll-proportion="-19.666666">
+          <caret line="92" column="31" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+          <folding>
+            <marker date="1479739125641" expanded="true" signature="3254:3293" placeholder="{...}" />
+            <marker date="1479739125641" expanded="true" signature="3254:3391" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/_execution_status.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32475883">
+          <caret line="106" column="30" selection-start-line="106" selection-start-column="30" selection-end-line="106" selection-end-column="30" />
           <folding />
         </state>
       </provider>
