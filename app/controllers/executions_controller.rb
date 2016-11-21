@@ -64,15 +64,20 @@ class ExecutionsController < ApplicationController
   end
 
 
-  def project_summary
+  def project_summary(update=false)
 
     @title = params[:title]
 
     render partial: 'projects/no_execution_status' and return if params[:id] == '-1'
 
     @status = @mustard.executions.testcase_status( params[:id] )
-    render partial: 'projects/execution_status', locals: {execution: @status['execution']}
+    render partial: 'projects/execution_status', locals: {execution: @status['execution'], update: update}
 
+  end
+
+
+  def project_summary_update
+    project_summary(true)
   end
 
 

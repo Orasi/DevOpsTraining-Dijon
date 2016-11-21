@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get 'executions/:id/testcase_detail/:testcase_id', to: 'executions#testcase_detail', as: :testcase_detail
   put 'executions/:id/close', to: 'executions#close', as: :close_execution
   get 'executions/:id/project_execution_summary/:title', to: 'executions#project_summary', as: :execution_project_summary
+  get 'executions/:id/project_execution_summary/:title/update', to: 'executions#project_summary_update', as: :execution_project_summary_update
   get 'executions/:id/environment_overview', to: 'executions#environment_overview', as: :execution_environment_overview
   get 'executions/:id/testcase_overview', to: 'executions#testcase_overview', as: :execution_testcase_overview
   get 'executions/:id/next_test', to: 'executions#next_test', as: :next_test
