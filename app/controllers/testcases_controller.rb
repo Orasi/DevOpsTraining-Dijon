@@ -87,14 +87,15 @@ class TestcasesController < ApplicationController
 
     if params[:preview] == 'preview' || params[:preview] == 'true'
       @csv = params[:csv]
-      @testcases = @mustard.testcases.import(params[:id], params[:csv], preview: true)
+      @testcases = @mustard.testcases.import(params[:id], params[:csv], preview: true, update: params[:update])
     else
-      @testcases = @mustard.testcases.import(params[:id], params[:csv])
+      @testcases = @mustard.testcases.import(params[:id], params[:csv], update: params[:update])
 
       redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} and return if @testcases['error']
       redirect_to project_path(params[:id]), flash: { success: 'Testcases imported'} and return unless @testcases['error']
     end
 
+    @update = params[:update]
     redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} if @testcases['error']
 
   end

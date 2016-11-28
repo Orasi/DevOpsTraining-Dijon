@@ -1,6 +1,9 @@
 .panel.panel-default
   .panel-body
     = form_tag(testcase_import_path(@project['project']['id'], preview: :preview), method: :post) do |f|
+      .form-group.pull-right
+        Update Testcases
+        = check_box_tag 'update', true
       .form-group
         = label_tag 'Import Testcases'
       .form-group
