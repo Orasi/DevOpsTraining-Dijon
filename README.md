@@ -1,24 +1,9 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Mustard
+Ruby on Rails based multi-environment test results server.  Mustard collects test results from closely related tests (IE Cross Browser or Mobile Testing on Multiple Device) and groups them for easy analysis.  The Mustard-Dijon is the front-end GUI and requires [Mustard-Seed](https://github.com/Orasi/Mustard-Seed) for storing test results.
 
-Things you may want to cover:
+# Orasi Software Inc
+Orasi is a software and professional services company focused on software quality testing and management.  As an organization, we are dedicated to best-in-class QA tools, practices and processes. We are agile and drive continuous improvement with our customers and within our own business.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# License
+Licensed under [BSD License](/License)
