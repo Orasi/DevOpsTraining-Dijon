@@ -44,6 +44,7 @@
               %th
                 Created By
               %th
+              %th
                 Created
           %tbody
             - manual_results.each_with_index do |obj, i|
@@ -64,6 +65,9 @@
                   = r['comment']
                 %td
                   = r['created_by_name']
+                %tdg
+                  - if r['screenshot_id']
+                    %div{class: 'link-like screenshot-link fa fa-camera-retro', data: {toggle: 'modal', target:'#screenshot_modal', image: result_screenshot_path(id: r['id'], screenshot_id: r['screenshot_id'])}}
                 %td
                   .small.overview-time
                     = time_ago_in_words(r['created_at']) + ' ago' if r['created_at']
