@@ -15,7 +15,7 @@
     %label Reproduction Steps
     .test-steps-container
       - testcase['reproduction_steps'].each do |step|
-        = render partial: 'step_well', locals: {step_number: step['step_number'], action: step['action'], result: step['result']}
+        = render partial: 'testcases/step_well', locals: {step_number: step['step_number'], action: step['action'], result: step['result']}
     .add-step-btn.btn.btn-success.pull-right
       %span.glyphicon.glyphicon-plus
       Add Test Step
@@ -100,7 +100,7 @@
 
   add_step = function(){
 
-    $('.testcase-step:last').after("#{j render partial: 'step_well', locals: {step_number: '', action: '', result: ''}}")
+    $('.testcase-step:last').after("#{j render partial: 'testcases/step_well', locals: {step_number: '', action: '', result: ''}}")
 
     $('.step-up').unbind('click').click(step_up)
     $('.step-down').unbind('click').click(step_down)
