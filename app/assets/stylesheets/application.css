@@ -188,7 +188,7 @@ ul.select2-results {
     margin-left: 15px;
     margin-top: 30px;
 }
-.testcase-step:first-child .step-up, .testcase-step:last-child .step-down{
+.testcase-step:first-of-type .step-up, .testcase-step:last-child .step-down{
     display: none
 }
 .step-up, .step-down{

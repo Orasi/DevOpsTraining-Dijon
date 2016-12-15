@@ -19,10 +19,18 @@ class TestcasesController < ApplicationController
 
   def create
 
+    reproduction_steps = []
+
+    if params[:reproduction_steps]
+      params[:reproduction_steps].keys.each do |k|
+        reproduction_steps.append({step_number: k, action: params[:reproduction_steps][k][:action], result: params[:reproduction_steps][k][:result]})
+      end
+    end
+
     testcase = @mustard.testcases.add({name: testcase_params[:name],
                                        project_id: testcase_params[:project_id],
                                        validation_id: testcase_params[:validation_id],
-                                       reproduction_steps: testcase_params[:reproduction_steps]
+                                       reproduction_steps: reproduction_steps
                                       })
 
     if testcase['error']

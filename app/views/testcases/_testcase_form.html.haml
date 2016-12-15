@@ -14,7 +14,7 @@
 
   %label Reproduction Steps
   .test-steps-container
-    .tc1
+    %span.tc1
     - if testcase['reproduction_steps']
       - testcase['reproduction_steps'].each do |step|
         = render partial: 'testcases/step_well', locals: {step_number: step['step_number'], action: step['action'], result: step['result']}
@@ -101,11 +101,11 @@
   })
 
   add_step = function(){
-
-    if ($('.testcase-step:last').count == 0){
-      element = $('.testcase-step:last')
+    form = $(this).closest('.testcase-form')
+    if (form.find('.testcase-step:last').count == 0){
+      element = form.find('.testcase-step:last')
     } else {
-      element = $('.tc1:last')
+      element = form.find('.tc1:last')
     }
 
     element.after("#{j render partial: 'testcases/step_well', locals: {step_number: '', action: '', result: ''}}")
@@ -117,5 +117,5 @@
     renumber_steps()
   }
 
-  $('.add-step-btn').click(add_step)
+  $('.add-step-btn').unbind('click').click(add_step)
 
