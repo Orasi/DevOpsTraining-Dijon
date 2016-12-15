@@ -174,3 +174,28 @@ ul.select2-results {
 .numbered_table tr td .row-index::after {
     content: '.';
 }
+.testcase-step table{
+    width: 100%;
+}
+.testcase-step .step-cell{
+    width: 95%;
+}
+.testcase-step .action-cell{
+    width: 5%;
+}
+.testcase-step .action-cell table{
+    height: 100px;
+    margin-left: 15px;
+    margin-top: 30px;
+}
+.testcase-step:first-child .step-up, .testcase-step:last-child .step-down{
+    display: none
+}
+.step-up, .step-down{
+    cursor: pointer;
+}
+
+.step-remove{
+    color: red;
+    cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.well.testcase-step
+  %table
+    %tr
+      %td.step-cell
+        %label
+          Step #
+          %span.step_number= step_number
+        %br
+        %label Action
+        = text_field_tag "reproduction_steps[<step_number>][action]",  action, class: 'form-control'
+        %label Result
+        = text_field_tag "reproduction_steps[<step_number>][result]",  result, class: 'form-control'
+      %td.action-cell
+        %table
+          %tr
+            %td
+              .glyphicon.glyphicon-chevron-up.step-up{title: 'Move Step Up'}
+          %tr
+            %td
+              .glyphicon.glyphicon-remove.step-remove{title: 'Delete Step'}
+          %tr
+            %td
+              .glyphicon.glyphicon-chevron-down.step-down{title: 'Move Step Down'}
+

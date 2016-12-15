@@ -1,7 +1,7 @@
 
 
 = form_tag(testcase['name'] ? testcase_path(testcase['id']) : testcases_path,
-           method: testcase['name'] ? :put : :post,
+           class: 'testcase-form', method: testcase['name'] ? :put : :post,
            role: :form) do
   .form-group
     = hidden_field_tag 'testcase[project_id]', project_id
@@ -13,17 +13,101 @@
 
   - if testcase['name'] && testcase['reproduction_steps']
     %label Reproduction Steps
-
-    - testcase['reproduction_steps'].each do |step|
-      .well
-        %label.step_number=  "Step ##{step['step_number']}"
-        %br
-        %label Action
-        = text_field_tag "reproduction_steps[#{step['step_number']}][action]",  step['action'], class: 'form-control'
-        %label Result
-        = text_field_tag "reproduction_steps[#{step['step_number']}][result]",  step['result'], class: 'form-control'
-
-
+    .test-steps-container
+      - testcase['reproduction_steps'].each do |step|
+        = render partial: 'step_well', locals: {step_number: step['step_number'], action: step['action'], result: step['result']}
+    .add-step-btn.btn.btn-success.pull-right
+      %span.glyphicon.glyphicon-plus
+      Add Test Step
+  %br
+  %br
+  %br
   .form-group
     = submit_tag 'Submit', class: 'btn btn-primary'
     .pull-right= link_to 'Delete Testcase', testcase_path(testcase['id']), method: :delete, class: 'btn btn-danger' if testcase['name']
+
+:javascript
+  $('[data-toggle="tooltip"]').tooltip()
+
+  renumber_steps = function(){
+    counter = 1
+    $('.step_number').each(function(i, step){
+      $(step).text(counter)
+      counter += 1
+    })
+  }
+
+  remove_step = function(){
+    this_step = $(this).closest('.testcase-step')
+    this_step.remove()
+
+    renumber_steps()
+  }
+
+  step_up = function(){
+
+    this_step = $(this).closest('.testcase-step')
+    last_step = this_step.prev('.testcase-step')
+
+    this_clone = this_step.clone()
+    last_clone = last_step.clone()
+
+    this_step.replaceWith(last_clone)
+    last_step.replaceWith(this_clone)
+
+
+    $('.step-up').unbind('click').click(step_up)
+    $('.step-down').unbind('click').click(step_down)
+    $('.step-remove').unbind('click').click(remove_step)
+    renumber_steps()
+  }
+
+  step_down = function(){
+
+    this_step = $(this).closest('.testcase-step')
+    last_step = this_step.next('.testcase-step')
+
+    this_clone = this_step.clone()
+    last_clone = last_step.clone()
+
+    this_step.replaceWith(last_clone)
+    last_step.replaceWith(this_clone)
+
+    $('.step-up').unbind('click').click(step_up)
+    $('.step-down').unbind('click').click(step_down)
+    $('.step-remove').unbind('click').click(remove_step)
+
+    renumber_steps()
+  }
+
+  $('.step-up').unbind('click').click(step_up)
+  $('.step-down').unbind('click').click(step_down)
+  $('.step-remove').unbind('click').click(remove_step)
+
+  $('.testcase-form').unbind('submit').submit(function(e){
+
+    $(this).find('.testcase-step').each(function(step){
+      action = $(this).find('#reproduction_steps__step_number__action')
+      action_name = action.attr('name');
+      action.attr('name', action_name.replace('<step_number>', step + 1));
+
+      result = $(this).find('#reproduction_steps__step_number__result')
+      result_name = result.attr('name');
+      result.attr('name', result_name.replace('<step_number>', step + 1));
+
+    })
+  })
+
+  add_step = function(){
+
+    $('.testcase-step:last').after("#{j render partial: 'step_well', locals: {step_number: '', action: '', result: ''}}")
+
+    $('.step-up').unbind('click').click(step_up)
+    $('.step-down').unbind('click').click(step_down)
+    $('.step-remove').unbind('click').click(remove_step)
+
+    renumber_steps()
+  }
+
+  $('.add-step-btn').click(add_step)
+
