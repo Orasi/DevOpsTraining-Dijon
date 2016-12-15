@@ -11,14 +11,16 @@
     %label Validation ID
     = text_field_tag 'testcase[validation_id]', testcase['validation_id'], class: 'form-control', required: true
 
-  - if testcase['name'] && testcase['reproduction_steps']
-    %label Reproduction Steps
-    .test-steps-container
+
+  %label Reproduction Steps
+  .test-steps-container
+    .tc1
+    - if testcase['reproduction_steps']
       - testcase['reproduction_steps'].each do |step|
         = render partial: 'testcases/step_well', locals: {step_number: step['step_number'], action: step['action'], result: step['result']}
-    .add-step-btn.btn.btn-success.pull-right
-      %span.glyphicon.glyphicon-plus
-      Add Test Step
+  .add-step-btn.btn.btn-success.pull-right
+    %span.glyphicon.glyphicon-plus
+    Add Test Step
   %br
   %br
   %br
@@ -30,10 +32,10 @@
   $('[data-toggle="tooltip"]').tooltip()
 
   renumber_steps = function(){
-    counter = 1
-    $('.step_number').each(function(i, step){
-      $(step).text(counter)
-      counter += 1
+
+    $('.testcase-step').each(function(i, step){
+      $(this).find('.step_number').text(i + 1)
+
     })
   }
 
@@ -100,7 +102,13 @@
 
   add_step = function(){
 
-    $('.testcase-step:last').after("#{j render partial: 'testcases/step_well', locals: {step_number: '', action: '', result: ''}}")
+    if ($('.testcase-step:last').count == 0){
+      element = $('.testcase-step:last')
+    } else {
+      element = $('.tc1:last')
+    }
+
+    element.after("#{j render partial: 'testcases/step_well', locals: {step_number: '', action: '', result: ''}}")
 
     $('.step-up').unbind('click').click(step_up)
     $('.step-down').unbind('click').click(step_down)
