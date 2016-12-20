@@ -102,10 +102,11 @@
 
   add_step = function(){
     form = $(this).closest('.testcase-form')
-    if (form.find('.testcase-step:last').count == 0){
-      element = form.find('.testcase-step:last')
-    } else {
+    if (form.find('.testcase-step').length == 0){
       element = form.find('.tc1:last')
+    } else {
+
+      element = form.find('.testcase-step:last')
     }
 
     element.after("#{j render partial: 'testcases/step_well', locals: {step_number: '', action: '', result: ''}}")

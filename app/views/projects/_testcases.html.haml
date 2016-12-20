@@ -10,6 +10,8 @@
         Testcase Name
 
       %th
+        Version #
+      %th
         Last Updated
       %th
         Actions
@@ -22,7 +24,10 @@
         %td
           = link_to testcase.testcase_name, testcase_path(testcase.id)
         %td
-          = testcase.updated_at.strftime('%m/%d/%Y')
+          = testcase.version
+        %td
+          .small.overview-time
+            = time_ago_in_words(testcase.updated_at) + ' ago' if testcase['updated_at']
         %td
           %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase.id)}}
 #new_testcase_modal.modal.fade
