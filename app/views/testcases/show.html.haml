@@ -1,16 +1,21 @@
 - testcase = @testcase
 .dashboard-page-header
 
+  .small= link_to "Back to Project", project_path(testcase['project_id']), class: 'pull-right', style: 'margin:15px'
   %h4
     = testcase['name']
+
     %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase['id'])}}
-    %ol.breadcrumb.pull-right{ style: 'background-color: white;font-size: .5em;' }
-      %li
-        = link_to "Back to Project", project_path(testcase['project_id'])
+
 .container-fluid
 
 
   Reproduction Steps
+  .pull-right
+    - if testcase['username']
+      = " Version #{testcase['version']} - #{testcase['version'] == 1 ? 'Created By' : 'Updated By'} #{testcase['username']}"
+    - else
+      = " Version #{testcase['version']}"
   .panel.panel-default
     .panel-body
       %table.table.table-striped.table-hover.table-condensed
@@ -45,6 +50,29 @@
       .modal-body
         #testcase_modal_content
           .loader
+- if @all_versions && @all_versions.count > 1
+  .container-fluid
+    %h3 Other Versions
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th
+            Testcase
+          %th
+            Version #
+          %th
+            Last Action
+      %tbody
+        - @all_versions.each do |test|
+          - last_action_by = test['username'] ? test['username'] : 'Unknown'
+          %tr
+            %td
+              = link_to test['name'], testcase_path(id: test['id'])
+            %td
+              = test['version']
+            %td
+              = "#{test['version'] == 1 ? 'Created By' : 'Updated By'} #{last_action_by}"
+
 :javascript
   $('.testcase-link').click(function(){
     $('#testcase_modal_content').load($(this).data('path'))

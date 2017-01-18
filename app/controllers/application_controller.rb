@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
     r = @mustard.authenticate(params[:username], params[:password])
 
     redirect_to :login and return if r['error']
-    session[:current_user] = r
-    session[:user_token] = r['token']
+    session[:current_user] = r['user']
+    session[:user_token] = r['user']['token']
 
     redirect_to :dashboard
   end

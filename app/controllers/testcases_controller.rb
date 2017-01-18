@@ -2,7 +2,9 @@ class TestcasesController < ApplicationController
 
 
   def show
-    @testcase = @mustard.testcases.find params[:id]
+    testcase = @mustard.testcases.find(params[:id])
+    @testcase = testcase['testcase']
+    @all_versions = testcase['other_versions']
   end
 
 
@@ -12,7 +14,7 @@ class TestcasesController < ApplicationController
     if testcase['error']
       render json: {error: "User failed to create. Error[#{testcase['error']}]"}, status: :not_found and return
     else
-      render partial: 'testcases/testcase_form', locals: {testcase: TestcasePresenter.new(testcase), project_id: testcase['project_id']}
+      render partial: 'testcases/testcase_form', locals: {testcase: TestcasePresenter.new(testcase['testcase']), project_id: testcase['testcase']['project_id']}
     end
   end
 
@@ -36,7 +38,7 @@ class TestcasesController < ApplicationController
     if testcase['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to create testcase. Error[#{testcase['error']}]"}
     else
-      redirect_back fallback_location: root_path, flash: { success:  "Testcase #{testcase['uuid']} created"}
+      redirect_back fallback_location: root_path, flash: { success:  "Testcase #{testcase['testcase']['uuid']} created"}
     end
   end
 
@@ -60,7 +62,12 @@ class TestcasesController < ApplicationController
     if testcase['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to update team. Error[#{testcase['error']}]"}
     else
-      redirect_back fallback_location: root_path, flash: { success:  "Testcase #{testcase['uuid']} updated"}
+      if http_referer_uri.to_s.include? 'testcases'
+        redirect_to testcase_path id: testcase['testcase']['id'], flash: { success:  "Testcase #{testcase['testcase']['uuid']} updated"}
+      else
+        redirect_back fallback_location: root_path, flash: { success:  "Testcase #{testcase['testcase']['uuid']} updated"}
+      end
+
     end
   end
 
@@ -125,6 +132,10 @@ class TestcasesController < ApplicationController
 
   def testcase_params
     params.require(:testcase).permit(:name, :validation_id, :project_id, :reproduction_steps)
+  end
+
+  def http_referer_uri
+    request.env["HTTP_REFERER"] && URI.parse(request.env["HTTP_REFERER"])
   end
 
 end
