@@ -28,7 +28,7 @@
             = form_tag(forgot_password_path) do
               .form-group
                 %label Email Address
-                = text_field_tag :username, '', class: 'form-control', required: true
+                = text_field_tag :email, '', class: 'form-control', required: true
               .form-group
                 = submit_tag 'Reset', class: 'form-control'
 

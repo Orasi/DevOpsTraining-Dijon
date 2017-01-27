@@ -81,11 +81,11 @@ class UsersController < ApplicationController
 
 
   def forgot_password
-    user = @mustard.users.find_by_username(params[:username])
+    user = @mustard.users.find_by_username(params[:email])
     @user = UserPresenter.new(user['user'])
 
     unless user['error']
-      @mustard.users.trigger_password_reset(@user['username'], reset_password_form_url(@user.id, token: 'TOKEN'))
+      @mustard.users.trigger_password_reset(@user['email'], reset_password_form_url(@user.id, token: 'TOKEN'))
     end
 
     redirect_back fallback_location: root_path, flash: {success: "Password reset email sent for user #{params['username']}"}
