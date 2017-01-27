@@ -17,7 +17,7 @@
           .tab-pane.active#loginTab{role: :tabpanel}
             = form_tag url: login_path, role: :form do
               .form-group
-                %label Username
+                %label Username or Email Address
                 = text_field_tag :username, '', class: 'form-control', required: true
               .form-group
                 %label Password
@@ -27,7 +27,7 @@
           .tab-pane#forgotPassword{role: :tabpanel}
             = form_tag(forgot_password_path) do
               .form-group
-                %label Username
+                %label Email Address
                 = text_field_tag :username, '', class: 'form-control', required: true
               .form-group
                 = submit_tag 'Reset', class: 'form-control'

@@ -29,6 +29,7 @@ class UsersController < ApplicationController
                                last_name: create_user_params[:last_name],
                                company: create_user_params[:company],
                                username: create_user_params[:username],
+                               email: create_user_params[:email],
                                password: create_user_params[:password],
                                admin: create_user_params[:admin]
                               })
@@ -114,10 +115,10 @@ class UsersController < ApplicationController
   private
 
   def update_user_params
-    params.require(:user).permit(:first_name, :last_name, :company, :username, :admin)
+    params.require(:user).permit(:first_name, :last_name, :company, :username, :admin, :email)
   end
 
   def create_user_params
-    params.require(:user).permit(:first_name, :last_name, :company, :username,  :password, :admin)
+    params.require(:user).permit(:first_name, :last_name, :company, :username,  :password, :admin, :email)
   end
 end

@@ -4,8 +4,12 @@
            role: :form) do
   .form-group
     = fields_for :user do |f|
+
       %label Username
       = text_field_tag 'user[username]', user['username'], class: 'form-control', required: true
+    .form-group
+      %label Email Address
+      = text_field_tag 'user[email]', user['email'], class: 'form-control', required: true
     .form-group
       %label First Name
       = text_field_tag 'user[first_name]', user['first_name'], class: 'form-control', required: true
