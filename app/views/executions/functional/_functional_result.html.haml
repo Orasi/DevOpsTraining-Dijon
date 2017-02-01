@@ -108,7 +108,7 @@
                   - if r['link']
                     = link_to '', r['link'], class: 'link-icon fa fa-link', target: '_blank'
                   - if r['step_log']
-                    = link_to '', step_log_path(r['id']), class: 'link-icon fa fa-cube step-log-link', data: {toggle: 'modal', target:'#step_log_modal'}
+                    %span{class: 'link-icon link-like fa fa-cube step-log-link', data: {toggle: 'modal', target:'#step_log_modal', href: step_log_path(r['id'])}}
                 %td
                   %td
                     .small.overview-time
@@ -177,18 +177,8 @@
   })
 
   $('.step-log-link').on('click', function(e){
-    e.preventDefault()
-    $('#step_log_div').load($(this).href)
+    $('#step_log_div').load($(this).data('href'))
   })
 
   $('.timeago').timeago()
-
-
--#  $(document).on('show.bs.modal', '.modal', function () {
--#    var zIndex = 1040 + (10 * $('.modal:visible').length);
--#    $(this).css('z-index', zIndex);
--#    setTimeout(function() {
--#        $('.modal').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
--#    }, 0);
--#  });
 
