@@ -22,10 +22,13 @@
             = link_to execution['name'], execution_path(execution.id)
         %td
           - if execution.closed
-            = "#{ execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y') }"
+            .small.overview-time{data: {toggle: 'tooltip', title: execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y'), placement: 'left' }}
+              = time_ago_in_words(execution.updated_at)
+
         %td
           - if !execution.closed
             - current_execution = execution
+
             = link_to '','', data: {toggle: 'modal', target: '#execution', execution: execution.id}, class: 'fa fa-archive'
           - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
             = link_to execution_path(id: execution.id), method: :delete do
