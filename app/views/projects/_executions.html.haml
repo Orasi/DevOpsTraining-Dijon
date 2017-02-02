@@ -23,7 +23,8 @@
         %td
           - if execution.closed
             .small.overview-time{data: {toggle: 'tooltip', title: execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y'), placement: 'left' }}
-              = "Closed #{time_ago_in_words(execution.updated_at)} ago"
+              Closed
+              %span.timeago{title: DateTime.parse(execution['updated_at']).iso8601}
 
         %td
           - if !execution.closed
@@ -43,3 +44,6 @@
       .modal-body
         #execution_modal
           = render partial: 'executions/execution_form', locals: {execution_id: current_execution.id}
+
+:javascript
+  $('.timeago').timeago()
