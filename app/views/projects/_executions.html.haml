@@ -23,7 +23,7 @@
         %td
           - if execution.closed
             .small.overview-time{data: {toggle: 'tooltip', title: execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y'), placement: 'left' }}
-              = time_ago_in_words(execution.updated_at)
+              = "Closed #{time_ago_in_words(execution.updated_at)} ago"
 
         %td
           - if !execution.closed
