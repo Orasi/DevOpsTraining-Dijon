@@ -75,7 +75,7 @@ class UsersController < ApplicationController
       redirect_back fallback_location: root_path, flash: { alert: "Failed to access user. Error[#{user['error']}]"}
     end
 
-    @mustard.users.trigger_password_reset( @user.username,reset_password_form_url(@user.id, token: 'TOKEN'))
+    @mustard.users.trigger_password_reset( @user.email,reset_password_form_url(@user.id, token: 'TOKEN'))
     redirect_back fallback_location: root_path, flash: {success: "Password reset email sent for user #{@user['username']}"}
   end
 

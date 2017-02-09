@@ -160,9 +160,11 @@
     $('body').addClass('modal-open');
     }
   });
+
   $('#test_runner_btn').click(function(){
     $('#test_runner_modal_content').load("#{next_test_path(result['execution_id'])}")
-  })
+  });
+
   $('#steps_view').click(function(e){
     e.preventDefault()
     $('#steps_table').slideToggle('slow');

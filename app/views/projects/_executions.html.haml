@@ -9,6 +9,7 @@
         Closed?
       %th
         Actions
+
   %tbody#executions
     - executions.each_with_index do |e, i|
       - execution = ExecutionPresenter.new(e)
@@ -34,6 +35,7 @@
           - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
             = link_to execution_path(id: execution.id), method: :delete do
               .fa.fa-trash-o
+
 #execution.modal.fade
   .modal-dialog
     .modal-content
