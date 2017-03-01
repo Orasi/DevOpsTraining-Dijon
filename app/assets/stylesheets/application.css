@@ -15,9 +15,18 @@
  *= require font-awesome
  *= require select2
  *= require select2-bootstrap
+ *= require dropzone/dropzone
  *= require_tree .
  *= require_self
  */
+
+.dz-error-mark g{
+    fill: red
+
+}
+.dz-success-mark g{
+    fill: green
+}
 
 .sub_steps{
     display: none;

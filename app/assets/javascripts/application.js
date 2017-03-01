@@ -16,7 +16,7 @@
 //= require timeago
 //= require select2
 //= require Chart
-
+//= require dropzone
 //= require_tree .
 
 String.prototype.capitalizeFirstLetter = function() {

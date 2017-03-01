@@ -1,12 +1,106 @@
-.panel.panel-default
+.panel.panel-default{style: 'padding:25px'}
   .panel-body
-    = form_tag(testcase_import_path(@project['project']['id'], preview: :preview), method: :post) do |f|
-      .form-group.pull-right
-        Update Testcases
-        = check_box_tag 'update', true
-      .form-group
-        = label_tag 'Import Testcases'
-      .form-group
-        = text_area_tag 'csv', '', {class: 'form-control', style: 'height:400px', placeholder: 'Paste CSV Here', require: true, autofocus: true}
-      .form-group
-        = submit_tag 'Preview Testcases'
+    %h3 Import Testcases
+    = form_tag(testcase_parse_path(@project['project']['id']), method: :post, id: 'my_dropzone', class: 'dropzone' ) do |f|
+      .dz-message{'data-dz-message' => true}
+        %span Click or drop file here to continue
+
+
+
+  #app
+    = form_tag(testcase_import_path(@project['project']['id']), method: :post, id: 'confirm-testcases') do |f|
+      %template{ 'v-if' => 'success.length > 0'}
+        .form-group.pull-right
+          = submit_tag 'Confirm Testcases', class: 'btn btn-primary pull-right'
+          %br
+          %br
+          = label_tag do
+            Update Testcases
+            = check_box_tag 'update', true
+          = hidden_field_tag :json, nil, id: 'json_field'
+
+
+        %br
+        %br
+        %br
+
+    %template{ 'v-if' => 'failure.length > 0'}
+      .panel.panel-default
+        .panel-heading
+          Failed to Import
+        .panel-body
+          %table.table.table-hover.table-striped
+            %tr
+              %th
+                Testcase Name
+            %tr{ 'v-for' => 'failed in failure' }
+              %td
+                {{ failed }}
+    .panel.panel-default
+      .panel-body
+        %table.table.table-hover.table-striped
+          %tr
+            %th
+              Validation ID
+            %th
+              Title
+            %th
+              Steps
+            %th
+              Results
+          %tr{ 'v-if' => "success.length == 0" }
+            %td{colspan: 4}
+              No testcases found
+          %tr{ 'v-for' => "(testcase, index) in success" }
+            %td
+              {{ testcase.validation_id }}
+            %td
+              {{ testcase.name }}
+            %td
+              %ol
+                %li{ 'v-for' => "step in testcase.reproduction_steps"}
+                  {{ step.action}}
+
+            %td
+              %ol
+                %li{ 'v-for' => "steps in testcase.reproduction_steps"}
+                  {{ steps.result}}
+
+
+
+:javascript
+
+  var app = new Vue({
+      el: '#app',
+      data: {
+          success: [],
+          failure: []
+      }
+  });
+
+  Dropzone.autoDiscover = false;
+
+  dz = new Dropzone('#my_dropzone')
+
+  dz.on("success", function (file, response) {
+    $('.loading-overlay').hide()
+      if( response.success){
+        app.success = app.success.concat(response.success)
+      }
+
+      if( response.failure){
+        app.failure = app.failure.concat(response.failure)
+      }
+
+      $('#confirm-testcases').on('submit', function(){
+        $('#json_field').val(JSON.stringify(app.success))
+      })
+
+
+  });
+
+  dz.on("processing", function (file, response) {
+      $('.loading-overlay').show()
+  });
+
+

@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   # Teastcase Paths
   resources :testcases
   get 'projects/:id/testcases/import', to: 'testcases#import_form', as: :testcase_import
-  post 'projects/:id/testcases/import(/:preview)', to: 'testcases#import'
+  post 'projects/:id/testcases/parse', to: 'testcases#parse', as: :testcase_parse
+  post 'projects/:id/testcases/import', to: 'testcases#import'
   get 'projects/:id/testcases/export', to: 'testcases#export', as: :export_testcase
 
 

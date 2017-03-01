@@ -1,6 +1,6 @@
+%h3 Preview
 .container-fluid
   = form_tag(testcase_import_path(@project['project']['id']), method: :post) do |f|
-    = text_area_tag 'csv', @csv,  require: true, style: 'display:none'
     = hidden_field_tag 'update', @update
     = submit_tag 'Confirm Testcase Import', class: 'btn btn-success'
 

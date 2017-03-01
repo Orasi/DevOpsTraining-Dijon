@@ -94,26 +94,33 @@ class TestcasesController < ApplicationController
   end
 
 
+  def parse
+
+    @project = @mustard.projects.find(params[:id])
+
+    redirect_back fallback_location: root_path, flash: { alert: @project['error']} if @project['error']
+
+    @file = params[:file]
+    @testcases = @mustard.testcases.parse(params[:id], params[:file])
+
+    # redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} if @testcases['error']
+    render json: @testcases
+
+  end
+
   def import
 
     @project = @mustard.projects.find(params[:id])
 
     redirect_back fallback_location: root_path, flash: { alert: @project['error']} if @project['error']
 
-    if params[:preview] == 'preview' || params[:preview] == 'true'
-      @csv = params[:csv]
-      @testcases = @mustard.testcases.import(params[:id], params[:csv], preview: true, update: params[:update])
-    else
-      @testcases = @mustard.testcases.import(params[:id], params[:csv], update: params[:update])
+    @testcases = @mustard.testcases.import(params[:id], params[:json], update: params[:update])
 
-      redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} and return if @testcases['error']
-      redirect_to project_path(params[:id]), flash: { success: 'Testcases imported'} and return unless @testcases['error']
-    end
-
-    @update = params[:update]
-    redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} if @testcases['error']
+    redirect_back fallback_location: root_path, flash: { alert: @testcases['error']} and return if @testcases['error']
+    redirect_to project_path(params[:id]), flash: { success: 'Testcases imported'} and return unless @testcases['error']
 
   end
+
 
   def export
     @project = @mustard.projects.find(params[:id])
