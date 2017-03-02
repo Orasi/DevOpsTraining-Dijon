@@ -214,10 +214,14 @@ ul.select2-results {
     padding: 4px 0px;
 }
 
-#f_results_nav_subpanel > .panel.panel-default {
+#f_results_nav_subpanel {
     max-height: 470px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+#f_results_nav_subpanel .panel.panel-default:last-of-type {
+    margin-bottom: 0 !important;
 }
 
 #select2-test-results {
