@@ -69,7 +69,7 @@
     font-size: 1.25em;
 }
 ul.select2-results {
-    max-height: 400px;
+    max-height: 450px;
 }
 .modal:nth-of-type(even) {
     z-index: 1042 !important;
@@ -207,4 +207,19 @@ ul.select2-results {
 .step-remove{
     color: red;
     cursor: pointer;
+}
+
+.results_load {
+    display: block;
+    padding: 4px 0px;
+}
+
+#f_results_nav_subpanel > .panel.panel-default {
+    max-height: 470px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#select2-test-results {
+    max-height: 450px;
 }
