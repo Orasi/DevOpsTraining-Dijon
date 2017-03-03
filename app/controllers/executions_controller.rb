@@ -12,6 +12,7 @@ class ExecutionsController < ApplicationController
   def testcase_detail
 
     @detail = @mustard.executions.testcase_detail(params[:id], params[:testcase_id])
+    @environments = @mustard.projects.environments(@detail['testcase']['project_id'])
     render partial: 'executions/functional/functional_result', layout: false
 
   end
@@ -99,9 +100,16 @@ class ExecutionsController < ApplicationController
     redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
 
     @execution_id = params[:id]
-    render partial: 'results/no_testcases' and return unless next_test['testcase']['id']
+    if cookies[:last_environment]
+      @selected = YAML::load cookies[:last_environment]
+    end
 
-    render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase']} and return
+    if next_test['testcase']['id']
+      @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
+      render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase']}
+    else
+      render partial: 'results/no_testcases' and return unless next_test['testcase']['id']
+    end
 
   end
 

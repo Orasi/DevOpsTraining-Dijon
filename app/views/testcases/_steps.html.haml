@@ -10,12 +10,13 @@
       - if steps.blank?
         %tr
           No Steps Defined
-      - steps.each do |step|
-        %tr
-          %td
-            = "#{step['step_number']}."
-          %td
-            = step['action']
-          %td
-            = "#{step['step_number']}."
-            = step['result']
+      - else
+        - steps.each do |step|
+          %tr
+            %td
+              = "#{step['step_number']}."
+            %td
+              = step['action']
+            %td
+              = "#{step['step_number']}."
+              = step['result']

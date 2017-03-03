@@ -1,11 +1,18 @@
 - runner ||= false
 = form_tag( runner ? runner_result_path : results_path, method: :post, role: :form, remote: runner) do
   .form-group
-    = hidden_field_tag 'result[environment_id]', -1
     = hidden_field_tag 'result[testcase_id]', testcase_id
     = hidden_field_tag 'result[execution_id]', execution_id
     = hidden_field_tag 'result[result_type]', 'manual'
 
+    - unless @environments.blank?
+      .form-group
+
+        = label_tag :Environment
+        - if @selected
+          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['uuid'] ]},  @selected['uuid']), class: 'select2'
+        -else
+          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['uuid'] ]}), class: 'select2'
     %label Status
     %br
     %span{style: 'margin:15px'}
@@ -25,3 +32,5 @@
   .form-group
     = submit_tag 'Submit', class: 'btn btn-primary'
 
+:javascript
+  $('.select2').select2({ width: '100%'})

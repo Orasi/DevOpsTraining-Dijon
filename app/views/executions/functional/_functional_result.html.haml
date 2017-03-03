@@ -77,8 +77,7 @@
   - unless automated_results.blank?
     .row
       .col-md-12
-        %h4 Automated Results
-        -#- asdfasdfasdfasdf
+        %h4 Results
         %table.table.table-condensed.table-overview
           %tbody
             - automated_results.each_with_index do |obj, i|
@@ -90,9 +89,10 @@
                   = display_icon_for r['environment_type']
                   = r['environment_name']
                 %td{ style: 'width: 60%;'}
-                  Comments:
+                  = "Comments: #{r['comment']}"
                   %br
-                  = r['comment']
+                  = "Created By: #{r['created_by_name']}"
+
                 %td
                   Status:
                   %br

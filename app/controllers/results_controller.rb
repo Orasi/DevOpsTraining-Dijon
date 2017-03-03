@@ -42,8 +42,12 @@ class ResultsController < ApplicationController
     next_test = @mustard.executions.next_test(params[:id])
 
     redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
+    @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
+    @selected = @environments['environments'].dup.detect{|e| e['uuid'] == result_params[:environment_id]}
 
-    @execution_id = result_params[:execution_id]
+    cookies[:last_environment] = YAML::dump @selected
+
+    @execution_id = result_params[:execution_id].dup
 
     render partial: 'results/next_runner', locals: {execution_id: result_params[:execution_id], next_test: next_test['testcase']}
   end
