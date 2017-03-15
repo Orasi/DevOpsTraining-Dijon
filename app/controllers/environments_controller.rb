@@ -6,7 +6,7 @@ class EnvironmentsController < ApplicationController
     if environment['error']
       render json: {error: "User failed to create. Error[#{environment['error']}]"}, status: :not_found and return
     else
-      render partial: 'environments/environment_form', locals: {environment: EnvironmentPresenter.new(environment['environment']), project_id: environment['project_id']}
+      render partial: 'environments/environment_form', locals: {environment: EnvironmentPresenter.new(environment['environment']), project_id: environment['environment']['project_id']}
     end
   end
 
