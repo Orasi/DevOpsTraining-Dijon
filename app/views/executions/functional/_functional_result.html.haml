@@ -147,7 +147,7 @@
     .modal-content{style:'width:1000px'}
       .modal-body
         #manual_result_modal_content
-          = render partial: 'results/result_form', locals: {execution_id: result['execution_id'], testcase_id: result['validation_id'] && result['validation_id'] != '' ? result['validation_id'] : result['name']}
+          = render partial: 'results/result_form', locals: {execution_id: result['execution_id'], testcase_id: result['validation_id'] && result['validation_id'] != '' ? result['validation_id'] : result['testcase_name']}
 #test_runner_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
   .modal-dialog{role: 'document'}
     .modal-content{style:'width:1000px'}

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00fb2558-8b2a-422f-81d5-b21c721e9ed5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/environments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/environments_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml" afterPath="$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml" />
     </list>
     <ignored path="Mustard-Front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -97,20 +97,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_functional_result.html.haml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_functional_result.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="269">
+              <caret line="149" column="213" lean-forward="false" selection-start-line="149" selection-start-column="213" selection-end-line="149" selection-end-column="213" />
               <folding>
-                <marker date="1488490859366" expanded="true" signature="6618:6704" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="6655:6700" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="6748:6839" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="6879:6950" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="6992:7049" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="7098:7156" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="7205:7287" ph="{...}" />
-                <marker date="1488490859366" expanded="true" signature="7335:7390" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="6627:6713" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="6664:6709" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="6757:6848" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="6888:6959" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="7001:7058" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="7107:7165" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="7214:7296" ph="{...}" />
+                <marker date="1489604659244" expanded="true" signature="7344:7399" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -126,7 +126,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="environments_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="environments_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/environments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -233,8 +233,8 @@
         <option value="$PROJECT_DIR$/app/controllers/results_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/results/_result_form.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/environments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml" />
       </list>
     </option>
   </component>
@@ -373,50 +373,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testcases" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="results" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -466,28 +422,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="functional" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mustard-Front" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -853,12 +787,12 @@
       <workItem from="1488302250244" duration="27904000" />
       <workItem from="1488486056875" duration="5814000" />
       <workItem from="1489602646544" duration="11000" />
-      <workItem from="1489602666309" duration="747000" />
+      <workItem from="1489602666309" duration="1825000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61022000" />
+    <option name="totallyTimeSpent" value="62100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1200" extended-state="7" />
@@ -929,7 +863,7 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1236,14 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/results/_result_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1282,23 +1208,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding>
-            <marker date="1488490859366" expanded="true" signature="6618:6704" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="6655:6700" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="6748:6839" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="6879:6950" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="6992:7049" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="7098:7156" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="7205:7287" ph="{...}" />
-            <marker date="1488490859366" expanded="true" signature="7335:7390" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/environments/_environment_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1312,6 +1221,31 @@
         <state relative-caret-position="120">
           <caret line="8" column="183" lean-forward="false" selection-start-line="8" selection-start-column="183" selection-end-line="8" selection-end-column="183" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/results/_result_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/executions/functional/_functional_result.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="149" column="213" lean-forward="false" selection-start-line="149" selection-start-column="213" selection-end-line="149" selection-end-column="213" />
+          <folding>
+            <marker date="1489604659244" expanded="true" signature="6627:6713" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="6664:6709" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="6757:6848" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="6888:6959" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="7001:7058" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="7107:7165" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="7214:7296" ph="{...}" />
+            <marker date="1489604659244" expanded="true" signature="7344:7399" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
