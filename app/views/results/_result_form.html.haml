@@ -10,9 +10,9 @@
 
         = label_tag :Environment
         - if @selected
-          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['uuid'] ]},  @selected['uuid']), class: 'select2'
+          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected['uuid']), class: 'select2'
         -else
-          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['uuid'] ]}), class: 'select2'
+          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]}), class: 'select2'
     %label Status
     %br
     %span{style: 'margin:15px'}
