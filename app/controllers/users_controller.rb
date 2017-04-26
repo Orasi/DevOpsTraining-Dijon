@@ -47,6 +47,7 @@ class UsersController < ApplicationController
                                                last_name: update_user_params[:last_name],
                                                company: update_user_params[:company],
                                                username: update_user_params[:username],
+                                               email: update_user_params[:email],
                                                admin: update_user_params[:admin]
                                               })
     if user['error']
