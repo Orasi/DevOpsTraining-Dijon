@@ -1,5 +1,5 @@
 - keyword ||= false
-- unless @keywords.blank?
+- unless @keywords['keywords'].blank?
 
   %span.pull-right{style: 'width:300px;margin-top:-15px'}
     = select_tag 'keyword_select', options_for_select(['All'] + @keywords['keywords'].map{|e| e['keyword']}, keyword), class: 'form-control'

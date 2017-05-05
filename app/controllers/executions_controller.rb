@@ -96,7 +96,7 @@ class ExecutionsController < ApplicationController
   def next_test
 
     if params[:keyword] && params[:keyword] != 'All'
-      next_test = @mustard.executions.next_test(params[:id], keyword: 'TESTKEYWORD')
+      next_test = @mustard.executions.next_test(params[:id], keyword: params[:keyword])
     else
       next_test = @mustard.executions.next_test(params[:id])
     end
