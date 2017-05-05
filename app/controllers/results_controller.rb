@@ -38,18 +38,28 @@ class ResultsController < ApplicationController
     render json: {error: "Result Error [#{result['error']}]"} and return if result['error']
 
 
+    if params[:keyword] && params[:keyword] != 'All'
+      next_test = @mustard.executions.next_test(params[:id], keyword: 'TESTKEYWORD')
+    else
+      next_test = @mustard.executions.next_test(params[:id])
+    end
 
-    next_test = @mustard.executions.next_test(params[:id])
 
-    redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
+    render partial: 'results/next_runner_no_remaining', locals: {text: "Failed to get next test. #{test['error']}"}  and return if next_test['error']
+
+    @keywords = @mustard.projects.keywords(next_test['testcase']['project_id'])
+
+    render partial: 'results/next_runner_no_remaining', locals: {text: 'No Remaining Test', keyword: params[:keyword], execution_id: params[:id] } and return  unless next_test['testcase']['id']
+
     @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
+
     @selected = @environments['environments'].dup.detect{|e| e['uuid'] == result_params[:environment_id]}
 
     cookies[:last_environment] = YAML::dump @selected
 
     @execution_id = result_params[:execution_id].dup
 
-    render partial: 'results/next_runner', locals: {execution_id: result_params[:execution_id], next_test: next_test['testcase']}
+    render partial: 'results/next_runner', locals: {execution_id: result_params[:execution_id], next_test: next_test['testcase'], keyword: params[:keyword]}
   end
 
 

@@ -1,4 +1,6 @@
 %h5
+  = render partial: 'results/select_keyword', locals: {keyword: keyword, execution_id: @execution_id}
   = testcase['name']
+
 = render partial: 'testcases/steps', locals: {steps: testcase['reproduction_steps']}
-= render partial: 'results/result_form', locals: {runner: true, execution_id: @execution_id, testcase_id: testcase['validation_id'] && testcase['validation_id'] != '' ? testcase['validation_id'] : testcase['name']}
+= render partial: 'results/result_form', locals: {runner: true, execution_id: @execution_id, testcase_id: testcase['validation_id'] && testcase['validation_id'] != '' ? testcase['validation_id'] : testcase['name'], keyword: keyword}

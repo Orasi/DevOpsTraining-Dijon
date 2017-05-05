@@ -1,0 +1,39 @@
+= link_to ' Add Keyword', '', class: 'pull-right btn default-label fa fa-key small', data: {toggle: 'modal', target: '#new_keyword_modal'}
+%table.table.table-overview.table-hover
+  %thead
+    %tr
+      %th
+      %th
+        Keyword
+      %th
+        Testcase Count
+      %th
+        Actions
+  %tbody#keywords
+    - keywords.reverse.each_with_index do |e, i|
+      - keyword = KeywordPresenter.new(e)
+      %tr
+        %td.table-number
+          = "#{i + 1}."
+        %td
+          = keyword.keyword
+        %td
+          = keyword.testcase_count
+
+        %td
+          %span.fa.fa-pencil.link-like.keyword-link.small{data: {toggle: 'modal', target:'#keyword_modal', path: edit_keyword_path(keyword.id)}}
+
+#new_keyword_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Keyword
+      .modal-body
+        #new_keyword_modal_content
+          = render partial: 'keywords/keyword_form', locals: {keyword: {}, project_id: @project['project']['id']}
+:javascript
+  $('.keyword-link').click(function(){
+    $('#keyword_modal_content').load($(this).data('path'))
+  })

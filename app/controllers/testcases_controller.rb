@@ -12,8 +12,11 @@ class TestcasesController < ApplicationController
     testcase = @mustard.testcases.find(params[:id])
 
     if testcase['error']
+
       render json: {error: "User failed to create. Error[#{testcase['error']}]"}, status: :not_found and return
     else
+      @keywords = (@mustard.projects.keywords testcase['testcase']['project_id'])['keywords']
+      @selected = testcase['testcase']['keywords'].map{|tc| tc['id']} if testcase['testcase']['keywords']
       render partial: 'testcases/testcase_form', locals: {testcase: TestcasePresenter.new(testcase['testcase']), project_id: testcase['testcase']['project_id']}
     end
   end
@@ -28,12 +31,21 @@ class TestcasesController < ApplicationController
         reproduction_steps.append({step_number: k, action: params[:reproduction_steps][k][:action], result: params[:reproduction_steps][k][:result]})
       end
     end
+    if params[:keywords] && !params[:keywords].blank?
+      testcase = @mustard.testcases.add({name: testcase_params[:name],
+                                         project_id: testcase_params[:project_id],
+                                         validation_id: testcase_params[:validation_id],
+                                         reproduction_steps: reproduction_steps
+                                        }, keyword_ids: params[:keywords])
 
-    testcase = @mustard.testcases.add({name: testcase_params[:name],
-                                       project_id: testcase_params[:project_id],
-                                       validation_id: testcase_params[:validation_id],
-                                       reproduction_steps: reproduction_steps
-                                      })
+    else
+      testcase = @mustard.testcases.add({name: testcase_params[:name],
+                                         project_id: testcase_params[:project_id],
+                                         validation_id: testcase_params[:validation_id],
+                                         reproduction_steps: reproduction_steps
+                                        })
+
+    end
 
     if testcase['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to create testcase. Error[#{testcase['error']}]"}
@@ -52,12 +64,20 @@ class TestcasesController < ApplicationController
       end
     end
 
+    if params[:keywords] && !params[:keywords].blank?
+      testcase = @mustard.testcases.update(params[:id], {name: testcase_params[:name],
+                                                         project_id: testcase_params[:project_id],
+                                                         validation_id: testcase_params[:validation_id],
+                                                         reproduction_steps: reproduction_steps
+      }, keyword_ids: params[:keywords])
+    else
+      testcase = @mustard.testcases.update(params[:id], {name: testcase_params[:name],
+                                                         project_id: testcase_params[:project_id],
+                                                         validation_id: testcase_params[:validation_id],
+                                                         reproduction_steps: reproduction_steps
+      })
+    end
 
-    testcase = @mustard.testcases.update(params[:id], {name: testcase_params[:name],
-                                                       project_id: testcase_params[:project_id],
-                                                       validation_id: testcase_params[:validation_id],
-                                                       reproduction_steps: reproduction_steps
-    })
 
     if testcase['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to update team. Error[#{testcase['error']}]"}

@@ -4,9 +4,7 @@
 - automated_results = result['automated_results']
 
 .col-md-9
-  .pull-right
-    %button{type: 'button',id: 'test_runner_btn', data: {toggle: 'modal', target: '#test_runner_modal'}, class: 'btn btn-default'}
-      Manual Test Runner
+
   .row
     .col-md-12
       - unless result.blank?
@@ -148,12 +146,7 @@
       .modal-body
         #manual_result_modal_content
           = render partial: 'results/result_form', locals: {execution_id: result['execution_id'], testcase_id: result['validation_id'] && result['validation_id'] != '' ? result['validation_id'] : result['testcase_name']}
-#test_runner_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
-  .modal-dialog{role: 'document'}
-    .modal-content{style:'width:1000px'}
-      .modal-body
-        #test_runner_modal_content
-          .loader
+
 :javascript
   $('.modal').on('hidden.bs.modal', function (e) {
     if($('.modal').hasClass('in')) {
@@ -161,9 +154,7 @@
     }
   });
 
-  $('#test_runner_btn').click(function(){
-    $('#test_runner_modal_content').load("#{next_test_path(result['execution_id'])}")
-  });
+
 
   $('#steps_view').click(function(e){
     e.preventDefault()

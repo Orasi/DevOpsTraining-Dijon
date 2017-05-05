@@ -1,7 +1,9 @@
 .container-fluid
   .row
-    .btn.btn-default.btn-xs.pull-right
-      = link_to :Manage, project_path(execution.project_id), class: 'link-icon'
+    = link_to :Manage, project_path(execution.project_id), class: 'link-icon btn btn-default btn-xs pull-right'
+    .btn.btn-default.btn-xs.pull-right{type: 'button',id: 'test_runner_btn', data: {toggle: 'modal', target: '#test_runner_modal'}, class: 'link-icon'}
+      Manual Test Runner
+
     .col-md-4
       %h4{ style: 'font-weight: 300;'}
         = execution.created_at
@@ -12,3 +14,13 @@
           = 'Closed' if execution.closed
     .col-md-8
       #results_overview_top_panel
+#test_runner_modal.modal.fade{tabindex: '-1', role: 'dialog', style: 'margin:0 0 0 -300px'}
+  .modal-dialog{role: 'document'}
+    .modal-content{style:'width:1000px'}
+      .modal-body
+        #test_runner_modal_content
+          .loader
+:javascript
+  $('#test_runner_btn').click(function(){
+    $('#test_runner_modal_content').load("#{next_test_path(execution.id)}")
+  });

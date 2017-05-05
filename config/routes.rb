@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   #Environments Paths
   resources :environments
 
+  #Keywords Paths
+  resources :keywords
 
   #Execution Paths
   resources :executions

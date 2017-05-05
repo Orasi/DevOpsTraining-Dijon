@@ -1,0 +1,28 @@
+- @selected ||= []
+= form_tag(keyword['id'] ? keyword_path(keyword['id']) : keywords_path,
+           method: keyword['id'] ? :put : :post,
+           role: :form) do
+  .form-group
+    = fields_for :keyword do |f|
+      = hidden_field_tag 'keyword[project_id]', project_id
+      %label Keyword
+      = text_field_tag 'keyword[keyword]', keyword['keyword'], class: 'form-control', required: true
+  - if @project['project'] && @project['project']['testcases']
+    .form-group
+      = fields_for :testcases do |f|
+        %label Testcases
+        = select_tag 'testcases[]',  options_for_select(@project['project']['testcases'].map{|u| ["#{u['testcase_id']}: #{u['testcase_name']}", u['id']]}, @selected),
+                                                       {class: 'functional select2',
+                                                        style: 'width:100%',
+                                                        include_blank: false,
+                                                        multiple: true,
+                                                        data: {placeholder: 'Select Testcases'}}
+
+
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+    .pull-right= link_to 'Delete Keyword', keyword_path(keyword['id']), method: :delete, class: 'btn btn-danger' if keyword['id']
+
+-#:javascript
+-#  $('.functional.select2').select2()

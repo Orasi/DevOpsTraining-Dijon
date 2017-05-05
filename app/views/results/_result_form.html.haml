@@ -1,13 +1,15 @@
+- keyword ||= false
 - runner ||= false
+
 = form_tag( runner ? runner_result_path : results_path, method: :post, role: :form, remote: runner) do
   .form-group
     = hidden_field_tag 'result[testcase_id]', testcase_id
     = hidden_field_tag 'result[execution_id]', execution_id
     = hidden_field_tag 'result[result_type]', 'manual'
+    = hidden_field_tag 'keyword', keyword
 
     - unless @environments.blank?
       .form-group
-
         = label_tag :Environment
         - if @selected
           = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected['uuid']), class: 'select2'

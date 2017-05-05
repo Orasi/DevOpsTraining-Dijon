@@ -43,6 +43,8 @@
             %li{role: 'presentation'}
               = link_to 'Testcases', '#testcase_tab', role: 'tab', data: {toggle: 'tab'}
             %li{role: 'presentation'}
+              = link_to 'Keywords', '#keyword_tab', role: 'tab', data: {toggle: 'tab'}
+            %li{role: 'presentation'}
               = link_to 'Reports', '#reports_tab', role: 'tab', data: {toggle: 'tab'}
 
           .tab-content
@@ -52,6 +54,8 @@
               = render partial: 'environments', locals: {environments: project.environments}
             #testcase_tab.tab-pane{role: 'tabpanel'}
               = render partial: 'testcases', locals: {testcases: project.testcases}
+            #keyword_tab.tab-pane{role: 'tabpanel'}
+              = render partial: 'keywords', locals: {keywords: project.keywords}
             #reports_tab.tab-pane{role: 'tabpanel'}
               = render partial: 'reports', locals: {project: @project['project']}
 
@@ -88,7 +92,16 @@
       .modal-body
         #testcase_modal_content
           .loader
-
+#keyword_modal.modal.fade
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Edit Keyword
+      .modal-body
+        #keyword_modal_content
+          .loader
 :javascript
   $('#project_info_tabs').tab()
 

@@ -95,7 +95,12 @@ class ExecutionsController < ApplicationController
 
   def next_test
 
-    next_test = @mustard.executions.next_test(params[:id])
+    if params[:keyword] && params[:keyword] != 'All'
+      next_test = @mustard.executions.next_test(params[:id], keyword: 'TESTKEYWORD')
+    else
+      next_test = @mustard.executions.next_test(params[:id])
+    end
+
 
     redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
 
@@ -106,9 +111,19 @@ class ExecutionsController < ApplicationController
 
     if next_test['testcase']['id']
       @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
-      render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase']}
+      @keywords = @mustard.projects.keywords(next_test['testcase']['project_id'])
+      render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase'], keyword: params[:keyword]}
     else
-      render partial: 'results/no_testcases' and return unless next_test['testcase']['id']
+      execution = @mustard.executions.find(params[:id])
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      puts execution.to_json
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      puts '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6'
+      @keywords = @mustard.projects.keywords(execution['execution']['project_id'])
+      render partial: 'results/no_testcases', locals: { keyword: params[:keyword], execution_id: @execution_id } and return unless next_test['testcase']['id']
     end
 
   end

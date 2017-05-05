@@ -12,6 +12,8 @@
       %th
         Version #
       %th
+        Keywords
+      %th
         Last Updated
       %th
         Actions
@@ -26,8 +28,15 @@
         %td
           = testcase.version
         %td
+          - if testcase['keywords']
+            - testcase['keywords'].first(3).each do |key|
+              .label.label-info= key
+            - if testcase['keywords'].count > 3
+              %span.small{title: testcase['keywords'].drop(3).join(','), 'data-toggle' => 'tooltip'}= "+#{testcase['keywords'].count - 2 }"
+        %td
           .small.overview-time
             = time_ago_in_words(testcase.updated_at) + ' ago' if testcase['updated_at']
+
         %td
           %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase.id)}}
 #new_testcase_modal.modal.fade

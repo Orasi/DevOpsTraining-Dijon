@@ -1,15 +1,25 @@
+- @selected ||= []
+- @keywords ||= @project['project']['keywords']
 
-
-= form_tag(testcase['name'] ? testcase_path(testcase['id']) : testcases_path,
-           class: 'testcase-form', method: testcase['name'] ? :put : :post,
+= form_tag(testcase['testcase_name'] ? testcase_path(testcase['id']) : testcases_path,
+           class: 'testcase-form', method: testcase['testcase_name'] ? :put : :post,
            role: :form) do
   .form-group
     = hidden_field_tag 'testcase[project_id]', project_id
     %label Name
-    = text_field_tag 'testcase[name]', testcase['name'], class: 'form-control', required: true
+    = text_field_tag 'testcase[name]', testcase['testcase_name'], class: 'form-control', required: true
   .form-group
     %label Validation ID
-    = text_field_tag 'testcase[validation_id]', testcase['validation_id'], class: 'form-control', required: true
+    = text_field_tag 'testcase[validation_id]', testcase['testcase_id'], class: 'form-control', required: true
+  .form-group
+    = fields_for :keywords do |f|
+      %label Keywords
+      = select_tag 'keywords[]',  options_for_select(@keywords.map{|u| ["#{u['keyword']}", u['id']]}, @selected),
+                                                     {class: 'functional select2',
+                                                      style: 'width:100%',
+                                                      include_blank: false,
+                                                      multiple: true,
+                                                      data: {placeholder: 'Select Keywords'}}
 
 
   %label Reproduction Steps
@@ -30,6 +40,8 @@
 
 :javascript
   $('[data-toggle="tooltip"]').tooltip()
+
+  $('.functional.select2').select2()
 
   renumber_steps = function(){
 

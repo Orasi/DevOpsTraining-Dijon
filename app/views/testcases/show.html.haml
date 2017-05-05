@@ -3,13 +3,16 @@
 
   .small= link_to "Back to Project", project_path(testcase['project_id']), class: 'pull-right', style: 'margin:15px'
   %h4
-    = testcase['name']
+    = testcase['testcase_name']
 
     %span.testcase-link.fa.fa-pencil.link-like.small{data: {toggle: 'modal', target: '#testcase_modal', path: edit_testcase_path(testcase['id'])}}
 
 .container-fluid
-
-
+  .keywords
+    - if testcase['keywords']
+      - testcase['keywords'].each do |key|
+        .label.label-info= key['keyword']
+  %br
   Reproduction Steps
   .pull-right
     - if testcase['username']
@@ -61,17 +64,27 @@
           %th
             Version #
           %th
+            Keywords
+          %th
             Last Action
       %tbody
         - @all_versions.each do |test|
           - last_action_by = test['username'] ? test['username'] : 'Unknown'
           %tr
             %td
-              = link_to test['name'], testcase_path(id: test['id'])
+              = link_to test['testcase_name'], testcase_path(id: test['id'])
             %td
               = test['version']
             %td
+              - if test['keywords']
+                - test['keywords'].first(3).each do |key|
+                  .label.label-info= key['keyword']
+                - if test['keywords'].count > 3
+                  %span.small{title: test['keywords'].map{|k|k['keyword']}.drop(3).join(','), 'data-toggle' => 'tooltip'}= "+#{test['keywords'].count - 2 }"
+            %td
               = "#{test['version'] == 1 ? 'Created By' : 'Updated By'} #{last_action_by}"
+              .small.overview-time
+                = time_ago_in_words(test['updated_at']) + ' ago' if test['updated_at']
 
 :javascript
   $('.testcase-link').click(function(){
