@@ -44,8 +44,7 @@ class ResultsController < ApplicationController
       next_test = @mustard.executions.next_test(params[:id])
     end
 
-
-    render partial: 'results/next_runner_no_remaining', locals: {text: "Failed to get next test. #{test['error']}"}  and return if next_test['error']
+    render partial: 'results/next_runner_no_remaining', locals: {text: "Failed to get next test. #{next_test['error']}", execution_id: params[:id]}  and return if next_test['error']
 
     @keywords = @mustard.projects.keywords(next_test['testcase']['project_id'])
 
