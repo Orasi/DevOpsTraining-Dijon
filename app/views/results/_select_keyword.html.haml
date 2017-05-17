@@ -1,17 +1,29 @@
-- keyword ||= "All"
+- keyword ||= []
+
 - @keywords ||= {}
 - unless @keywords['keywords'].blank?
-
   %span.pull-right{style: 'width:300px;margin-top:-15px'}
-    = select_tag 'keyword_select', options_for_select(['All'] + @keywords['keywords'].map{|e| e['keyword']}, keyword), class: 'form-control'
+    = select_tag 'keyword_select', options_for_select(@keywords['keywords'].map{|e| [e['keyword'], e['keyword']]}, keyword),  multiple: true
   %label.pull-right{style: 'margin-top:-5px;margin-right: 10px'} Keyword
   :javascript
-    // $('#keyword_select').select2({ width: '75%',   minimumResultsForSearch: Infinity})
 
     $('#keyword_select').on('change', function(e){
-      path = "#{next_test_path(execution_id, keyword: 'KEYWORD')}"
-      new_path = path.replace('KEYWORD', $(this).val())
-      $('#test_runner_modal_content').html('<div class="loader"></div>')
-      $('#test_runner_modal_content').load(new_path)
+      if($(this).val()){
+        path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD')}"
+        new_path = path.replace('KEYWORD', $(this).val())
+        $('#keyword_select').select2('destroy')
+
+        $('#test_runner_modal_content').html('<div class="loader"></div>')
+        $('#test_runner_modal_content').load(new_path)
+      }else{
+        path = "#{next_test_path(execution_id)}"
+        $('#keyword_select').select2('destroy')
+        $('#test_runner_modal_content').html('<div class="loader"></div>')
+        $('#test_runner_modal_content').load(path)
+      }
+
     })
+
+    $('#keyword_select').select2({ width: '75%'})
+
 
