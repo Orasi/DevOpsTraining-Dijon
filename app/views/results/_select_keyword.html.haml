@@ -7,21 +7,23 @@
   %label.pull-right{style: 'margin-top:-5px;margin-right: 10px'} Keyword
   :javascript
 
-    $('#keyword_select').on('change', function(e){
+    $('#keyword_select').on("select2:select select2:unselect", function(e){
       if($(this).val()){
         path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD')}"
-        new_path = path.replace('KEYWORD', $(this).val())
-        $('#keyword_select').select2('destroy')
-
+        new_path = path.replace('KEYWORD', encodeURIComponent($(this).val()))
+        $('#keyword_select').select2('destroy').unbind();
         $('#test_runner_modal_content').html('<div class="loader"></div>')
         $('#test_runner_modal_content').load(new_path)
+
       }else{
         path = "#{next_test_path(execution_id)}"
-        $('#keyword_select').select2('destroy')
+        $('#keyword_select').select2('destroy').unbind();
         $('#test_runner_modal_content').html('<div class="loader"></div>')
         $('#test_runner_modal_content').load(path)
-      }
 
+      }
+      // $('#keyword_select').select2('destroy')
+      // e.preventDefault()
     })
 
     $('#keyword_select').select2({ width: '75%'})
