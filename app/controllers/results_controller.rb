@@ -39,7 +39,7 @@ class ResultsController < ApplicationController
 
 
     if params[:keyword] && params[:keyword] != 'All'
-      next_test = @mustard.executions.next_test(params[:id], keyword: params[:keyword])
+      next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword])
     else
       next_test = @mustard.executions.next_test(params[:id])
     end
