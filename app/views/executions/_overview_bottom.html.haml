@@ -6,13 +6,19 @@
           %li.active{role: "presentation"}
             %a#env_overview_tab.active{href: "#environment_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
               Environments
+
           %li{role: "presentation", style: 'margin-left:0'}
             %a#tc_overview_tab{href: "#testcase_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
               Testcases
+
+          %li{role: "presentation"}
+            %a#keyword_overview_tab{href: "#keyword_overview", 'aria-controls' => "home", role: "tab", 'data-toggle' => "tab"}
+              Keywords
   .tab-content
+    .tab-pane.fade.in#keyword_overview{role: "tabpanel"}
     .tab-pane.fade.in.active#environment_overview{role: "tabpanel"}
       .loader
-    .tab-pane.fade.in.active#testcase_overview{role: "tabpanel"}
+    .tab-pane.fade.in#testcase_overview{role: "tabpanel"}
 
 :javascript
   $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
@@ -23,4 +29,8 @@
 
   $('#env_overview_tab').on('show.bs.tab', function (e) {
     $('#environment_overview').load("#{execution_environment_overview_path(id: execution['id'])}")
+  })
+
+  $('#keyword_overview_tab').on('show.bs.tab', function (e) {
+    $('#keyword_overview').load("#{execution_keyword_overview_path(id: execution['id'])}")
   })

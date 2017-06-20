@@ -35,6 +35,16 @@ class ExecutionsController < ApplicationController
     puts @summary
 
     render partial: 'executions/testcase_overview', locals: {execution: @summary['summary']}
+    
+  end
+  
+  def keyword_overview
+
+    # @count = @mustard.executions.environment_count( params[:id])
+    @summary = @mustard.executions.keyword_summary( params[:id])
+    puts @summary
+
+    render partial: 'executions/keyword_overview', locals: {keywords: @summary['summary']}
 
   end
 

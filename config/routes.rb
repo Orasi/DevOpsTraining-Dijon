@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get 'executions/:id/project_execution_summary/:title/update', to: 'executions#project_summary_update', as: :execution_project_summary_update
   get 'executions/:id/environment_overview', to: 'executions#environment_overview', as: :execution_environment_overview
   get 'executions/:id/testcase_overview', to: 'executions#testcase_overview', as: :execution_testcase_overview
+  get 'executions/:id/keyword_overview', to: 'executions#keyword_overview', as: :execution_keyword_overview
   get 'executions/:id/next_test', to: 'executions#next_test', as: :next_test
   post 'executions/:id/runner_result', to: 'results#runner_result', as: :runner_result
 
