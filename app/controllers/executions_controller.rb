@@ -3,12 +3,37 @@ class ExecutionsController < ApplicationController
 
   def edit
     execution = @mustard.executions.find(params[:id])
-
+    project = @mustard.projects.find(execution['execution']['project_id'])
+    @keywords = project['project']['keywords']
+    @environments = project['project']['environments']
     if execution['error']
       render json: {error: "Failed to find execution. Error[#{execution['error']}]"}, status: :not_found and return
     else
       render partial: 'executions/edit_execution', locals: {execution: execution, execution_id: execution['execution']['id']}
     end
+  end
+
+  def update
+    update_params = {}
+    update_params[:name] = params[:execution][:name] if params[:execution][:name]
+    update_params[:fast] = params[:execution][:fast] if params[:execution][:fast]
+
+    update_params[:limit_environments] = params[:execution][:edit_environments] == 'true'
+    if params[:execution][:edit_keywords]
+      update_params[:active_environments] = params[:edit_active_environments]
+    else
+      update_params[:active_environments] = nil
+    end
+
+    update_params[:limit_keywords] = params[:execution][:edit_keywords] == 'true'
+    if params[:execution][:edit_keywords]
+      update_params[:active_keywords] = params[:edit_active_keywords]
+    else
+      update_params[:active_keywords] = nil
+    end
+    execution = @mustard.executions.update(params[:id], update_params)
+    puts update_params
+    redirect_to project_path(execution['execution']['project_id'])
   end
 
 
@@ -64,7 +89,7 @@ class ExecutionsController < ApplicationController
   def close
     new_execution_params = {name: params[:execution][:name], active_keywords: params[:active_keywords], active_environments: params[:active_environments], fast: params[:execution][:fast]}
     execution = @mustard.executions.close(execution_id: params[:id], new_execution_params: new_execution_params)
-    ap params
+
     if execution['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to close execution. Error[#{execution['error']}]"}
     else

@@ -41,7 +41,7 @@
             %span.fa.fa-pencil.link-like.edit-execution-link.small{data: {toggle: 'modal', target:'#edit_execution', path: edit_execution_path(execution.id)}}
           - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
             = link_to execution_path(id: execution.id), method: :delete do
-              .fa.fa-trash-o
+              .fa.fa-trash-o.link-icon
 
 #edit_execution.modal.fade
   .modal-dialog
