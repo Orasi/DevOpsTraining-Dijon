@@ -2,6 +2,7 @@
 - runner ||= false
 
 = form_tag( runner ? runner_result_path : results_path, method: :post, role: :form, remote: runner) do
+
   .form-group
     = hidden_field_tag 'result[testcase_id]', testcase_id
     = hidden_field_tag 'result[execution_id]', execution_id
@@ -12,9 +13,10 @@
       .form-group
         = label_tag :Environment
         - if @selected
-          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected['uuid']), class: 'env-select2'
+          = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected), class: 'env-select2'
         -else
           = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]}), class: 'env-select2'
+
     %label Status
     %br
     %span{style: 'margin:15px'}
@@ -36,3 +38,28 @@
 
 :javascript
   $('.env-select2').select2({ width: '100%'})
+
+- unless @execution['execution']['fast']
+  :javascript
+
+    $('#result_environment_id').on("select2:select select2:unselect", function(e){
+      if($('#keyword_select').val()){
+        var env_id = $(this).val()
+        path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD', environment: 'ENVIRONMENT')}"
+        new_path = path.replace('KEYWORD', encodeURIComponent($(this).val()))
+        new_path = new_path.replace('ENVIRONMENT', encodeURIComponent(env_id))
+        $('#keyword_select').select2('destroy').unbind();
+        $('#test_runner_modal_content').html('<div class="loader"></div>')
+        $('#test_runner_modal_content').load(new_path)
+      }else{
+        var env_id = $(this).val()
+        path = "#{next_test_path(execution_id, environment: 'ENVIRONMENT')}"
+        new_path = path.replace('ENVIRONMENT', encodeURIComponent(env_id))
+        $('#keyword_select').select2('destroy').unbind();
+        $('#test_runner_modal_content').html('<div class="loader"></div>')
+        $('#test_runner_modal_content').load(new_path)
+      }
+    })
+
+
+

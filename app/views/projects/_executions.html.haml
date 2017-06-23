@@ -8,6 +8,8 @@
       %th
         Closed?
       %th
+        Fast
+      %th
         Actions
 
   %tbody#executions
@@ -26,6 +28,9 @@
             .small.overview-time{data: {toggle: 'tooltip', title: execution.updated_at.strftime('Closed %I:%M %p on %m/%d/%Y'), placement: 'left' }}
               Closed
               %span.timeago{title: DateTime.parse(execution['updated_at']).iso8601}
+        %td
+          - if execution['fast']
+            .fa.fa-check
 
         %td
           - if !execution.closed

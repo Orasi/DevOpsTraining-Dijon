@@ -7,20 +7,39 @@
   %label.pull-right{style: 'margin-top:-5px;margin-right: 10px'} Keyword
   :javascript
 
+    fast_execution = "#{ @execution['execution']['fast'] }"
+
     $('#keyword_select').on("select2:select select2:unselect", function(e){
       if($(this).val()){
-        path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD')}"
-        new_path = path.replace('KEYWORD', encodeURIComponent($(this).val()))
-        $('#keyword_select').select2('destroy').unbind();
-        $('#test_runner_modal_content').html('<div class="loader"></div>')
-        $('#test_runner_modal_content').load(new_path)
-
+        if(fast_execution){
+          path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD')}"
+          new_path = path.replace('KEYWORD', encodeURIComponent($(this).val()))
+          $('#keyword_select').select2('destroy').unbind();
+          $('#test_runner_modal_content').html('<div class="loader"></div>')
+          $('#test_runner_modal_content').load(new_path)
+        }else{
+          var env_id = $('#result_environment_id').val()
+          path = "#{next_test_path(execution_id, 'keyword[]' => 'KEYWORD', environment: 'ENVIRONMENT')}"
+          new_path = path.replace('KEYWORD', encodeURIComponent($(this).val()))
+          new_path = new_path.replace('ENVIRONMENT', encodeURIComponent(env_id))
+          $('#keyword_select').select2('destroy').unbind();
+          $('#test_runner_modal_content').html('<div class="loader"></div>')
+          $('#test_runner_modal_content').load(new_path)
+        }
       }else{
-        path = "#{next_test_path(execution_id)}"
-        $('#keyword_select').select2('destroy').unbind();
-        $('#test_runner_modal_content').html('<div class="loader"></div>')
-        $('#test_runner_modal_content').load(path)
-
+        if(fast_execution){
+          path = "#{next_test_path(execution_id)}"
+          $('#keyword_select').select2('destroy').unbind();
+          $('#test_runner_modal_content').html('<div class="loader"></div>')
+          $('#test_runner_modal_content').load(path)
+        }else{
+          var env_id = $('#result_environment_id').val()
+          path = "#{next_test_path(execution_id, environment: 'ENVIRONMENT')}"
+          new_path = path.replace('ENVIRONMENT', encodeURIComponent(env_id))
+          $('#keyword_select').select2('destroy').unbind();
+          $('#test_runner_modal_content').html('<div class="loader"></div>')
+          $('#test_runner_modal_content').load(new_path)
+        }
       }
       // $('#keyword_select').select2('destroy')
       // e.preventDefault()

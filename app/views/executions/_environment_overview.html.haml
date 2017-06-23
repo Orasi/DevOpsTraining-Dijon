@@ -4,49 +4,28 @@
     %table.table.table-condensed.table-overview.numbered_table
       %tbody
 
-        - execution.each_with_index do |env, i|
+        - environments.each_with_index do |environment, i|
+          - env = summary.find{|e| e['id'] == environment['id']}
+          - pass_count = env ? env['pass_count'] : 0
+          - fail_count = env ? env['fail_count'] : 0
+          - skip_count = env ? env['skip_count'] : 0
+
           %tr
-            - results_bar = stacked_progress_bar :Results, total_tests, env['pass_count'], env['fail_count'], env['skip_count']
+            - results_bar = stacked_progress_bar :Results, total_tests, pass_count, fail_count, skip_count
             %td
               .row-index
             %td
-              = display_icon_for env['environment_type']
-              = env['display_name'] && env['display_name'] != '' ? env['display_name'] : env['uuid']
-              -#.created_at.hidden-sm.hidden-xs
-              -#  %span.small
-              -#    Created:
-              -#    = "<CREATED ON>"
-              -#.upated_at.hidden-lg.hidden-md
-              -#  %span.small.overview-time
-              -#    -if true                                                        #FIX
-              -#      .timeago{title: DateTime.now.iso8601}                         //FIX
-              -#
-              -#.functionalxs.visible-xs
-              -#  %br
-              -#  .stacked_progress
-              -#    = results_bar
+              = display_icon_for environment['environment_type']
+              = environment['display_name'] && environment['display_name'] != '' ? environment['display_name'] : environment['uuid']
 
-            -#  .screenshotxs.visible-xs
-            -#    %br
-            -#    .stacked_progress
-            -#      = screenshot_bar
-            -#
-            -#  .pefromancexs.visible-xs
-            -#    %br
-            -#    .stacked_progress
-            -#      = performance_bar
             %td
               .stacked_progress
                 = results_bar
-            -#%td.visible-sm.visible-md.visible-lg
-            -#  .stacked_progress
-            -#    = screenshot_bar
-            -#%td.visible-sm.visible-md.visible-lg
-            -#  = performance_bar
+
             %td
               .pull-right.small.overview-time
-                -if true                                            #FIX ME
-                  .timeago{title: DateTime.parse(env['updated_at']).iso8601}
+                -if env                                            #FIX ME
+                  .timeago{title: DateTime.parse(environment['updated_at']).iso8601}
             %td
               .pull-right
                 -#= link_to '',execution_device_info_path(execution_id: device.execution.id, device_id: device.id), class: 'glyphicon glyphicon-info-sign link-icon', data: {toggle: 'modal', target: '#infoModal'}, remote: true

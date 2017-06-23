@@ -4,6 +4,7 @@ class ResultsController < ApplicationController
     @result = @mustard.results.find params[:id]
 
     render json: @result
+
   end
 
 
@@ -35,26 +36,38 @@ class ResultsController < ApplicationController
                                    comment: result_params[:comment]
                                   })
 
+
     render json: {error: "Result Error [#{result['error']}]"} and return if result['error']
 
+    @execution = @mustard.executions.find(params[:id])
 
     if params[:keyword] && params[:keyword] != 'All'
-      next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword])
+      if @execution['execution']['fast']
+        next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword])
+      else
+        next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword], environment: result_params[:environment_id])
+      end
     else
-      next_test = @mustard.executions.next_test(params[:id])
+      if @execution['execution']['fast']
+        next_test = @mustard.executions.next_test(params[:id])
+      else
+        next_test = @mustard.executions.next_test(params[:id], environment: result_params[:environment_id])
+      end
+
     end
 
     render partial: 'results/next_runner_no_remaining', locals: {text: "Failed to get next test. #{next_test['error']}", execution_id: params[:id]}  and return if next_test['error']
 
-    @keywords = @mustard.projects.keywords(next_test['testcase']['project_id'])
+
+    @keywords = @execution['execution']
 
     render partial: 'results/next_runner_no_remaining', locals: {text: 'No Remaining Test', keyword: params[:keyword], execution_id: params[:id] } and return  unless next_test['testcase']['id']
 
-    @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
+    @environments = @execution['execution']
 
-    @selected = @environments['environments'].dup.detect{|e| e['uuid'] == result_params[:environment_id]}
+    @selected = @environments['environments'].dup.detect{|e| e['uuid'] == result_params[:environment_id]}['uuid']
 
-    cookies[:last_environment] = YAML::dump @selected
+    cookies[:last_environment] = YAML::dump @selected['uuid']
 
     @execution_id = result_params[:execution_id].dup
 

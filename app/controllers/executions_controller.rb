@@ -5,6 +5,7 @@ class ExecutionsController < ApplicationController
   def show
 
     @status = @mustard.executions.testcase_status( params[:id] )
+    @execution = @mustard.executions.find(params[:id])
 
   end
 
@@ -12,7 +13,7 @@ class ExecutionsController < ApplicationController
   def testcase_detail
 
     @detail = @mustard.executions.testcase_detail(params[:id], params[:testcase_id])
-    @environments = @mustard.projects.environments(@detail['testcase']['project_id'])
+    @environments = @mustard.executions.find(params[:id])['execution']
     render partial: 'executions/functional/functional_result', layout: false
 
   end
@@ -21,9 +22,10 @@ class ExecutionsController < ApplicationController
   def environment_overview
 
     @count = @mustard.executions.testcase_count( params[:id])
+    @execution = @mustard.executions.find( params[:id] )
     @summary = @mustard.executions.environment_summary( params[:id])
 
-    render partial: 'executions/environment_overview', locals: {execution: @summary['summary']}
+    render partial: 'executions/environment_overview', locals: {summary: @summary['summary'], environments: @execution['execution']['environments']}
 
   end
 
@@ -31,28 +33,27 @@ class ExecutionsController < ApplicationController
   def testcase_overview
 
     @count = @mustard.executions.environment_count( params[:id])
+    @execution = @mustard.executions.find( params[:id] )
     @summary = @mustard.executions.testcase_summary( params[:id])
-    puts @summary
 
-    render partial: 'executions/testcase_overview', locals: {execution: @summary['summary']}
+    render partial: 'executions/testcase_overview', locals: {summary: @summary['summary'], testcases: @execution['execution']['testcases']}
     
   end
   
   def keyword_overview
 
-    # @count = @mustard.executions.environment_count( params[:id])
+    @execution = @mustard.executions.find(params[:id])['execution']
     @summary = @mustard.executions.keyword_summary( params[:id])
-    puts @summary
 
-    render partial: 'executions/keyword_overview', locals: {keywords: @summary['summary']}
+    render partial: 'executions/keyword_overview', locals: {execution: @execution, summary: @summary['summary']}
 
   end
 
 
   def close
-
-    execution = @mustard.executions.close(execution_id: params[:id], name: params[:execution][:name])
-
+    new_execution_params = {name: params[:execution][:name], active_keywords: params[:active_keywords], active_environments: params[:active_environments], fast: params[:execution][:fast]}
+    execution = @mustard.executions.close(execution_id: params[:id], new_execution_params: new_execution_params)
+    ap params
     if execution['error']
       redirect_back fallback_location: root_path, flash: { alert: "Failed to close execution. Error[#{execution['error']}]"}
     else
@@ -104,9 +105,15 @@ class ExecutionsController < ApplicationController
 
 
   def next_test
+
     params[:keyword] = params[:keyword].map{|m| m.split(',')}.flatten if params[:keyword]
-    if params[:keyword] && !params[:keyword].blank?
+
+    if params[:keyword] && !params[:keyword].blank? && params[:environment] && !params[:environment].blank?
+      next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword], environment: params[:environment])
+    elsif params[:keyword] && !params[:keyword].blank?
       next_test = @mustard.executions.next_test(params[:id], keywords: params[:keyword])
+    elsif params[:environment] && !params[:environment].blank?
+      next_test = @mustard.executions.next_test(params[:id], environment: params[:environment])
     else
       next_test = @mustard.executions.next_test(params[:id])
     end
@@ -114,17 +121,21 @@ class ExecutionsController < ApplicationController
     redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
 
     @execution_id = params[:id]
+
+    cookies[:last_environment] = params[:environment] if params[:environment]
+
     if cookies[:last_environment]
       @selected = YAML::load cookies[:last_environment]
     end
 
+    @execution = @mustard.executions.find(params[:id])
+
     if next_test['testcase']['id']
-      @environments = @mustard.projects.environments(next_test['testcase']['project_id'])
-      @keywords = @mustard.projects.keywords(next_test['testcase']['project_id'])
+      @environments = @execution['execution']
+      @keywords = @execution['execution']
       render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase'], keyword: params[:keyword]}
     else
-      execution = @mustard.executions.find(params[:id])
-      @keywords = @mustard.projects.keywords(execution['execution']['project_id'])
+      @keywords = @execution['execution']
       render partial: 'results/no_testcases', locals: { keyword: params[:keyword], execution_id: @execution_id } and return unless next_test['testcase']['id']
     end
 

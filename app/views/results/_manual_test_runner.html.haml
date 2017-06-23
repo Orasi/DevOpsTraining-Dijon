@@ -1,6 +1,8 @@
 %h5
   = render partial: 'results/select_keyword', locals: {keyword: keyword, execution_id: @execution_id}
   = testcase['name']
+  - if @execution['execution']['fast']
+    .fa.fa-bolt.fast-execution-icon{data: {toggle: 'tooltip'}, title: 'Fast Execution'}
 
 = render partial: 'testcases/steps', locals: {steps: testcase['reproduction_steps']}
 = render partial: 'results/result_form', locals: {runner: true, execution_id: @execution_id, testcase_id: testcase['validation_id'] && testcase['validation_id'] != '' ? testcase['validation_id'] : testcase['name'], keyword: keyword}

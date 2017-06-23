@@ -20,7 +20,15 @@
       .modal-body
         #test_runner_modal_content
           .loader
-:javascript
-  $('#test_runner_btn').click(function(){
-    $('#test_runner_modal_content').load("#{next_test_path(execution.id)}")
-  });
+- if @execution['execution']['fast']
+  :javascript
+    $('#test_runner_btn').click(function(){
+      $('#test_runner_modal_content').load("#{next_test_path(execution.id)}")
+    });
+- else
+  :javascript
+    alert( $.cookie("last_environment") )
+    $('#test_runner_btn').click(function(){
+
+           $('#test_runner_modal_content').load("#{next_test_path(execution.id, environment: @execution['execution']['environments'][0]['uuid'])}")
+    });

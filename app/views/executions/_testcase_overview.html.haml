@@ -3,22 +3,52 @@
   .col-md-12
     %table.table.table-condensed.table-overview.numbered_table
       %tbody
-        - execution.each_with_index do |tc, i|
-          %tr
-            - results_bar = stacked_progress_bar :Results, total_tests, tc['pass_count'], tc['fail_count'], tc['skip_count']
-            %td
-              .row-index
-            %td
-              = tc['name']
-            %td
-              .stacked_progress
-                = results_bar
-            %td
-              .pull-right.small.overview-time
-                -if true
-                  .timeago{title: DateTime.parse(tc['updated_at']).iso8601}
-            %td
-              .pull-right
+
+        - testcases.each_with_index do |testcase, i|
+          - tc = summary.find{|t| t['id'] == testcase['id']}
+          - if @execution['execution']['fast']
+            %tr
+              %td
+                .row-index
+              %td
+                = testcase['testcase_name']
+              %td
+                - unless tc
+                  .primary-box.text-center= "Incomplete"
+                - if tc && tc['current_status'] == 'pass'
+                  .success-box.text-center= "Passed"
+                - if tc && tc['current_status'] == 'fail'
+                  .danger-box.text-center= "Failed"
+                - if tc && tc['current_status'] == 'skip'
+                  .primary-box.text-center= "Skipped"
+
+              %td
+                .pull-right.small.overview-time
+                  -if tc
+                    .timeago{title: DateTime.parse(testcase['updated_at']).iso8601}
+              %td
+                .pull-right
+          - else
+
+            - pass_count = tc ? tc['pass_count'] : 0
+            - fail_count = tc ? tc['fail_count'] : 0
+            - skip_count = tc ? tc['skip_count'] : 0
+            - puts tc
+            %tr
+              - results_bar = stacked_progress_bar :Results, total_tests, pass_count, fail_count, skip_count
+              %td
+                .row-index
+              %td
+                = testcase['testcase_name']
+              %td
+                .stacked_progress
+                  = results_bar
+              %td
+                .pull-right.small.overview-time
+                  -if tc
+                    .timeago{title: DateTime.parse(testcase['updated_at']).iso8601}
+              %td
+                .pull-right
 
   :javascript
     $('.timeago').timeago()
