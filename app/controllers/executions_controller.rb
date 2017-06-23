@@ -1,6 +1,16 @@
 class ExecutionsController < ApplicationController
 
 
+  def edit
+    execution = @mustard.executions.find(params[:id])
+
+    if execution['error']
+      render json: {error: "Failed to find execution. Error[#{execution['error']}]"}, status: :not_found and return
+    else
+      render partial: 'executions/edit_execution', locals: {execution: execution, execution_id: execution['execution']['id']}
+    end
+  end
+
 
   def show
 
@@ -127,8 +137,8 @@ class ExecutionsController < ApplicationController
     else
       next_test = @mustard.executions.next_test(params[:id])
     end
-
-    render partial: 'results/error_loading', flash: { alert: "Failed to get next test"} and return if next_test['error']
+    puts next_test['error']
+    render partial: 'results/error_loading', flash: { alert: "Failed to get next test. Error #{next_test['error']}"} and return if next_test['error']
 
     @execution_id = params[:id]
 

@@ -15,8 +15,9 @@
 
   $('#continue-btn').on("click", function(e){
       var env_id = $('#result_environment_id').val()
-      path = "#{next_test_path(execution_id, environment: '>>>ENVIRONMENT<<<')}"
-      new_path = path.replace('>>>ENVIRONMENT<<<', encodeURIComponent(env_id))
+      path = "#{next_test_path(execution_id, environment: 'EEEEEEEEEEEEEEEEEEEEEEE')}"
+
+      new_path = path.replace('EEEEEEEEEEEEEEEEEEEEEEE', encodeURIComponent(env_id))
       $('#keyword_select').select2('destroy').unbind();
       $('#test_runner_modal_content').html('<div class="loader"></div>')
       $('#test_runner_modal_content').load(new_path)

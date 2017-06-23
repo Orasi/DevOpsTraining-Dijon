@@ -1,0 +1,57 @@
+= form_tag( execution_path(execution_id), method: :put, role: :form) do
+  = fields_for :execution do |f|
+
+    .form-group
+      %label New Execution Name
+      = text_field_tag 'execution[name]',  "Execution: #{DateTime.now.strftime('%m/%d/%Y')}", class: 'form-control', required: true
+
+    .form-group.well
+      %label
+        = check_box_tag 'execution[fast]', true, true
+        Fast Execution
+        .small
+          Fast executions only expect one result per test case.  Normal execution expect a result per test case per environment
+
+    .form-group
+      %label#limit_keywords
+        = check_box_tag 'execution[limit_keywords]'
+        Limit Keywords?
+
+    .form-group#limit_keyword_field{style: 'display:none'}
+      .well
+        = label_tag 'Active Keywords'
+        .small  Only test cases for the selected keywords will be used for this execution
+        = select_tag 'active_keywords', options_for_select(execution['execution']['keywords'].map{|e| [e['keyword'], e['id']]}, nil),  multiple: true
+
+    .form-group
+      %label#limit_environments
+        = check_box_tag 'execution[limit_environments]', execution['execution']['']
+        Limit Environments?
+
+    .form-group#limit_environment_field{style: 'display:none'}
+      .well
+        = label_tag 'Active Environments'
+        .small  Only the selected environments will be used for this execution
+        = select_tag 'active_environments', options_for_select(execution['execution']['environments'].map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['id']]}, nil),  multiple: true
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+
+:javascript
+  $('#active_keywords').select2({ width: '100%'})
+  $('#active_environments').select2({ width: '100%'})
+  $('#execution_limit_keywords').click(function(){
+    if (this.checked){
+      $('#limit_keyword_field').slideDown()
+    }else{
+      $('#limit_keyword_field').slideUp()
+    }
+  })
+
+  $('#execution_limit_environments').click(function(){
+    if (this.checked){
+      $('#limit_environment_field').slideDown()
+    }else{
+      $('#limit_environment_field').slideUp()
+    }
+  })

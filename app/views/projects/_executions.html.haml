@@ -35,11 +35,24 @@
         %td
           - if !execution.closed
             - current_execution = execution
-
-            = link_to '','', data: {toggle: 'modal', target: '#execution', execution: execution.id}, class: 'fa fa-archive'
+            %span.tool{data: {toggle: 'tooltip'}, title: 'Close Execution'}
+              %span.fa.fa-archive.link-like{data: {toggle: 'modal', target: '#execution', execution: execution.id}}
+          %span.tool{data: {toggle: 'tooltip'}, title: 'Edit'}
+            %span.fa.fa-pencil.link-like.edit-execution-link.small{data: {toggle: 'modal', target:'#edit_execution', path: edit_execution_path(execution.id)}}
           - if execution.updated_at < 2.weeks.ago && current_user.admin && execution.closed
             = link_to execution_path(id: execution.id), method: :delete do
               .fa.fa-trash-o
+
+#edit_execution.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' }, aria: { label: 'Close' } }
+          %span.glyphicon.glyphicon-remove{ aria: { hidden: 'true' }, style: 'top:10px' }
+        %h4 Close Execution
+      .modal-body
+        #edit_execution_modal
+          .loader
 
 #execution.modal.fade
   .modal-dialog
@@ -54,3 +67,7 @@
 
 :javascript
   $('.timeago').timeago()
+
+  $('.edit-execution-link').click(function(){
+    $('#edit_execution_modal').load($(this).data('path'))
+  })

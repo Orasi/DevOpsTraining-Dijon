@@ -47,16 +47,16 @@
     $('#result_environment_id').on("select2:select select2:unselect", function(e){
       if($('#keyword_select').val()){
         var env_id = $(this).val()
-        path = "#{next_test_path(execution_id, 'keyword[]' => '<<<KEYWORD>>>', environment: '>>>ENVIRONMENT<<<')}"
-        new_path = path.replace('<<<KEYWORD>>>', encodeURIComponent($(this).val()))
-        new_path = new_path.replace('>>>ENVIRONMENT<<<', encodeURIComponent(env_id))
+        path = "#{next_test_path(execution_id, 'keyword[]' => 'KKKKKKKKKKKKKKKKKK', environment: 'EEEEEEEEEEEEEEEEEEEEEEE')}"
+        new_path = path.replace('KKKKKKKKKKKKKKKKKK', encodeURIComponent($(this).val()))
+        new_path = new_path.replace('EEEEEEEEEEEEEEEEEEEEEEE', encodeURIComponent(env_id))
         $('#keyword_select').select2('destroy').unbind();
         $('#test_runner_modal_content').html('<div class="loader"></div>')
         $('#test_runner_modal_content').load(new_path)
       }else{
         var env_id = $(this).val()
-        path = "#{next_test_path(execution_id, environment: '>>>ENVIRONMENT<<<')}"
-        new_path = path.replace('>>>ENVIRONMENT<<<', encodeURIComponent(env_id))
+        path = "#{next_test_path(execution_id, environment: 'EEEEEEEEEEEEEEEEEEEEEEE')}"
+        new_path = path.replace('EEEEEEEEEEEEEEEEEEEEEEE', encodeURIComponent(env_id))
         $('#keyword_select').select2('destroy').unbind();
         $('#test_runner_modal_content').html('<div class="loader"></div>')
         $('#test_runner_modal_content').load(new_path)
