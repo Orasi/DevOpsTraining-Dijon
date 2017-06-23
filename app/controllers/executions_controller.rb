@@ -106,6 +106,15 @@ class ExecutionsController < ApplicationController
 
   def next_test
 
+    @execution = @mustard.executions.find(params[:id])
+    if !@execution['execution']['fast'] && !params[:environment]
+      @environments = @execution['execution']
+      if cookies[:last_environment]
+        @selected = YAML::load cookies[:last_environment]
+      end
+      render partial: 'executions/select_environment', locals: {execution_id: params[:id]} and return
+    end
+
     params[:keyword] = params[:keyword].map{|m| m.split(',')}.flatten if params[:keyword]
 
     if params[:keyword] && !params[:keyword].blank? && params[:environment] && !params[:environment].blank?
@@ -118,7 +127,7 @@ class ExecutionsController < ApplicationController
       next_test = @mustard.executions.next_test(params[:id])
     end
 
-    redirect_back fallback_location: root_path, flash: { alert: "Failed to get next test"} and return if next_test['error']
+    render partial: 'results/error_loading', flash: { alert: "Failed to get next test"} and return if next_test['error']
 
     @execution_id = params[:id]
 
@@ -128,10 +137,9 @@ class ExecutionsController < ApplicationController
       @selected = YAML::load cookies[:last_environment]
     end
 
-    @execution = @mustard.executions.find(params[:id])
 
+    @environments = @execution['execution']
     if next_test['testcase']['id']
-      @environments = @execution['execution']
       @keywords = @execution['execution']
       render partial: 'results/manual_test_runner', locals: {testcase: next_test['testcase'], keyword: params[:keyword]}
     else
