@@ -13,7 +13,8 @@ class ExecutionsController < ApplicationController
   def testcase_detail
 
     @detail = @mustard.executions.testcase_detail(params[:id], params[:testcase_id])
-    @environments = @mustard.executions.find(params[:id])['execution']
+    @execution = @mustard.executions.find(params[:id])
+    @environments = @execution['execution']
     render partial: 'executions/functional/functional_result', layout: false
 
   end
