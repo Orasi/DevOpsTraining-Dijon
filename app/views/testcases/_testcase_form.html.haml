@@ -36,7 +36,8 @@
   %br
   .form-group
     = submit_tag 'Submit', class: 'btn btn-primary'
-    .pull-right= link_to 'Delete Testcase', testcase_path(testcase['id']), method: :delete, class: 'btn btn-danger' if testcase['name']
+
+    .pull-right= link_to 'Delete Testcase', testcase_path(testcase['id']), method: :delete, class: 'btn btn-danger' if testcase['id'] && current_user['admin']
 
 :javascript
   $('[data-toggle="tooltip"]').tooltip()
