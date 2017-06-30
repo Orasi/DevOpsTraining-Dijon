@@ -1,3 +1,8 @@
 = render partial: 'results/select_keyword', locals: {keyword: keyword, execution_id: execution_id}
 %h4
   No Remaining testcases
+.hidden{style: 'display:none'}
+  - if @selected
+    = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected), class: 'env-select2'
+  -else
+    = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]}), class: 'env-select2'

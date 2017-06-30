@@ -1,0 +1,24 @@
+%h5
+  Select Environment
+  .small This execution type requires that you select and environment before being assigned a test
+.form-group
+  = label_tag :Environment
+  - if @selected
+    = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]},  @selected), class: 'env-select2'
+  -else
+    = select_tag 'result[environment_id]', options_for_select(@environments['environments'].map{|e| [e['display_name'].blank? ? e['uuid'] : e['display_name'] , e['uuid'] ]}), class: 'env-select2'
+.form-group
+  .btn.btn-primary#continue-btn Continue
+  .btn.btn-default#cancel-btn Cancel
+:javascript
+  $('.env-select2').select2({ width: '100%'})
+
+  $('#continue-btn').on("click", function(e){
+      var env_id = $('#result_environment_id').val()
+      path = "#{next_test_path(execution_id, environment: 'EEEEEEEEEEEEEEEEEEEEEEE')}"
+
+      new_path = path.replace('EEEEEEEEEEEEEEEEEEEEEEE', encodeURIComponent(env_id))
+      $('#keyword_select').select2('destroy').unbind();
+      $('#test_runner_modal_content').html('<div class="loader"></div>')
+      $('#test_runner_modal_content').load(new_path)
+  })

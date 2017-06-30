@@ -10,7 +10,7 @@
       - unless result.blank?
         %h4
           = result.validation_id ? "#{result.validation_id} - #{result.testcase_name}" : result.testcase_name
-          = link_to '', '', class: 'fa fa-pencil small'
+          -#= link_to '', '', class: 'fa fa-pencil small'
           %br
         %h5
           = link_to 'View Steps', '#', id: 'steps_view', class: 'small', style: 'margin-left:20px' unless result.reproduction_steps.blank?

@@ -14,7 +14,7 @@
                 = testcase['testcase_name']
               %td
                 - unless tc
-                  .primary-box.text-center= "Incomplete"
+                  .default-box.text-center= "Incomplete"
                 - if tc && tc['current_status'] == 'pass'
                   .success-box.text-center= "Passed"
                 - if tc && tc['current_status'] == 'fail'

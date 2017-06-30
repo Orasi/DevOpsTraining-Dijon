@@ -1,0 +1,80 @@
+= form_tag( execution_path(execution_id), method: :put, role: :form) do
+  = fields_for :execution do |f|
+
+    .form-group
+      %label New Execution Name
+      = text_field_tag 'execution[name]', execution['execution']['name'],class: 'form-control', required: true
+
+    .form-group.well
+      %label
+        = hidden_field_tag 'execution[fast]', '', id: 'hidden-edit-fast'
+        = check_box_tag 'execution[fast]', true, execution['execution']['fast']
+        Fast Execution
+        .small
+          Fast executions only expect one result per test case.  Normal execution expect a result per test case per environment
+
+    .form-group
+      %label#edit_limit_keywords
+        - limited_keywords = execution['execution']['limited_keywords']
+        = hidden_field_tag 'execution[edit_keywords]', '', id: 'hidden-edit-keyword'
+        = check_box_tag 'execution[edit_keywords]', true, limited_keywords
+        Limit Keywords?
+
+    .form-group#edit_limit_keyword_field{style: 'display:none'}
+      .well
+        = label_tag 'Active Keywords'
+        .small  Only test cases for the selected keywords will be used for this execution
+        - if limited_keywords
+          - selected_keys = execution['execution']['keywords'].map{|e|  e['id']}
+          = select_tag 'edit_active_keywords', options_for_select(@keywords.map{|e| [e['keyword'], e['id']]}, selected_keys),  multiple: true
+        - else
+          = select_tag 'edit_active_keywords', options_for_select(@keywords.map{|e| [e['keyword'], e['id']]}, nil),  multiple: true
+
+    .form-group
+      %label#edit_limit_environments
+        - limited_environments = execution['execution']['limited_environments']
+        = hidden_field_tag 'execution[edit_environments]', '', id: 'hidden-edit-environment'
+        = check_box_tag 'execution[edit_environments]', true, limited_environments
+        Limit Environments?
+
+    .form-group#edit_limit_environment_field{style: 'display:none'}
+      .well
+        = label_tag 'Active Environments'
+        .small  Only the selected environments will be used for this execution
+        - if limited_environments
+          - selected_env = execution['execution']['environments'].map{|e| e['id']}
+          - puts selected_env
+          = select_tag 'edit_active_environments', options_for_select(@environments.map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['id']]}, selected_env),  multiple: true
+        - else
+          = select_tag 'edit_active_environments', options_for_select(@environments.map{|e| [e['display_name'] ? e['display_name'] : e['uuid'], e['id']]}, nil),  multiple: true
+
+
+  .form-group
+    = submit_tag 'Submit', class: 'btn btn-primary'
+
+:javascript
+  $('#edit_active_keywords').select2({ width: '100%'})
+  $('#edit_active_environments').select2({ width: '100%'})
+  $('#execution_edit_keywords').click(function(){
+    if (this.checked){
+      $('#edit_limit_keyword_field').slideDown()
+    }else{
+      $('#edit_limit_keyword_field').slideUp()
+    }
+  })
+
+  if($('#execution_edit_keywords').attr('checked')){
+   $('#edit_limit_keyword_field').show()
+  }
+
+  if($('#execution_edit_environments').attr('checked')){
+    $('#edit_limit_environment_field').show()
+  }
+
+  $('#execution_edit_environments').click(function(){
+    if (this.checked){
+      $('#edit_limit_environment_field').slideDown()
+    }else{
+      $('#edit_limit_environment_field').slideUp()
+    }
+  })
