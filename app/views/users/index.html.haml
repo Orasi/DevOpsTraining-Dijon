@@ -8,7 +8,7 @@
   %p.small All Users
   - @users['users'].each do |user|
     - user = UserPresenter.new(user)
-    - gravatar = Gravatar.new(user.email)
+    -#- gravatar = Gravatar.new(user.email, default: 'retro')
     .col-sm-4
       .panel.panel-default.customerCard
         = link_to user_path(user.id) do
@@ -20,8 +20,9 @@
               .table-row
                 .table-cell
                   .gravatar
-                    - if gravatar
-                      = image_tag(gravatar.image_url, class: 'img-circle')
+                    = gravatar_tag(user.email, :default)
+                    -#- if gravatar
+                    -#  = image_tag(gravatar.image_url, class: 'img-circle')
 
                 .table-cell.customer-info.top
 

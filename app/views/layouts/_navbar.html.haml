@@ -11,10 +11,11 @@
 
       #logout.pull-right
 
-        = link_to logout_path, class: 'navbar-brand' do
+        = link_to logout_path, class: 'navbar-brand', style: 'padding-top:3px;padding-right:30px' do
           #welcome
             = "Welcome, #{current_user.first_name.titleize}"
-            %span.caret
+            -#%span.caret
+            = gravatar_tag(current_user.email, :mini)
           #logoutLink Logout
 #nav-side-menu.sidebar.visible-lg.visible-md.visible-sm
   %ul.nav.nav-bar
