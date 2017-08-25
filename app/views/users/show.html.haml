@@ -1,4 +1,3 @@
-- gravatar = Gravatar.new(@user.email)
 .dashboard-page-header
   %h4
 
@@ -13,9 +12,7 @@
     %table.table.table-striped
       %tr
         %td
-          Gravatar:
-          - if gravatar
-            .pull-right= image_tag(gravatar.image_url, class: 'img-circle')
+          .pull-right= gravatar_tag(@user.email, :default)
       %tr
         %td
           Username:

@@ -66,6 +66,6 @@ gem 'less-rails-bootstrap'
 gem 'mustard_client', '= 0.1.57'
 gem 'select2-rails'
 gem "font-awesome-rails"
-gem 'gravatar-ultimate'
+gem 'gravatarify'
 gem 'chart-js-rails'
 gem 'dropzonejs-rails'
