@@ -20,6 +20,11 @@
  *= require_self
  */
 
+.small.version{
+    font-size: 65%;
+    margin-top: -5px;
+    color: #fff1f1;
+}
 .dz-error-mark g{
     fill: red
 

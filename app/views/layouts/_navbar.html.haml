@@ -7,6 +7,8 @@
       %span.icon-bar
     %a.navbar-brand
       Mustard
+      %span.small.version
+        = "v#{Rails.application.config.version}"
     - if current_user
 
       #logout.pull-right
